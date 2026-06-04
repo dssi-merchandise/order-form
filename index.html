@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Form | DSSI School Merchandise</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap');
+    
+    :root {
+      --primary: #1e40af;
+    }
+    
+    body {
+      font-family: 'Inter', system_ui, -apple-system, sans-serif;
+    }
+
+    .product-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    .cart-item {
+      transition: all 0.2s ease;
+    }
+
+    .nav-active {
+      background-color: #1e40af;
+      color: white;
+      border-radius: 9999px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .price-tag {
+      font-feature-settings: "tnum";
+    }
+
+    .modal {
+      animation: modalPop 0.2s ease-out forwards;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .item-img {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .size-select, .color-select, .qty-input {
+      transition: all 0.1s ease;
+    }
+
+    .lang-btn {
+      transition: all 0.1s ease;
+    }
+
+    .lang-btn.active {
+      background-color: #1e40af;
+      color: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-table th, .order-table td {
+      padding: 0.5rem 0.75rem;
+    }
+
+    .empty-cart {
+      background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+    }
+  </style>
+</head>
+<body class="bg-slate-50">
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo + Title -->
+        <div class="flex items-center gap-x-3">
+          <img src="DSSI logo.jpg" alt="DSSI Logo" class="h-9 w-auto max-h-10 object-contain">
+          <div>
+            <div class="font-semibold text-xl tracking-tight text-slate-900">DSSI</div>
+            <div class="text-[10px] text-slate-500 -mt-1 font-medium tracking-[0.5px]">School Merchandise</div>
+          </div>
+          <a href="https://www.dsseoul.org/" target="_blank" rel="noopener" class="hidden sm:block ml-1 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 hover:text-blue-700 transition-colors">Deutsche Schule Seoul International</a>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="flex items-center bg-slate-100 rounded-full p-1 shadow-inner">
+          <button onclick="switchLang('en')" id="lang-en"
+                  class="lang-btn px-2.5 py-1 text-sm font-semibold rounded-full hover:bg-slate-200 active:bg-blue-800">
+            EN
+          </button>
+          <button onclick="switchLang('de')" id="lang-de"
+                  class="lang-btn px-2.5 py-1 text-sm font-semibold rounded-full hover:bg-slate-200 active:bg-blue-800">
+            DE
+          </button>
+          <button onclick="switchLang('ko')" id="lang-ko"
+                  class="lang-btn px-2.5 py-1 text-sm font-semibold rounded-full hover:bg-slate-200 active:bg-blue-800">
+            KR
+          </button>
+        </div>
+
+        <!-- Cart Button -->
+        <button onclick="toggleCartDrawer()" 
+                class="flex items-center gap-x-2 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 px-4 py-2 rounded-2xl text-sm font-semibold shadow-sm active:scale-[0.985] transition-all">
+          <div class="relative">
+            <i class="fa-solid fa-shopping-bag text-lg text-slate-700"></i>
+            <span id="cart-count-badge"
+                  class="absolute -top-1.5 -right-1.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center bg-blue-700 text-white text-[10px] font-bold rounded-full">0</span>
+          </div>
+          <span class="hidden sm:inline font-semibold text-slate-700" id="cart-btn-text">Basket</span>
+          <span id="cart-total-header" class="hidden sm:inline text-emerald-700 font-semibold text-sm tabular-nums"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
+    <!-- Hero / Intro -->
+    <div class="max-w-2xl mb-8">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tighter text-slate-900" id="page-title">
+        Order Form
+      </h1>
+      <p class="mt-2 text-slate-600 text-[15px]" id="page-subtitle">
+        Proudly wear and use our school items. Select color, size and quantity.
+      </p>
+      <div class="mt-3 flex items-center gap-x-2 text-xs">
+        <div class="inline-flex items-center gap-x-1 px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full font-medium">
+          <i class="fa-solid fa-check text-xs"></i>
+          <span id="in-stock-text">In stock • Ready for ordering</span>
+        </div>
+        <button onclick="showSizeGuide()" 
+                class="inline-flex items-center gap-x-1 px-2.5 py-1 text-slate-500 hover:text-slate-700 text-xs font-medium">
+          <i class="fa-solid fa-ruler-horizontal"></i>
+          <span id="size-guide-btn">Size guide</span>
+        </button>
+        <button onclick="showOrderHistory()" 
+                class="inline-flex items-center gap-x-1 px-2.5 py-1 text-slate-500 hover:text-slate-700 text-xs font-medium">
+          <i class="fa-solid fa-history"></i>
+          <span id="history-btn">Previous orders</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="mb-4">
+      <div class="flex items-baseline justify-between mb-3 px-1">
+        <h2 class="section-title text-slate-800" id="products-heading">Available Items</h2>
+        <div class="text-xs text-slate-500" id="prices-note">All prices in KRW</div>
+      </div>
+    </div>
+
+    <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- Info bar -->
+    <div class="mt-8 rounded-3xl bg-white border border-slate-200 p-5 text-sm text-slate-600 flex flex-col sm:flex-row gap-y-2 sm:items-center sm:justify-between">
+      <div class="flex items-start gap-x-3">
+        <i class="fa-solid fa-info-circle text-blue-600 mt-0.5"></i>
+        <div>
+          <span id="info-text">Orders are processed after payment confirmation. You will receive payment instructions by email.</span>
+          <span class="block text-emerald-700 text-xs mt-1 font-medium" id="collection-note"></span>
+        </div>
+      </div>
+      <div class="text-xs sm:text-right text-slate-500">
+        <a href="mailto:vs.vorsitz@dsseoul.org" class="text-blue-700 hover:underline" id="contact-email-link">vs.vorsitz@dsseoul.org</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div id="cart-drawer" onclick="if (event.target.id === 'cart-drawer') toggleCartDrawer()" 
+       class="hidden fixed inset-0 bg-black/40 z-[60]">
+    <div onclick="event.stopImmediatePropagation()" 
+         class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+      
+      <!-- Cart Header -->
+      <div class="px-5 py-4 border-b flex items-center justify-between bg-slate-50">
+        <div>
+          <span class="font-semibold text-lg" id="cart-title">Your Basket</span>
+          <span id="cart-count-text" class="ml-2 text-sm text-slate-500 font-medium">(0)</span>
+        </div>
+        <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-slate-600 p-2 -mr-2">
+          <i class="fa-solid fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Cart Content -->
+      <div id="cart-content" class="flex-1 overflow-auto p-5 space-y-4">
+        <!-- JS populated cart items -->
+      </div>
+
+      <!-- Cart Footer -->
+      <div class="p-5 border-t bg-white sticky bottom-0">
+        <div class="flex justify-between items-baseline mb-4 px-1">
+          <div class="text-sm font-medium text-slate-600" id="total-label">Total</div>
+          <div id="cart-total" class="text-2xl font-semibold tabular-nums text-slate-900">0 KRW</div>
+        </div>
+        
+        <button onclick="proceedToOrder()" 
+                class="w-full py-3.5 bg-blue-800 hover:bg-blue-900 active:bg-blue-950 transition-colors text-white font-semibold rounded-2xl flex items-center justify-center gap-x-2 shadow-lg shadow-blue-900/30">
+          <span id="order-now-text">Order Now</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        
+        <button onclick="clearCart()" 
+                class="w-full mt-2 text-xs py-2 text-slate-500 hover:text-red-600 font-medium">
+          <i class="fa-solid fa-trash mr-1"></i> <span id="clear-basket-text">Clear basket</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout / Order Modal -->
+  <div id="checkout-modal" onclick="if (event.target.id === 'checkout-modal') closeCheckoutModal()" 
+       class="hidden fixed inset-0 bg-black/50 z-[70] flex items-center justify-center p-4">
+    <div onclick="event.stopImmediatePropagation()" 
+         class="modal bg-white w-full max-w-lg rounded-3xl shadow-xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center">
+        <div class="flex-1">
+          <div class="font-semibold text-lg" id="checkout-title">Complete Your Order</div>
+          <div class="text-blue-300 text-xs" id="checkout-subtitle">Payment instructions will be sent by email</div>
+        </div>
+        <button onclick="closeCheckoutModal()" class="text-white/70 hover:text-white p-1">
+          <i class="fa-solid fa-times text-2xl"></i>
+        </button>
+      </div>
+
+      <div class="p-6" id="checkout-body">
+        <!-- Dynamic content: summary + form OR success state -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Size Guide Modal -->
+  <div id="size-modal" onclick="if (event.target.id === 'size-modal') closeSizeModal()" 
+       class="hidden fixed inset-0 bg-black/50 z-[80] flex items-center justify-center p-4">
+    <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl">
+      <div class="px-5 py-3.5 border-b flex items-center justify-between bg-slate-50">
+        <div class="font-semibold" id="size-modal-title">Size Guide / Größenübersicht / 사이즈 가이드</div>
+        <button onclick="closeSizeModal()" class="text-xl text-slate-400 hover:text-slate-600 px-1">×</button>
+      </div>
+      <div class="p-5 text-sm max-h-[70vh] overflow-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs">
+          <!-- T-Shirt sizes -->
+          <div>
+            <div class="font-semibold mb-1 text-blue-800">T-Shirt</div>
+            <table class="w-full text-[10px] border border-slate-200">
+              <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Body (cm)</th></tr></thead>
+              <tbody class="font-mono">
+                <tr class="border-t"><td class="p-1">110</td><td class="p-1">108</td></tr>
+                <tr class="border-t"><td class="p-1">120</td><td class="p-1">116</td></tr>
+                <tr class="border-t"><td class="p-1">130</td><td class="p-1">130</td></tr>
+                <tr class="border-t"><td class="p-1">140</td><td class="p-1">137</td></tr>
+                <tr class="border-t"><td class="p-1">150</td><td class="p-1">150</td></tr>
+                <tr class="border-t"><td class="p-1">160</td><td class="p-1">161</td></tr>
+                <tr class="border-t"><td class="p-1">S</td><td class="p-1">163</td></tr>
+                <tr class="border-t"><td class="p-1">M</td><td class="p-1">170</td></tr>
+                <tr class="border-t"><td class="p-1">L</td><td class="p-1">179</td></tr>
+                <tr class="border-t"><td class="p-1">XL</td><td class="p-1">181</td></tr>
+                <tr class="border-t"><td class="p-1">XXL</td><td class="p-1">183</td></tr>
+                <tr class="border-t"><td class="p-1">XXXL</td><td class="p-1">186</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Polo -->
+          <div>
+            <div class="font-semibold mb-1 text-blue-800">Polo Shirt</div>
+            <table class="w-full text-[10px] border border-slate-200">
+              <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Body (cm)</th></tr></thead>
+              <tbody class="font-mono">
+                <tr class="border-t"><td class="p-1">XS</td><td class="p-1">~160</td></tr>
+                <tr class="border-t"><td class="p-1">S</td><td class="p-1">163</td></tr>
+                <tr class="border-t"><td class="p-1">M</td><td class="p-1">170</td></tr>
+                <tr class="border-t"><td class="p-1">L</td><td class="p-1">179</td></tr>
+                <tr class="border-t"><td class="p-1">XL</td><td class="p-1">181</td></tr>
+                <tr class="border-t"><td class="p-1">XXL</td><td class="p-1">183</td></tr>
+                <tr class="border-t"><td class="p-1">XXXL</td><td class="p-1">186</td></tr>
+              </tbody>
+            </table>
+            <div class="mt-2 text-[10px] text-slate-500">Standard adult sizing</div>
+          </div>
+          <!-- Hoodie -->
+          <div>
+            <div class="font-semibold mb-1 text-blue-800">Hoodie</div>
+            <table class="w-full text-[10px] border border-slate-200">
+              <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Body (cm)</th></tr></thead>
+              <tbody class="font-mono">
+                <tr class="border-t"><td class="p-1">XS</td><td class="p-1">~160</td></tr>
+                <tr class="border-t"><td class="p-1">S</td><td class="p-1">163</td></tr>
+                <tr class="border-t"><td class="p-1">M</td><td class="p-1">170</td></tr>
+                <tr class="border-t"><td class="p-1">L</td><td class="p-1">179</td></tr>
+                <tr class="border-t"><td class="p-1">XL</td><td class="p-1">181</td></tr>
+                <tr class="border-t"><td class="p-1">XXL</td><td class="p-1">183</td></tr>
+                <tr class="border-t"><td class="p-1">XXXL</td><td class="p-1">186</td></tr>
+                <tr class="border-t"><td class="p-1">XXXXL</td><td class="p-1">189</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="mt-4 text-xs text-slate-500 px-1">
+          Measurements are approximate body height / upper body length. Please refer to the original PDF for full chest, shoulder and sleeve measurements.
+        </div>
+      </div>
+      <div class="px-5 py-3 bg-slate-50 border-t text-right">
+        <button onclick="closeSizeModal()" class="px-5 py-1.5 text-sm font-semibold rounded-xl bg-slate-800 text-white">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order History Modal -->
+  <div id="history-modal" onclick="if (event.target.id === 'history-modal') closeHistoryModal()" 
+       class="hidden fixed inset-0 bg-black/50 z-[80] flex items-center justify-center p-4">
+    <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl">
+      <div class="px-5 py-3.5 border-b flex items-center justify-between bg-slate-50">
+        <div class="font-semibold" id="history-modal-title">Previous Orders / Frühere Bestellungen / 이전 주문</div>
+        <button onclick="closeHistoryModal()" class="text-xl text-slate-400 hover:text-slate-600 px-1">×</button>
+      </div>
+      <div id="history-list" class="p-5 text-sm max-h-[55vh] overflow-auto space-y-3">
+        <!-- populated by JS -->
+      </div>
+      <div class="px-5 py-3 bg-slate-50 border-t text-right text-xs text-slate-500">
+        Stored locally in your browser only.
+      </div>
+    </div>
+  </div>
+
+  <!-- Impressum Modal -->
+  <div id="impressum-modal" onclick="if (event.target.id === 'impressum-modal') closeImpressumModal()" 
+       class="hidden fixed inset-0 bg-black/50 z-[80] flex items-center justify-center p-4">
+    <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl">
+      <div class="px-5 py-3.5 border-b flex items-center justify-between bg-slate-50">
+        <div class="font-semibold" id="impressum-modal-title">Impressum / Legal Notice</div>
+        <button onclick="closeImpressumModal()" class="text-xl text-slate-400 hover:text-slate-600 px-1">×</button>
+      </div>
+      <div class="p-5 text-sm">
+        <div class="font-semibold text-base mb-2">Deutsche Schule Seoul International</div>
+        <address class="not-italic text-slate-700 leading-relaxed">
+          123-6 Dokseodang-Ro<br>
+          Yongsan-Gu<br>
+          04419 Seoul<br>
+          Republik Korea<br><br>
+          <span class="font-medium">Telefon:</span> +82-(0)2-792-0797<br>
+          <span class="font-medium">Fax:</span> +82-(0)2-792-1954<br>
+          <span class="font-medium">Email:</span> <a href="mailto:vs.vorsitz@dsseoul.org" class="text-blue-700 hover:underline">vs.vorsitz@dsseoul.org</a><br>
+          <span class="font-medium">Webseite:</span> <a href="https://www.dsseoul.org" target="_blank" rel="noopener" class="text-blue-700 hover:underline">www.dsseoul.org</a>
+        </address>
+        <div id="impressum-note" class="mt-4 text-xs text-slate-500 border-t pt-3">
+          This ordering form is operated by the school. All orders are subject to the school's terms.
+        </div>
+      </div>
+      <div class="px-5 py-3 bg-slate-50 border-t text-right">
+        <button onclick="closeImpressumModal()" class="px-5 py-1.5 text-sm font-semibold rounded-xl bg-slate-800 text-white">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="max-w-screen-xl mx-auto px-6 pb-10 text-center text-xs text-slate-400">
+    <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+      <button onclick="showImpressum()" class="hover:text-slate-600 underline font-medium" id="impressum-btn">Impressum</button>
+      <span class="text-slate-300">•</span>
+      <span>Simple ordering system for DSSI • 2026</span>
+      <span class="text-slate-300">•</span>
+      <a href="mailto:vs.vorsitz@dsseoul.org" class="hover:text-slate-600 underline" id="footer-contact-link">Questions? vs.vorsitz@dsseoul.org</a>
+    </div>
+  </footer>
+
+  <script>
+    // Tailwind script
+    function initTailwind() {
+      document.documentElement.style.setProperty('--accent', '#1e40af');
+    }
+
+    // ==================== I18N ====================
+    const translations = {
+      en: {
+        pageTitle: "Order Form",
+        pageSubtitle: "Proudly wear and use our school items. Select color, size and quantity.",
+        productsHeading: "Available Items",
+        pricesNote: "All prices in KRW",
+        inStock: "In stock • Ready for ordering",
+        sizeGuide: "Size guide",
+        infoText: "Orders are processed after payment confirmation. You will receive payment instructions by email.",
+        basket: "Basket",
+        yourBasket: "Your Basket",
+        total: "Total",
+        orderNow: "Order Now",
+        clearBasket: "Clear basket",
+        addToBasket: "Add to basket",
+        color: "Color",
+        size: "Size",
+        quantity: "Qty",
+        checkoutTitle: "Complete Your Order",
+        checkoutSubtitle: "Payment instructions will be emailed to you",
+        emailLabel: "Your Email Address",
+        emailPlaceholder: "you@example.com",
+        emailHelp: "We will send the order confirmation and payment details to this address. A copy goes to vs.vorsitz@dsseoul.org.",
+        placeOrderBtn: "Confirm and Order",
+        orderSummary: "Order Summary",
+        items: "Items",
+        successTitle: "Thank you for your order!",
+        successText: "Order confirmation sent to you (school office receives identical copy via BCC).",
+        spamNote: "If you did not receive the email, please check your spam folder.",
+        copyToClipboard: "Copy order details",
+        closeAndClear: "Close & Empty Basket",
+        paymentTitle: "Payment Instructions",
+        bank: "Bank: Shinhan Bank (신한은행)",
+        account: "Account Number: 56208298713156",
+        holder: "Account Holder: DSSI, Merchandise",
+        referenceNote: "Please use your order number as payment reference.",
+        emailSentNote: "Order confirmation sent to you (school office receives identical copy via BCC).",
+        emptyCart: "Your basket is empty",
+        emptyCartHint: "Add items from the list above to get started.",
+        remove: "Remove",
+        qty: "Qty",
+        historyBtn: "Previous orders",
+        historyTitle: "Previous Orders",
+        noOrders: "No previous orders on this device yet.",
+        orderOn: "Ordered on",
+        impressum: "Impressum",
+        impressumTitle: "Impressum / Legal Notice",
+        collectionNote: "Items will be handed over to students at school or can be collected at the reception.",
+        collectionNoteShort: "Handed to students or collect at reception",
+        contactGeneral: "Questions? Contact the school office",
+        impressumNote: "This ordering form is operated by the school. All orders are subject to the school's terms."
+      },
+      de: {
+        pageTitle: "Bestellformular",
+        pageSubtitle: "Tragen und nutzen Sie stolz unsere Schulartikel. Wählen Sie Farbe, Größe und Menge.",
+        productsHeading: "Verfügbare Artikel",
+        pricesNote: "Alle Preise in KRW",
+        inStock: "Auf Lager • Bestellbereit",
+        sizeGuide: "Größenübersicht",
+        infoText: "Bestellungen werden nach Zahlungseingang bearbeitet. Sie erhalten die Zahlungsanweisungen per E-Mail.",
+        basket: "Warenkorb",
+        yourBasket: "Ihr Warenkorb",
+        total: "Gesamt",
+        orderNow: "Jetzt bestellen",
+        clearBasket: "Warenkorb leeren",
+        addToBasket: "In den Warenkorb",
+        color: "Farbe",
+        size: "Größe",
+        quantity: "Menge",
+        checkoutTitle: "Bestellung abschließen",
+        checkoutSubtitle: "Zahlungsanweisungen werden Ihnen per E-Mail zugesandt",
+        emailLabel: "Ihre E-Mail-Adresse",
+        emailPlaceholder: "max@beispiel.de",
+        emailHelp: "Wir senden Bestellbestätigung und Zahlungsinformationen an diese Adresse. Eine Kopie geht an vs.vorsitz@dsseoul.org.",
+        placeOrderBtn: "Bestätigen und Bestellen",
+        orderSummary: "Bestellübersicht",
+        items: "Artikel",
+        successTitle: "Vielen Dank für Ihre Bestellung!",
+        successText: "Bestellbestätigung an Sie gesendet (Schulbüro erhält identische Kopie per BCC).",
+        spamNote: "Falls Sie keine E-Mail erhalten haben, überprüfen Sie bitte Ihren Spam-Ordner.",
+        copyToClipboard: "Bestelldaten kopieren",
+        closeAndClear: "Schließen & Warenkorb leeren",
+        paymentTitle: "Zahlungsanweisung",
+        bank: "Bank: Shinhan Bank (신한은행)",
+        account: "Kontonummer: 56208298713156",
+        holder: "Name des Kontos: DSSI, Merchandise",
+        referenceNote: "Bitte verwenden Sie Ihre Bestellnummer als Verwendungszweck.",
+        emailSentNote: "Bestellbestätigung an Sie (Schulbüro erhält identische Kopie per BCC).",
+        emptyCart: "Ihr Warenkorb ist leer",
+        emptyCartHint: "Fügen Sie Artikel aus der Liste oben hinzu.",
+        remove: "Entfernen",
+        qty: "Menge",
+        historyBtn: "Frühere Bestellungen",
+        historyTitle: "Frühere Bestellungen",
+        noOrders: "Noch keine Bestellungen auf diesem Gerät.",
+        orderOn: "Bestellt am",
+        impressum: "Impressum",
+        impressumTitle: "Impressum / Rechtliche Hinweise",
+        collectionNote: "Die Ware wird direkt an die Schüler in der Schule übergeben oder kann an der Rezeption abgeholt werden.",
+        collectionNoteShort: "Wird an Schüler übergeben oder an Rezeption abholbar",
+        contactGeneral: "Fragen? Kontaktieren Sie das Schulbüro",
+        impressumNote: "Dieses Bestellformular wird von der Schule betrieben. Alle Bestellungen unterliegen den Bedingungen der Schule."
+      },
+      ko: {
+        pageTitle: "주문 양식",
+        pageSubtitle: "자랑스럽게 학교 물품을 착용하고 사용하세요. 색상, 사이즈, 수량을 선택하세요.",
+        productsHeading: "주문 가능 품목",
+        pricesNote: "모든 가격은 KRW입니다",
+        inStock: "재고 있음 • 주문 가능",
+        sizeGuide: "사이즈 가이드",
+        infoText: "결제 확인 후 주문이 처리됩니다. 결제 안내가 이메일로 발송됩니다.",
+        basket: "장바구니",
+        yourBasket: "장바구니",
+        total: "합계",
+        orderNow: "지금 주문하기",
+        clearBasket: "장바구니 비우기",
+        addToBasket: "장바구니에 담기",
+        color: "색상",
+        size: "사이즈",
+        quantity: "수량",
+        checkoutTitle: "주문 완료하기",
+        checkoutSubtitle: "결제 안내가 이메일로 전송됩니다",
+        emailLabel: "이메일 주소",
+        emailPlaceholder: "you@example.com",
+        emailHelp: "주문 확인서와 결제 안내를 이 주소로 보냅니다. 사본은 vs.vorsitz@dsseoul.org로 전송됩니다.",
+        placeOrderBtn: "확인 및 주문",
+        orderSummary: "주문 요약",
+        items: "품목",
+        successTitle: "주문해 주셔서 감사합니다!",
+        successText: "주문 확인서가 귀하에게 전송되었습니다 (학교 사무실은 BCC로 동일 사본 수신).",
+        spamNote: "이메일을 받지 못한 경우 스팸 폴더를 확인해 주세요.",
+        copyToClipboard: "주문 내용 복사",
+        closeAndClear: "닫기 및 장바구니 비우기",
+        paymentTitle: "결제 안내",
+        bank: "은행: 신한은행 (Shinhan Bank)",
+        account: "계좌번호: 56208298713156",
+        holder: "계좌 이름: DSSI, Merchandise",
+        referenceNote: "결제 시 주문 번호를 참조번호로 사용해 주세요.",
+        emailSentNote: "주문 확인서가 귀하에게 (학교 사무실은 BCC로 동일 사본 수신).",
+        emptyCart: "장바구니가 비어 있습니다",
+        emptyCartHint: "위 목록에서 상품을 추가해 주세요.",
+        remove: "삭제",
+        qty: "수량",
+        historyBtn: "이전 주문",
+        historyTitle: "이전 주문 내역",
+        noOrders: "이 기기에 저장된 이전 주문이 없습니다.",
+        orderOn: "주문일",
+        impressum: "Impressum",
+        impressumTitle: "Impressum / 법적 고지",
+        collectionNote: "물품은 학교에서 학생에게 직접 전달되거나 리셉션에서 수령할 수 있습니다.",
+        collectionNoteShort: "학생에게 전달 또는 리셉션 수령 가능",
+        contactGeneral: "문의 사항이 있으신가요? 학교 사무실에 연락하세요",
+        impressumNote: "이 주문 양식은 학교에서 운영합니다. 모든 주문은 학교 약관의 적용을 받습니다."
+      }
+    }
+
+    let currentLang = 'en'
+
+    // ==================== EMAILJS CONFIG FOR AUTOMATIC EMAILS ====================
+    // Automatic order confirmation emails are sent using EmailJS.
+    // - Customer receives full order details + payment instructions.
+    // - A copy is also sent to vs.vorsitz@dsseoul.org.
+    // Configured with:
+    //   Public Key: Hyd-NRca4cqelM5HB
+    //   Service ID: service_w2elslj
+    //   Template ID: template_8ic1dmd
+    // Template variables used: to_email, email_subject, order_id, order_details, total_price, payment_reference, customer_email
+    // If you need to change the keys later, update this object.
+    //
+    // CRITICAL: EmailJS Template Setup for template_8ic1dmd (follow exactly)
+    //
+    // The customer always receives the full order confirmation.
+    // The school always receives a simple copy at vs.vorsitz@dsseoul.org (no conditional logic needed).
+    //
+    // === STEP 1: Edit the template ===
+    // 1. Log into https://dashboard.emailjs.com/
+    // 2. Left menu → Email Templates
+    // 3. Edit template_8ic1dmd
+    //
+    // === STEP 2: Set To and Subject ===
+    // At the very top of the template editor:
+    // - "To" field: {{to_email}}
+    // - "Subject" field: {{email_subject}}
+    //
+    // === STEP 3: Body content (paste this exactly) ===
+    // In the body (HTML mode):
+    // Delete current content and paste:
+    //
+    // <h2 style="color:#1e40af;">DSSI School Clothing - Order Confirmation</h2>
+    //
+    // <p><strong>Order Number:</strong> {{order_id}}</p>
+    // <p><strong>Total Amount:</strong> {{total_price}}</p>
+    // <p><strong>Payment Reference:</strong> {{payment_reference}}</p>
+    // <p><strong>Customer Email:</strong> {{customer_email}}</p>
+    //
+    // <hr>
+    //
+    // <div style="white-space:pre-wrap; font-family:monospace; background:#f4f4f4; padding:15px; border:1px solid #ddd;">
+    // {{order_details}}
+    // </div>
+    //
+    // <hr>
+    //
+    // <p>Thank you for your order!</p>
+    // <p>Deutsche Schule Seoul International</p>
+    //
+    // === STEP 4: Save ===
+    // Save the template.
+    //
+    // === STEP 5: Test ===
+    // - Order from the form on http://localhost.
+    // - On thank-you screen, copy the params object from the yellow debug box.
+    // - In EmailJS template, click "Send Test Email".
+    // - Paste the values from the object into the test form fields.
+    // - Send the test.
+    //
+    // Note: one identical email is sent to the customer; school office receives it via BCC (same content).
+    //
+    // === Local file (double-click) vs HTTP server (VERY IMPORTANT) ===
+    // Double-clicking the .html file (file://) is the #1 reason people still see
+    // "One or more dynamic variables are corrupted" with EmailJS, even with a correct template.
+    //
+    // You must serve it over http://localhost.
+    //
+    // Easiest options for Windows:
+    //
+    // 1. Visual Studio Code + Live Server (recommended - easiest, no typing commands after setup):
+    //    a. Download VS Code from https://code.visualstudio.com/ and install it.
+    //    b. Open VS Code.
+    //    c. Click File → Open Folder... and choose this folder:
+    //       C:\Users\akama\Documents\Bestellformular\order-form
+    //    d. On the left side, click the Extensions icon (or press Ctrl+Shift+X).
+    //    e. Search for "Live Server" (by Ritwick Dey) and click Install.
+    //    f. In the file list on the left, right-click on "index.html".
+    //    g. Choose "Open with Live Server".
+    //    h. A browser should automatically open at http://127.0.0.1:5500 (or a similar address).
+    //
+    // 2. Using npx (if you have or install Node.js):
+    //    - Download Node.js from https://nodejs.org/ (choose the LTS version).
+    //    - Open PowerShell in this folder and run:
+    //      npx http-server -p 8000
+    //    - Then open http://localhost:8000 in your browser.
+    //
+    // 3. Fixing the Python command (only if you want to use python):
+    //    The error you saw is normal on Windows. Do this once:
+    //    - Open Windows Settings (Win + I)
+    //    - Go to Apps → Advanced app settings → App execution aliases
+    //    - Find "python.exe" and "python3.exe" and turn both OFF.
+    //    - Then download and install Python from https://www.python.org/downloads/
+    //      (during install, make sure "Add Python to PATH" is checked).
+    //    - After that, the command `python -m http.server 8000` will work.
+    //
+    // Once the page is open at http://localhost (not by double-clicking the .html file),
+    // place a test order and press F12 → Console tab.
+    // Look for the lines:
+    //   [EmailJS] Params that will be sent to EmailJS:
+    //   Customer: { ... }
+    //   School copy: { ... }
+    // Copy those and use the values in EmailJS "Send Test Email" to verify your template.
+    const EMAILJS_CONFIG = {
+      publicKey: 'Hyd-NRca4cqelM5HB',
+      serviceId: 'service_w2elslj',
+      templateId: 'template_8ic1dmd'
+    };
+
+    function initEmailJS() {
+      if (typeof emailjs !== 'undefined' && EMAILJS_CONFIG.publicKey) {
+        try {
+          emailjs.init(EMAILJS_CONFIG.publicKey);
+          console.log('[EmailJS] Initialized successfully for automatic order emails.');
+        } catch (e) {
+          console.warn('[EmailJS] Init error:', e);
+        }
+      } else {
+        console.warn('[EmailJS] Not configured. Automatic emails will be simulated in console.');
+      }
+    }
+
+    async function sendOrderEmails(order, emailBody, sendParams) {
+      console.log('[EmailJS] Params that will be sent to EmailJS (one email to customer + BCC to school):');
+      console.log('  ', sendParams);
+      console.log('>>> COPY THE OBJECT ABOVE and paste into EmailJS "Send Test Email" <<<');
+
+      if (typeof emailjs === 'undefined' || !EMAILJS_CONFIG.publicKey) {
+        // Simulate for local/demo use
+        console.log('[EmailJS SIMULATED] (no real send - keys not configured or emailjs lib not loaded)');
+        return Promise.resolve(true);
+      }
+
+      try {
+        console.log('[EmailJS] Sending email (to customer + BCC school) with params:', sendParams);
+        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, sendParams);
+        console.log('[EmailJS] Email sent to', sendParams.to_email, '(BCC to vs.vorsitz@dsseoul.org)');
+
+        return true;
+      } catch (error) {
+        console.error('[EmailJS] Failed to send:', error);
+        // Don't block the order - still show success, but warn
+        const msg = currentLang === 'ko' ? '자동 이메일 전송에 실패했습니다. 주문 번호를 메모해 두세요.' :
+                    currentLang === 'de' ? 'Automatischer E-Mail-Versand fehlgeschlagen. Bitte notieren Sie Ihre Bestellnummer.' :
+                    'Automatic email sending failed. Please note your order number.';
+        alert(msg);
+        return false;
+      }
+    }
+
+    function t(key) {
+      return translations[currentLang][key] || translations.en[key] || key
+    }
+
+    function switchLang(lang) {
+      currentLang = lang
+      localStorage.setItem('dssi_lang', lang)
+      
+      // Update active button styles
+      document.querySelectorAll('[id^="lang-"]').forEach(btn => {
+        btn.classList.remove('active', 'bg-blue-800', 'text-white')
+        if (!btn.classList.contains('hover:bg-slate-200')) btn.classList.add('hover:bg-slate-200')
+      })
+      const activeBtn = document.getElementById('lang-' + lang)
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-blue-800', 'text-white')
+        activeBtn.classList.remove('hover:bg-slate-200')
+      }
+
+      // Update all static texts
+      updateStaticTexts()
+      
+      // Re-render dynamic parts
+      renderProducts()
+      renderCart()
+    }
+
+    function updateStaticTexts() {
+      // Header
+      const cartBtnText = document.getElementById('cart-btn-text')
+      if (cartBtnText) cartBtnText.textContent = t('basket')
+
+      // Hero
+      const pt = document.getElementById('page-title')
+      if (pt) pt.textContent = t('pageTitle')
+      const ps = document.getElementById('page-subtitle')
+      if (ps) ps.textContent = t('pageSubtitle')
+      const instock = document.getElementById('in-stock-text')
+      if (instock) instock.textContent = t('inStock')
+      const sg = document.getElementById('size-guide-btn')
+      if (sg) sg.textContent = t('sizeGuide')
+      const hb = document.getElementById('history-btn')
+      if (hb) hb.textContent = t('historyBtn')
+
+      const impBtn = document.getElementById('impressum-btn')
+      if (impBtn) impBtn.textContent = t('impressum')
+
+      const footerContact = document.getElementById('footer-contact-link')
+      if (footerContact) {
+        footerContact.textContent = t('contactGeneral') + ' • vs.vorsitz@dsseoul.org'
+        footerContact.href = 'mailto:vs.vorsitz@dsseoul.org'
+      }
+
+      const info = document.getElementById('info-text')
+      if (info) info.textContent = t('infoText')
+
+      const coll = document.getElementById('collection-note')
+      if (coll) coll.textContent = t('collectionNote')
+
+      const contactLink = document.getElementById('contact-email-link')
+      if (contactLink) {
+        contactLink.textContent = 'vs.vorsitz@dsseoul.org'
+        contactLink.href = 'mailto:vs.vorsitz@dsseoul.org'
+      }
+
+      // Products heading
+      const ph = document.getElementById('products-heading')
+      if (ph) ph.textContent = t('productsHeading')
+      const pn = document.getElementById('prices-note')
+      if (pn) pn.textContent = t('pricesNote')
+
+      // Cart drawer
+      const ct = document.getElementById('cart-title')
+      if (ct) ct.textContent = t('yourBasket')
+      const tl = document.getElementById('total-label')
+      if (tl) tl.textContent = t('total')
+      const on = document.getElementById('order-now-text')
+      if (on) on.textContent = t('orderNow')
+      const cb = document.getElementById('clear-basket-text')
+      if (cb) cb.textContent = t('clearBasket')
+    }
+
+    // ==================== PRODUCTS DATA ====================
+    const products = [
+      {
+        id: 'tshirt',
+        image: 'tshirt.jpg',
+        price: 25000,
+        name: { en: 'T-Shirt', de: 'T-Shirt', ko: '티셔츠' },
+        desc: {
+          en: '100% cotton • Logo on front left chest • Children (110-160) & adult sizes',
+          de: '100% Baumwolle • Logo vorne links auf der Brust • Kindergrößen (110-160) und Erwachsene',
+          ko: '100% 면 • 가슴 왼쪽 앞 로고 • 어린이(110-160) 및 성인 사이즈'
+        },
+        colors: [
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
+          { id: 'grey', name: { en: 'Grey', de: 'Grau', ko: '그레이' } },
+          { id: 'burgundy', name: { en: 'Burgundy', de: 'Weinrot', ko: '버건디' } },
+          { id: 'darkblue', name: { en: 'Dark Blue', de: 'Dunkelblau', ko: '다크블루' } }
+        ],
+        sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+      },
+      {
+        id: 'polo',
+        image: 'poloshirt.jpg',
+        price: 35000,
+        name: { en: 'Polo Shirt', de: 'Poloshirt', ko: '폴로셔츠' },
+        desc: {
+          en: '65% cotton, 35% polyester • Logo on front left chest',
+          de: '65% Baumwolle, 35% Polyester • Logo vorne links auf der Brust',
+          ko: '면 65%, 폴리에스터 35% • 가슴 왼쪽 앞 로고'
+        },
+        colors: [
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
+          { id: 'navy', name: { en: 'Navy', de: 'Navy', ko: '네이비' } }
+        ],
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+      },
+      {
+        id: 'hoodie',
+        image: 'hoodie.jpg',
+        price: 75000,
+        name: { en: 'Hoodie', de: 'Hoodie', ko: '후드티' },
+        desc: {
+          en: '100% cotton • Logo on front left chest + large logo on back',
+          de: '100% Baumwolle • Logo vorne links auf der Brust + großes Logo auf dem Rücken',
+          ko: '100% 면 • 가슴 왼쪽 앞 로고 + 등판 큰 로고'
+        },
+        colors: [
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
+          { id: 'lightgrey', name: { en: 'Light Grey', de: 'Hellgrau', ko: '라이트 그레이' } }
+        ],
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
+      }
+    ]
+
+    // ==================== CART ====================
+    let cart = []
+
+    function loadCart() {
+      const saved = localStorage.getItem('dssi_cart')
+      if (saved) {
+        try { cart = JSON.parse(saved) } catch (e) { cart = [] }
+      }
+    }
+
+    function saveCart() {
+      localStorage.setItem('dssi_cart', JSON.stringify(cart))
+      updateCartBadge()
+    }
+
+    function updateCartBadge() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0)
+      const badge = document.getElementById('cart-count-badge')
+      if (badge) badge.textContent = count > 99 ? '99+' : count
+
+      const headerTotal = document.getElementById('cart-total-header')
+      if (headerTotal) {
+        const total = cart.reduce((sum, item) => sum + item.unitPrice * item.qty, 0)
+        headerTotal.textContent = total > 0 ? formatPrice(total) : ''
+      }
+    }
+
+    function getProduct(productId) {
+      return products.find(p => p.id === productId)
+    }
+
+    function getColorName(product, colorId) {
+      const col = product.colors.find(c => c.id === colorId)
+      return col ? col.name[currentLang] || col.name.en : colorId
+    }
+
+    function addToCart(productId) {
+      const product = getProduct(productId)
+      if (!product) return
+
+      // Find the select elements for this card (they have data attrs)
+      const card = document.querySelector(`[data-product-id="${productId}"]`)
+      if (!card) return
+
+      const colorSel = card.querySelector('.color-select')
+      const sizeSel = card.querySelector('.size-select')
+      const qtyInput = card.querySelector('.qty-input')
+
+      const colorId = colorSel ? colorSel.value : product.colors[0].id
+      const size = sizeSel ? sizeSel.value : product.sizes[0]
+      const qty = qtyInput ? Math.max(1, parseInt(qtyInput.value) || 1) : 1
+
+      // Check if same variant already in cart
+      const existing = cart.findIndex(item => 
+        item.productId === productId && 
+        item.colorId === colorId && 
+        item.size === size
+      )
+
+      if (existing !== -1) {
+        cart[existing].qty += qty
+      } else {
+        cart.push({
+          productId: productId,
+          colorId: colorId,
+          size: size,
+          qty: qty,
+          unitPrice: product.price,
+          addedAt: Date.now()
+        })
+      }
+
+      saveCart()
+      renderCart()
+
+      // Nice feedback
+      const origText = colorSel ? '' : ''
+      const btn = card.querySelector('.add-btn')
+      if (btn) {
+        const original = btn.innerHTML
+        btn.innerHTML = `<i class="fa-solid fa-check mr-1"></i> ${currentLang === 'ko' ? '추가됨' : currentLang === 'de' ? 'Hinzugefügt' : 'Added'}`
+        btn.disabled = true
+        setTimeout(() => {
+          if (btn) {
+            btn.innerHTML = original
+            btn.disabled = false
+          }
+          // Optionally open drawer on first add
+          if (cart.length === 1) {
+            setTimeout(() => toggleCartDrawer(true), 380)
+          }
+        }, 1100)
+      } else {
+        if (cart.length === 1) toggleCartDrawer(true)
+      }
+    }
+
+    function changeCartQty(index, delta) {
+      cart[index].qty = Math.max(1, Math.min(99, cart[index].qty + delta))
+      saveCart()
+      renderCart()
+    }
+
+    function setCartQty(index, newQty) {
+      const q = Math.max(1, Math.min(99, parseInt(newQty) || 1))
+      cart[index].qty = q
+      saveCart()
+      renderCart()
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1)
+      saveCart()
+      renderCart()
+    }
+
+    function clearCart() {
+      if (!cart.length) return
+      if (!confirm(currentLang === 'de' ? 'Warenkorb wirklich leeren?' : currentLang === 'ko' ? '장바구니를 비우시겠습니까?' : 'Empty the basket?')) return
+      cart = []
+      saveCart()
+      renderCart()
+    }
+
+    function calculateTotal() {
+      return cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0)
+    }
+
+    function formatPrice(amount) {
+      return amount.toLocaleString('ko-KR') + ' KRW'
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-content')
+      const totalEl = document.getElementById('cart-total')
+      const countEl = document.getElementById('cart-count-text')
+
+      if (!container || !totalEl) return
+
+      const count = cart.reduce((s, i) => s + i.qty, 0)
+      if (countEl) countEl.textContent = `(${count})`
+
+      const total = calculateTotal()
+      totalEl.textContent = formatPrice(total)
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart rounded-2xl p-8 text-center">
+            <i class="fa-solid fa-shopping-bag text-4xl text-slate-300 mb-3"></i>
+            <div class="font-semibold text-slate-500">${t('emptyCart')}</div>
+            <div class="text-xs text-slate-400 mt-1">${t('emptyCartHint')}</div>
+          </div>
+        `
+        updateCartBadge()
+        return
+      }
+
+      let html = ''
+      cart.forEach((item, idx) => {
+        const prod = getProduct(item.productId)
+        if (!prod) return
+
+        const colorName = getColorName(prod, item.colorId)
+        const lineTotal = item.unitPrice * item.qty
+
+        html += `
+          <div class="cart-item flex gap-3 bg-white border border-slate-200 rounded-2xl p-3">
+            <div class="w-16 h-16 rounded-xl overflow-hidden border border-slate-200 flex-shrink-0 bg-slate-100">
+              <img src="${prod.image}" class="w-full h-full object-cover" alt="${prod.name.en}">
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between gap-x-2">
+                <div>
+                  <div class="font-semibold leading-tight">${prod.name[currentLang] || prod.name.en}</div>
+                  <div class="text-xs text-slate-500 mt-0.5">${colorName} • ${item.size}</div>
+                </div>
+                <div class="text-right text-sm font-semibold tabular-nums whitespace-nowrap">${formatPrice(lineTotal)}</div>
+              </div>
+
+              <div class="mt-2 flex items-center justify-between">
+                <div class="inline-flex items-center rounded-xl border border-slate-200 text-sm">
+                  <button onclick="changeCartQty(${idx}, -1)" class="px-2.5 py-1 text-slate-500 hover:bg-slate-100 active:bg-slate-200 rounded-l-xl">-</button>
+                  <input type="number" value="${item.qty}" min="1" max="99"
+                         class="w-9 text-center border-x border-slate-200 focus:outline-none text-sm py-0.5"
+                         onchange="setCartQty(${idx}, this.value)">
+                  <button onclick="changeCartQty(${idx}, 1)" class="px-2.5 py-1 text-slate-500 hover:bg-slate-100 active:bg-slate-200 rounded-r-xl">+</button>
+                </div>
+
+                <button onclick="removeFromCart(${idx})" 
+                        class="text-red-500 hover:text-red-600 text-xs px-2 py-1 font-medium flex items-center gap-x-1">
+                  <i class="fa-solid fa-trash-can"></i>
+                  <span class="hidden sm:inline">${t('remove')}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `
+      })
+
+      container.innerHTML = html
+      updateCartBadge()
+    }
+
+    function toggleCartDrawer(forceOpen = false) {
+      const drawer = document.getElementById('cart-drawer')
+      if (!drawer) return
+
+      if (forceOpen) {
+        drawer.classList.remove('hidden')
+        drawer.classList.add('flex')
+      } else {
+        if (drawer.classList.contains('hidden')) {
+          drawer.classList.remove('hidden')
+          drawer.classList.add('flex')
+        } else {
+          drawer.classList.add('hidden')
+          drawer.classList.remove('flex')
+        }
+      }
+    }
+
+    // ==================== PRODUCT CARDS ====================
+    function renderProducts() {
+      const grid = document.getElementById('products-grid')
+      if (!grid) return
+      grid.innerHTML = ''
+
+      products.forEach(product => {
+        const card = document.createElement('div')
+        card.className = `product-card bg-white border border-slate-200 rounded-3xl overflow-hidden flex flex-col shadow-sm`
+        card.setAttribute('data-product-id', product.id)
+
+        const colorOptions = product.colors.map(c => 
+          `<option value="${c.id}">${c.name[currentLang] || c.name.en}</option>`
+        ).join('')
+
+        const sizeOptions = product.sizes.map(s => 
+          `<option value="${s}">${s}</option>`
+        ).join('')
+
+        card.innerHTML = `
+          <div class="aspect-square bg-slate-100 relative">
+            <img src="${product.image}" class="w-full h-full object-cover" alt="${product.name.en}">
+            <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2.5 py-0.5 rounded-full text-xs font-semibold shadow text-emerald-700 border border-white">
+              ${formatPrice(product.price)}
+            </div>
+          </div>
+          
+          <div class="p-4 flex flex-col flex-1">
+            <div>
+              <h3 class="font-semibold text-lg tracking-tight">${product.name[currentLang] || product.name.en}</h3>
+              <p class="text-xs text-slate-500 mt-0.5 leading-snug">${product.desc[currentLang] || product.desc.en}</p>
+              <div class="mt-1.5 text-[10px] text-emerald-700 font-medium flex items-center gap-x-1">
+                <i class="fa-solid fa-handshake text-xs"></i>
+                <span>${t('collectionNoteShort')}</span>
+              </div>
+            </div>
+
+            <div class="mt-4 grid grid-cols-1 gap-y-3 text-sm flex-1">
+              <!-- Color -->
+              <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">${t('color')}</label>
+                <select class="color-select w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 bg-white">
+                  ${colorOptions}
+                </select>
+              </div>
+
+              <!-- Size + Qty row -->
+              <div class="grid grid-cols-5 gap-2 items-end">
+                <div class="col-span-3">
+                  <label class="block text-xs font-medium text-slate-500 mb-1">${t('size')}</label>
+                  <select class="size-select w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 bg-white">
+                    ${sizeOptions}
+                  </select>
+                </div>
+                <div class="col-span-2">
+                  <label class="block text-xs font-medium text-slate-500 mb-1">${t('quantity')}</label>
+                  <input type="number" value="1" min="1" max="20" class="qty-input w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+              </div>
+            </div>
+
+            <button onclick="addToCart('${product.id}')" 
+                    class="add-btn mt-4 w-full py-2.5 bg-blue-800 hover:bg-blue-900 active:bg-blue-950 text-white text-sm font-semibold rounded-2xl flex items-center justify-center gap-x-2 transition-colors">
+              <i class="fa-solid fa-plus"></i>
+              <span>${t('addToBasket')}</span>
+            </button>
+          </div>
+        `
+
+        grid.appendChild(card)
+      })
+    }
+
+    // ==================== CHECKOUT / ORDER ====================
+    let currentOrderId = null
+
+    function generateOrderId() {
+      const d = new Date()
+      const y = d.getFullYear().toString().slice(2)
+      const m = String(d.getMonth() + 1).padStart(2, '0')
+      const rand = Math.random().toString(36).substring(2, 7).toUpperCase()
+      return `D${y}${m}${rand}`
+    }
+
+    function proceedToOrder() {
+      if (!cart.length) {
+        alert(currentLang === 'ko' ? '장바구니가 비어 있습니다.' : 'Your basket is empty.')
+        return
+      }
+      toggleCartDrawer() // close drawer
+      openCheckoutModal()
+    }
+
+    function openCheckoutModal() {
+      const modal = document.getElementById('checkout-modal')
+      const body = document.getElementById('checkout-body')
+      if (!modal || !body) return
+
+      currentOrderId = generateOrderId()
+      const total = calculateTotal()
+
+      // Build summary html
+      let itemsHtml = ''
+      cart.forEach(item => {
+        const prod = getProduct(item.productId)
+        const colorName = getColorName(prod, item.colorId)
+        const line = `${prod.name[currentLang] || prod.name.en} • ${colorName} • ${item.size} × ${item.qty}`
+        itemsHtml += `<div class="flex justify-between py-1 text-sm border-b border-slate-100 last:border-0">
+          <div class="text-slate-600">${line}</div>
+          <div class="font-medium tabular-nums">${formatPrice(item.unitPrice * item.qty)}</div>
+        </div>`
+      })
+
+      body.innerHTML = `
+        <div>
+          <div class="mb-4">
+            <div class="text-xs uppercase tracking-widest text-slate-500">${t('orderSummary')}</div>
+            <div class="font-mono text-blue-700 text-sm mt-0.5 font-semibold">#${currentOrderId}</div>
+          </div>
+
+          <div class="bg-slate-50 rounded-2xl p-4 mb-5">
+            ${itemsHtml}
+            <div class="flex justify-between pt-3 mt-1 font-semibold text-base">
+              <div>${t('total')}</div>
+              <div class="tabular-nums">${formatPrice(total)}</div>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-200 text-emerald-700 text-xs font-medium flex items-center gap-x-1.5">
+              <i class="fa-solid fa-handshake"></i>
+              <span>${t('collectionNote')}</span>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-1.5">${t('emailLabel')}</label>
+            <input id="customer-email" type="email" required
+                   class="w-full px-4 py-3 border border-slate-300 focus:border-blue-600 rounded-2xl text-sm"
+                   placeholder="${t('emailPlaceholder')}" value="">
+            <p class="mt-1.5 text-xs text-slate-500">${t('emailHelp')}</p>
+          </div>
+
+          <button onclick="confirmOrder()" 
+                  class="mt-2 w-full py-3.5 rounded-2xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 transition text-white font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-check"></i>
+            <span>${t('placeOrderBtn')}</span>
+          </button>
+          <div class="text-center mt-3">
+            <button onclick="closeCheckoutModal()" class="text-xs text-slate-500 hover:text-slate-700">${currentLang === 'ko' ? '취소' : currentLang === 'de' ? 'Abbrechen' : 'Cancel'}</button>
+          </div>
+        </div>
+      `
+
+      modal.classList.remove('hidden')
+      modal.classList.add('flex')
+
+      // Focus email
+      setTimeout(() => {
+        const emailInput = document.getElementById('customer-email')
+        if (emailInput) emailInput.focus()
+      }, 80)
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById('checkout-modal')
+      if (modal) {
+        modal.classList.add('hidden')
+        modal.classList.remove('flex')
+      }
+      // Do not clear currentOrderId here in case of success state reuse
+    }
+
+    function confirmOrder() {
+      const emailInput = document.getElementById('customer-email')
+      if (!emailInput) return
+
+      const email = emailInput.value.trim()
+      if (!email || !email.includes('@')) {
+        alert(currentLang === 'ko' ? '유효한 이메일 주소를 입력하세요.' : currentLang === 'de' ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' : 'Please enter a valid email address.')
+        emailInput.focus()
+        return
+      }
+
+      const total = calculateTotal()
+      const orderId = currentOrderId || generateOrderId()
+
+      // Build order data
+      const orderData = {
+        id: orderId,
+        email: email,
+        items: cart.map(i => ({...i})),
+        total: total,
+        date: new Date().toISOString(),
+        lang: currentLang
+      }
+
+      // Build the email body (in selected language) for the customer
+      const emailBody = buildEmailBody(orderData)
+
+      const baseParams = {
+        order_id: orderId,
+        customer_email: email,
+        order_details: emailBody,
+        total_price: formatPrice(total),
+        payment_reference: orderId
+      };
+
+      // Save order to local history (optional)
+      saveOrderToHistory(orderData)
+
+      // Clear the cart early
+      cart = []
+      saveCart()
+      renderCart()
+
+      const sendParams = {
+        ...baseParams,
+        to_email: email,
+        email_subject: `DSSI Order #${orderId} - Confirmation & Payment Instructions`,
+        bcc: 'vs.vorsitz@dsseoul.org'
+      };
+
+      // Send ONE identical email to the customer, BCC'd to the school office.
+      // Always show the thank you screen.
+      sendOrderEmails(orderData, emailBody, sendParams).finally(() => {
+        showOrderSuccess(orderData, emailBody, sendParams)
+      })
+    }
+
+    function buildEmailBody(order) {
+      const headerLine = 'Item\tColor\tSize\tQty\tLine Total'
+      const prodLines = order.items.map(item => {
+        const prod = getProduct(item.productId)
+        const cname = getColorName(prod, item.colorId)
+        const lineTotal = item.unitPrice * item.qty
+        return `${prod.name[order.lang] || prod.name.en}\t${cname}\t${item.size}\t${item.qty}\t${formatPrice(lineTotal)}`
+      }).join('\n')
+      const itemsHeader = order.lang === 'de' ? 'ARTIKEL:\n' + headerLine :
+                        order.lang === 'ko' ? '품목:\n' + headerLine :
+                        'ITEMS:\n' + headerLine
+
+      const payRef = `${order.id}`
+
+      let body = ''
+
+      if (order.lang === 'de') {
+        body = `Sehr geehrte Damen und Herren,
+
+hiermit bestelle ich die unten aufgeführten Artikel der DSSI Schulkleidung 2026.
+
+BESTELLNUMMER: ${order.id}
+DATUM: ${new Date(order.date).toLocaleDateString('de-DE')}
+
+${itemsHeader}
+${prodLines}
+
+GESAMTBETRAG: ${formatPrice(order.total)}
+
+ÜBERGABE / SAMMLUNG: ${t('collectionNote')}
+
+ZAHLUNGSANWEISUNG:
+Bitte überweisen Sie den Gesamtbetrag innerhalb von 7 Tagen auf folgendes Konto:
+
+${t('bank')}
+${t('account')}
+${t('holder')}
+
+Verwendungszweck / Reference: ${payRef}
+
+Vielen Dank für die Bearbeitung.
+
+Mit freundlichen Grüßen
+${order.email}
+`
+      } else if (order.lang === 'ko') {
+        body = `안녕하세요,
+
+2026 DSSI 학교 의류를 다음과 같이 주문합니다.
+
+주문번호: ${order.id}
+주문일: ${new Date(order.date).toLocaleDateString('ko-KR')}
+
+${itemsHeader}
+${prodLines}
+
+총 금액: ${formatPrice(order.total)}
+
+전달 / 수령 안내: ${t('collectionNote')}
+
+결제 안내:
+7일 이내에 아래 계좌로 총액을 입금해 주세요.
+
+${t('bank')}
+${t('account')}
+${t('holder')}
+
+참고번호 (Reference): ${payRef}
+
+감사합니다.
+
+${order.email}
+`
+      } else {
+        body = `Dear DSSI team,
+
+I would like to order the following school clothing items for 2026.
+
+ORDER NUMBER: ${order.id}
+DATE: ${new Date(order.date).toLocaleDateString('en-GB')}
+
+${itemsHeader}
+${prodLines}
+
+TOTAL AMOUNT: ${formatPrice(order.total)}
+
+ITEM COLLECTION: ${t('collectionNote')}
+
+PAYMENT INSTRUCTIONS:
+Please transfer the total amount to the account below within 7 days:
+
+${t('bank')}
+${t('account')}
+${t('holder')}
+
+Payment reference: ${payRef}
+
+Thank you.
+
+Best regards,
+${order.email}
+`
+      }
+
+      return body.trim()
+    }
+
+    function showOrderSuccess(order, emailBody, sendParams) {
+      const modal = document.getElementById('checkout-modal')
+      const body = document.getElementById('checkout-body')
+      if (!body) return
+
+      body.innerHTML = `
+        <div class="text-center py-2">
+          <div class="mx-auto w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
+            <i class="fa-solid fa-check text-3xl text-emerald-600"></i>
+          </div>
+          <div class="font-semibold text-xl">${t('successTitle')}</div>
+          <div class="mt-1 text-sm text-slate-600">${t('successText')}</div>
+          <div class="mt-1 text-xs text-slate-500">${t('spamNote')}</div>
+
+          <div class="my-4 p-3 bg-slate-900 text-white rounded-2xl font-mono text-sm tracking-[1px]">
+            #${order.id}
+          </div>
+
+          <div class="text-left bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-5">
+            <div class="uppercase text-xs font-semibold tracking-wider text-emerald-700 mb-2">${t('paymentTitle')}</div>
+            <div class="text-sm leading-relaxed">
+              <div class="font-medium">${t('bank')}</div>
+              <div class="font-medium">${t('account')}</div>
+              <div class="font-medium">${t('holder')}</div>
+              <div class="mt-2 text-xs text-slate-600">${t('referenceNote')}</div>
+              <div class="mt-1 text-xs font-semibold text-emerald-800">Reference: ${order.id}</div>
+            </div>
+            <div class="mt-3 pt-3 border-t text-emerald-700 text-xs font-medium flex items-center gap-x-1.5">
+              <i class="fa-solid fa-handshake"></i>
+              <span>${t('collectionNote')}</span>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <button onclick="copyOrderToClipboard('${order.id}', \`${emailBody.replace(/`/g, '\\`')}\` )"
+                    class="w-full py-3 border border-slate-300 hover:bg-slate-50 font-semibold rounded-2xl flex items-center justify-center gap-x-2 text-sm">
+              <i class="fa-solid fa-copy"></i>
+              <span>${t('copyToClipboard')}</span>
+            </button>
+
+            <button onclick="closeCheckoutAndReset()" 
+                    class="w-full py-2 text-sm text-slate-500 hover:text-slate-700 font-medium">
+              ${t('closeAndClear')}
+            </button>
+          </div>
+        </div>
+      `
+    }
+
+    function copyOrderToClipboard(orderId, emailBody) {
+      const text = `DSSI School Clothing Order #${orderId}\n\n` + emailBody + `\n\n---\nSent via DSSI online order form`
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = event.currentTarget ? event.currentTarget.innerHTML : null
+        const btns = document.querySelectorAll('#checkout-body button')
+        btns.forEach(b => {
+          if (b.textContent.includes('Copy') || b.textContent.includes('kopieren') || b.textContent.includes('복사')) {
+            const old = b.innerHTML
+            b.innerHTML = `<i class="fa-solid fa-check"></i> <span>Copied!</span>`
+            setTimeout(() => { b.innerHTML = old }, 1600)
+          }
+        })
+      }).catch(() => {
+        // fallback
+        prompt('Copy this text manually:', text)
+      })
+    }
+
+    function closeCheckoutAndReset() {
+      const modal = document.getElementById('checkout-modal')
+      if (modal) {
+        modal.classList.add('hidden')
+        modal.classList.remove('flex')
+      }
+      currentOrderId = null
+      // cart already cleared in confirm
+    }
+
+    function saveOrderToHistory(order) {
+      try {
+        const history = JSON.parse(localStorage.getItem('dssi_orders') || '[]')
+        history.unshift(order)
+        // keep last 8
+        localStorage.setItem('dssi_orders', JSON.stringify(history.slice(0, 8)))
+      } catch (e) {}
+    }
+
+    // ==================== SIZE GUIDE ====================
+    function showSizeGuide() {
+      const m = document.getElementById('size-modal')
+      if (m) {
+        m.classList.remove('hidden')
+        m.classList.add('flex')
+      }
+    }
+    function closeSizeModal() {
+      const m = document.getElementById('size-modal')
+      if (m) {
+        m.classList.add('hidden')
+        m.classList.remove('flex')
+      }
+    }
+
+    // ==================== ORDER HISTORY ====================
+    function showOrderHistory() {
+      const modal = document.getElementById('history-modal')
+      const list = document.getElementById('history-list')
+      if (!modal || !list) return
+
+      let orders = []
+      try { orders = JSON.parse(localStorage.getItem('dssi_orders') || '[]') } catch (e) {}
+
+      const titleEl = document.getElementById('history-modal-title')
+      if (titleEl) titleEl.textContent = t('historyTitle')
+
+      if (!orders.length) {
+        list.innerHTML = `<div class="text-center py-8 text-slate-500">${t('noOrders')}</div>`
+      } else {
+        let html = ''
+        orders.forEach(o => {
+          const d = new Date(o.date)
+          const dateStr = d.toLocaleDateString(currentLang === 'de' ? 'de-DE' : currentLang === 'ko' ? 'ko-KR' : 'en-GB')
+          const shortItems = o.items.map(i => {
+            const p = getProduct(i.productId)
+            return (p ? (p.name[currentLang] || p.name.en) : i.productId) + '×' + i.qty
+          }).join(', ')
+          html += `
+            <div class="border border-slate-200 rounded-2xl p-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="font-mono text-xs text-blue-700 font-semibold">#${o.id}</div>
+                  <div class="text-[11px] text-slate-500">${t('orderOn')} ${dateStr}</div>
+                </div>
+                <div class="text-right">
+                  <div class="font-semibold tabular-nums">${formatPrice(o.total)}</div>
+                  <div class="text-[10px] text-emerald-600">✓</div>
+                </div>
+              </div>
+              <div class="mt-1 text-xs text-slate-600 truncate">${shortItems}</div>
+              <div class="mt-1 text-[10px] text-slate-400">${o.email}</div>
+            </div>
+          `
+        })
+        list.innerHTML = html
+      }
+
+      modal.classList.remove('hidden')
+      modal.classList.add('flex')
+    }
+
+    function closeHistoryModal() {
+      const m = document.getElementById('history-modal')
+      if (m) {
+        m.classList.add('hidden')
+        m.classList.remove('flex')
+      }
+    }
+
+    // ==================== IMPRESSUM ====================
+    function showImpressum() {
+      const modal = document.getElementById('impressum-modal')
+      const titleEl = document.getElementById('impressum-modal-title')
+      const noteEl = document.getElementById('impressum-note')
+      if (modal) {
+        if (titleEl) titleEl.textContent = t('impressumTitle')
+        if (noteEl) noteEl.textContent = t('impressumNote')
+        modal.classList.remove('hidden')
+        modal.classList.add('flex')
+      }
+    }
+
+    function closeImpressumModal() {
+      const m = document.getElementById('impressum-modal')
+      if (m) {
+        m.classList.add('hidden')
+        m.classList.remove('flex')
+      }
+    }
+
+    // ==================== INIT ====================
+    function initLanguage() {
+      const saved = localStorage.getItem('dssi_lang')
+      const browser = (navigator.language || 'en').toLowerCase()
+      let startLang = 'en'
+      if (saved && ['en','de','ko'].includes(saved)) startLang = saved
+      else if (browser.startsWith('de')) startLang = 'de'
+      else if (browser.startsWith('ko')) startLang = 'ko'
+
+      currentLang = startLang
+
+      // Activate button
+      document.querySelectorAll('[id^="lang-"]').forEach(btn => {
+        btn.classList.remove('active', 'bg-blue-800', 'text-white')
+        if (!btn.classList.contains('hover:bg-slate-200')) btn.classList.add('hover:bg-slate-200')
+      })
+      const active = document.getElementById('lang-' + currentLang)
+      if (active) {
+        active.classList.add('active', 'bg-blue-800', 'text-white')
+        active.classList.remove('hover:bg-slate-200')
+      }
+
+      updateStaticTexts()
+    }
+
+    function init() {
+      initTailwind()
+      loadCart()
+
+      initLanguage()
+      initEmailJS()
+      renderProducts()
+      renderCart()
+      updateCartBadge()
+
+      // Keyboard support: ESC closes drawers/modals
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const cartD = document.getElementById('cart-drawer')
+          const sizeM = document.getElementById('size-modal')
+          const checkM = document.getElementById('checkout-modal')
+          if (!checkM.classList.contains('hidden')) {
+            checkM.classList.add('hidden'); checkM.classList.remove('flex')
+          } else if (!sizeM.classList.contains('hidden')) {
+            sizeM.classList.add('hidden'); sizeM.classList.remove('flex')
+          } else if (!cartD.classList.contains('hidden')) {
+            cartD.classList.add('hidden'); cartD.classList.remove('flex')
+          }
+        }
+        if (e.key.toLowerCase() === '?' && document.activeElement.tagName === 'BODY') {
+          e.preventDefault()
+          const d = document.getElementById('cart-drawer')
+          if (d.classList.contains('hidden')) toggleCartDrawer(true)
+          else toggleCartDrawer()
+        }
+      })
+
+      // Bonus: allow ? key hint in console or just for power users
+      console.log('%c[DSSI Order] Ready. Press ? with focus on page to toggle cart.', 'color:#64748b')
+
+      // Preload a demo item hint (optional, disabled)
+      // If you want demo data on first load for testing, uncomment:
+      // if (!cart.length && !localStorage.getItem('dssi_cart')) { setTimeout(()=>{ /* demo */ }, 1200) }
+    }
+
+    // Boot
+    window.onload = init
+  </script>
+</body>
+</html>
