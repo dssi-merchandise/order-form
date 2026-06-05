@@ -51,9 +51,9 @@ Automatic emails are sent via the configured EmailJS integration (see Technical 
 
 ## Files in this folder
 - `index.html` — the complete single-file application (open this)
-- `tshirt.jpg`, `poloshirt.jpg`, `hoodie.jpg`, `mascot.jpg` — product photos (mascot is a suspenseful Grok Imagine placeholder)
+- `tshirt.jpg`, `poloshirt.jpg`, `hoodie.jpg`, `jacket.jpg`, `mug.jpg`, `mascot.jpg` — product photos (jacket and mug are Grok Imagine placeholders with "PLACEHOLDER" text; mascot uses previous image with "Coming Soon" text)
 - `README.md` — this file
-- School Jacket and Mug Cup use embedded SVG placeholders; School Mascot uses a generated suspenseful placeholder image `mascot.jpg` created with Grok Imagine (update the `image` value in the `products` array in index.html when you have real photos). The mascot has no color variants (color selector is hidden).
+- School Jacket and Mug Cup use generated placeholder images (`jacket.jpg`, `mug.jpg`) created with Grok Imagine (with "PLACEHOLDER" text overlaid in the exact same position and style for a smooth look). School Mascot uses the previous generated image with "Coming Soon" text. Update the `image` value in the `products` array in index.html when you have real photos. The mascot has no color variants (color selector is hidden).
 
 The original `DSSI Shirts 2026.pdf` is included in this folder for reference (size charts etc.).
 
@@ -86,12 +86,14 @@ This is the absolute easiest way with zero setup.
 
 1. **Prepare a clean deploy folder** (strongly recommended):
    - Create a new folder on your computer, e.g. `dssi-order-form-live`
-   - Copy **only** these 6 files into it:
+   - Copy **only** these 8 files into it:
      - `index.html`
      - `DSSI logo.jpg`
      - `tshirt.jpg`
      - `poloshirt.jpg`
      - `hoodie.jpg`
+     - `jacket.jpg`
+     - `mug.jpg`
      - `mascot.jpg`
 
 2. Go to this page in your browser:  

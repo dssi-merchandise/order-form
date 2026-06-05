@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Form | DSSI School Merchandise</title>
+  <title>Order Form | DSSI School Support Shop</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -94,7 +94,7 @@
           <img src="DSSI logo.jpg" alt="DSSI Logo" class="h-9 w-auto max-h-10 object-contain">
           <div>
             <div class="font-semibold text-xl tracking-tight text-slate-900">DSSI</div>
-            <div class="text-[10px] text-slate-500 -mt-1 font-medium tracking-[0.5px]">School Merchandise</div>
+            <div class="text-[10px] text-slate-500 -mt-1 font-medium tracking-[0.5px]">School Support Shop</div>
           </div>
           <a href="https://www.dsseoul.org/" target="_blank" rel="noopener" class="hidden sm:block ml-1 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 hover:text-blue-700 transition-colors">Deutsche Schule Seoul International</a>
         </div>
@@ -142,7 +142,7 @@
       <div class="mt-3 flex items-center gap-x-2 text-xs">
         <div class="inline-flex items-center gap-x-1 px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full font-medium">
           <i class="fa-solid fa-check text-xs"></i>
-          <span id="in-stock-text">In stock • Ready for ordering</span>
+          <span id="in-stock-text">Ready for ordering</span>
         </div>
         <button onclick="showSizeGuide()" 
                 class="inline-flex items-center gap-x-1 px-2.5 py-1 text-slate-500 hover:text-slate-700 text-xs font-medium">
@@ -174,6 +174,7 @@
       <div class="flex items-start gap-x-3">
         <i class="fa-solid fa-info-circle text-blue-600 mt-0.5"></i>
         <div>
+          <p id="shop-intro" class="mb-2 text-sm text-slate-700 leading-relaxed">Our support shop serves the community of Deutsche Schule Seoul International (DSSI). Every purchase directly helps our school and benefits our students. All proceeds are 100% reinvested into school operations.</p>
           <span id="info-text">Orders are processed after payment confirmation. You will receive payment instructions by email.</span>
           <span class="block text-emerald-700 text-xs mt-1 font-medium" id="collection-note"></span>
         </div>
@@ -408,7 +409,8 @@
         pageSubtitle: "Proudly wear and use our school items. Select color, size and quantity.",
         productsHeading: "Available Items",
         pricesNote: "All prices in KRW",
-        inStock: "In stock • Ready for ordering",
+        inStock: "Ready for ordering",
+        shopIntro: "Our support shop serves the community of Deutsche Schule Seoul International (DSSI). Every purchase directly helps our school and benefits our students. All proceeds are 100% reinvested into school operations.",
         sizeGuide: "Size guide",
         infoText: "Orders are processed after payment confirmation. You will receive payment instructions by email.",
         basket: "Basket",
@@ -462,7 +464,8 @@
         pageSubtitle: "Tragen und nutzen Sie stolz unsere Schulartikel. Wählen Sie Farbe, Größe und Menge.",
         productsHeading: "Verfügbare Artikel",
         pricesNote: "Alle Preise in KRW",
-        inStock: "Auf Lager • Bestellbereit",
+        inStock: "Bestellbereit",
+        shopIntro: "Unser Support-Shop dient der Gemeinschaft der Deutschen Schule Seoul International (DSSI). Jeder Kauf hilft direkt unserer Schule und kommt unseren Schülern zugute. Alle Erlöse werden zu 100% in den Schulbetrieb reinvestiert.",
         sizeGuide: "Größenübersicht",
         infoText: "Bestellungen werden nach Zahlungseingang bearbeitet. Sie erhalten die Zahlungsanweisungen per E-Mail.",
         basket: "Warenkorb",
@@ -516,7 +519,8 @@
         pageSubtitle: "자랑스럽게 학교 물품을 착용하고 사용하세요. 색상, 사이즈, 수량을 선택하세요.",
         productsHeading: "주문 가능 품목",
         pricesNote: "모든 가격은 KRW입니다",
-        inStock: "재고 있음 • 주문 가능",
+        inStock: "주문 가능",
+        shopIntro: "우리의 지원 상점은 Deutsche Schule Seoul International (DSSI) 커뮤니티를 위해 운영됩니다. 모든 구매는 학교를 직접 돕고 학생들에게 혜택을 줍니다. 모든 수익은 100% 학교 운영에 재투자됩니다.",
         sizeGuide: "사이즈 가이드",
         infoText: "결제 확인 후 주문이 처리됩니다. 결제 안내가 이메일로 발송됩니다.",
         basket: "장바구니",
@@ -921,6 +925,8 @@
       if (pt) pt.textContent = t('pageTitle')
       const ps = document.getElementById('page-subtitle')
       if (ps) ps.textContent = t('pageSubtitle')
+      const intro = document.getElementById('shop-intro')
+      if (intro) intro.textContent = t('shopIntro')
       const instock = document.getElementById('in-stock-text')
       if (instock) instock.textContent = t('inStock')
       const sg = document.getElementById('size-guide-btn')
@@ -1023,7 +1029,7 @@
       },
       {
         id: 'jacket',
-        image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%231e3a8a%22/%3E%3Ctext x=%2250%25%22 y=%2240%25%22 fill=%22%23bae6fd%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPLACEHOLDER%3C/text%3E%3Ctext x=%2250%25%22 y=%2255%25%22 fill=%22white%22 font-size=%2220%22 text-anchor=%22middle%22 dy=%22.3em%22 font-weight=%22bold%22%3ESchool Jacket%3C/text%3E%3C/svg%3E',
+        image: 'jacket.jpg',
         price: 80000,
         name: { en: 'School Jacket', de: 'Schuljacke', ko: '스쿨 재킷' },
         desc: {
@@ -1040,7 +1046,7 @@
       },
       {
         id: 'mug',
-        image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%236b7280%22/%3E%3Ctext x=%2250%25%22 y=%2240%25%22 fill=%22%23e5e7eb%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPLACEHOLDER%3C/text%3E%3Ctext x=%2250%25%22 y=%2255%25%22 fill=%22white%22 font-size=%2220%22 text-anchor=%22middle%22 dy=%22.3em%22 font-weight=%22bold%22%3EMug Cup%3C/text%3E%3C/svg%3E',
+        image: 'mug.jpg',
         price: 10000,
         name: { en: 'Mug Cup', de: 'Tasse', ko: '머그컵' },
         desc: {
