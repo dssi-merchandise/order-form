@@ -259,7 +259,7 @@
         <button onclick="closeSizeModal()" class="text-xl text-slate-400 hover:text-slate-600 px-1">×</button>
       </div>
       <div class="p-5 text-sm max-h-[70vh] overflow-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-5 text-xs">
           <!-- T-Shirt sizes -->
           <div>
             <div class="font-semibold mb-1 text-blue-800">T-Shirt</div>
@@ -315,9 +315,21 @@
               </tbody>
             </table>
           </div>
+
+          <!-- Mug Cup -->
+          <div>
+            <div class="font-semibold mb-1 text-blue-800">Mug Cup</div>
+            <div class="text-[10px] text-slate-500">One Size • 350ml</div>
+          </div>
+
+          <!-- School Mascot -->
+          <div>
+            <div class="font-semibold mb-1 text-blue-800">School Mascot</div>
+            <div class="text-[10px] text-slate-500">One Size • Coming Soon</div>
+          </div>
         </div>
         <div class="mt-4 text-xs text-slate-500 px-1">
-          Measurements are approximate body height / upper body length. Please refer to the original PDF for full chest, shoulder and sleeve measurements.
+          Measurements are approximate body height / upper body length for clothing items. Mug and mascot are One Size. Please refer to the original PDF for full chest, shoulder and sleeve measurements.
         </div>
       </div>
       <div class="px-5 py-3 bg-slate-50 border-t text-right">
@@ -410,6 +422,8 @@
         quantity: "Qty",
         checkoutTitle: "Complete Your Order",
         checkoutSubtitle: "Payment instructions will be emailed to you",
+        nameLabel: "Your Name",
+        namePlaceholder: "Your full name",
         emailLabel: "Your Email Address",
         emailPlaceholder: "you@example.com",
         emailHelp: "We will send the order confirmation and payment details to this address. A copy goes to vs.vorsitz@dsseoul.org.",
@@ -438,6 +452,7 @@
         impressum: "Impressum",
         impressumTitle: "Impressum / Legal Notice",
         collectionNote: "Items will be handed over to students at school or can be collected at the reception.",
+        collectionNoteDetailed: "Items will be handed over to students at school or can be collected at the reception. Clothes are order-made and collectively handed to students four times a year - prior to Oktoberfest, Christmas Market, Spring Festival and Summer Festival.",
         collectionNoteShort: "Handed to students or collect at reception",
         contactGeneral: "Questions? Contact the school office",
         impressumNote: "This ordering form is operated by the school. All orders are subject to the school's terms."
@@ -461,6 +476,8 @@
         quantity: "Menge",
         checkoutTitle: "Bestellung abschließen",
         checkoutSubtitle: "Zahlungsanweisungen werden Ihnen per E-Mail zugesandt",
+        nameLabel: "Ihr Name",
+        namePlaceholder: "Ihr voller Name",
         emailLabel: "Ihre E-Mail-Adresse",
         emailPlaceholder: "max@beispiel.de",
         emailHelp: "Wir senden Bestellbestätigung und Zahlungsinformationen an diese Adresse. Eine Kopie geht an vs.vorsitz@dsseoul.org.",
@@ -489,6 +506,7 @@
         impressum: "Impressum",
         impressumTitle: "Impressum / Rechtliche Hinweise",
         collectionNote: "Die Ware wird direkt an die Schüler in der Schule übergeben oder kann an der Rezeption abgeholt werden.",
+        collectionNoteDetailed: "Die Artikel werden an die Schüler in der Schule übergeben oder können an der Rezeption abgeholt werden. Die Kleidungsstücke werden auf Bestellung gefertigt und viermal im Jahr gesammelt an die Schüler ausgegeben – vor dem Oktoberfest, Weihnachtsmarkt, Frühlingsfest und Sommerfest.",
         collectionNoteShort: "Wird an Schüler übergeben oder an Rezeption abholbar",
         contactGeneral: "Fragen? Kontaktieren Sie das Schulbüro",
         impressumNote: "Dieses Bestellformular wird von der Schule betrieben. Alle Bestellungen unterliegen den Bedingungen der Schule."
@@ -512,6 +530,8 @@
         quantity: "수량",
         checkoutTitle: "주문 완료하기",
         checkoutSubtitle: "결제 안내가 이메일로 전송됩니다",
+        nameLabel: "이름",
+        namePlaceholder: "이름을 입력하세요",
         emailLabel: "이메일 주소",
         emailPlaceholder: "you@example.com",
         emailHelp: "주문 확인서와 결제 안내를 이 주소로 보냅니다. 사본은 vs.vorsitz@dsseoul.org로 전송됩니다.",
@@ -540,6 +560,7 @@
         impressum: "Impressum",
         impressumTitle: "Impressum / 법적 고지",
         collectionNote: "물품은 학교에서 학생에게 직접 전달되거나 리셉션에서 수령할 수 있습니다.",
+        collectionNoteDetailed: "물품은 학교에서 학생에게 직접 전달되거나 리셉션에서 수령할 수 있습니다. 의류는 주문 제작되며 연 4회(옥토버페스트, 크리스마스 마켓, 봄 축제, 여름 축제 이전) 학생들에게 일괄 전달됩니다.",
         collectionNoteShort: "학생에게 전달 또는 리셉션 수령 가능",
         contactGeneral: "문의 사항이 있으신가요? 학교 사무실에 연락하세요",
         impressumNote: "이 주문 양식은 학교에서 운영합니다. 모든 주문은 학교 약관의 적용을 받습니다."
@@ -556,7 +577,7 @@
     //   Public Key: Hyd-NRca4cqelM5HB
     //   Service ID: service_w2elslj
     //   Template ID: template_8ic1dmd
-    // Template variables used: to_email, email_subject, order_id, order_details, total_price, payment_reference, customer_email
+    // Template variables used: to_email, email_subject, order_id, order_details, total_price, payment_reference, customer_name, customer_email
     // If you need to change the keys later, update this object.
     //
     // CRITICAL: EmailJS Template Setup for template_8ic1dmd (follow exactly)
@@ -583,6 +604,7 @@
     // <p><strong>Order Number:</strong> {{order_id}}</p>
     // <p><strong>Total Amount:</strong> {{total_price}}</p>
     // <p><strong>Payment Reference:</strong> {{payment_reference}}</p>
+    // <p><strong>Customer Name:</strong> {{customer_name}}</p>
     // <p><strong>Customer Email:</strong> {{customer_email}}</p>
     //
     // <hr>
@@ -600,10 +622,10 @@
     // Save the template.
     //
     // === STEP 5: Test ===
-    // - Order from the form on http://localhost.
-    // - On thank-you screen, copy the params object from the yellow debug box.
-    // - In EmailJS template, click "Send Test Email".
-    // - Paste the values from the object into the test form fields.
+    // - Order from the form on http://localhost (important!).
+    // - Open browser DevTools (F12) → Console tab.
+    // - After "Confirm and Order", look for the logged params object (starts with "[EmailJS] Params that will be sent...").
+    // - In EmailJS, click "Send Test Email" and paste the values (customer_name, customer_email, order_id, order_details etc.) into the matching fields.
     // - Send the test.
     //
     // Note: one identical email is sent to the customer; school office receives it via BCC (same content).
@@ -644,15 +666,111 @@
     //
     // Once the page is open at http://localhost (not by double-clicking the .html file),
     // place a test order and press F12 → Console tab.
-    // Look for the lines:
-    //   [EmailJS] Params that will be sent to EmailJS:
-    //   Customer: { ... }
-    //   School copy: { ... }
-    // Copy those and use the values in EmailJS "Send Test Email" to verify your template.
+    // Look for the line:
+    //   [EmailJS] Params that will be sent to EmailJS (one email to customer + BCC to school):
+    // followed by the object. Copy the values (now including customer_name) and use in EmailJS "Send Test Email" to verify your template.
     const EMAILJS_CONFIG = {
       publicKey: 'Hyd-NRca4cqelM5HB',
       serviceId: 'service_w2elslj',
       templateId: 'template_8ic1dmd'
+    };
+
+    // ==================== GOOGLE FORM / SHEET LOGGING FOR ADMIN OVERVIEW ====================
+    // When a customer clicks "Confirm and Order", we automatically submit one row per line-item
+    // to a Google Form. The responses are collected in a linked Google Sheet in clean tabular format.
+    // This gives school admin a live, filterable, sortable overview of everything that was ordered
+    // (no more copying from emails).
+    //
+    // Columns written (per line item):
+    //   Order Number | Order Date | Customer Name | Customer Email | Item | Quantity | Line Total (item × qty)
+    //
+    // Order-level fields (number, date, name, email) are repeated on every line of the same order
+    // so the sheet is easy to filter, sort by order, or pivot.
+    //
+    // SETUP INSTRUCTIONS (follow once):
+    //
+    // 1. Create the form:
+    //    - Go to https://forms.google.com and click "+ Blank".
+    //    - Title it something like "DSSI Merchandise Orders - Live Log".
+    //
+    // 2. Add the questions (use "Short answer" for all; you can mark Quantity/Line Total as "Number"
+    //    if you like validation later):
+    //      - Order Number
+    //      - Order Date          (Short answer is fine, or switch the type to "Date")
+    //      - Customer Name
+    //      - Customer Email
+    //      - Item Description    (we will put e.g. "Hoodie - Black - L")
+    //      - Quantity
+    //      - Line Total (KRW)
+    //
+    // 3. Connect to a Google Sheet:
+    //    - In the form editor, click the "Responses" tab at the top.
+    //    - Click the big green spreadsheet icon.
+    //    - Select "Create a new spreadsheet" and give it a name (e.g. "DSSI Merch 2026 Orders").
+    //    - Google will keep the Sheet in sync automatically with every form response.
+    //
+    // 4. Discover the entry IDs (the magic numbers we need in the code):
+    //    - In the form editor, click the preview "eye" icon (or Send → copy the live link and open it).
+    //    - On the live form page, right-click → "Inspect" (or press Ctrl+Shift+I).
+    //    - In the Elements panel, use Ctrl+F / Cmd+F and search for the text of your first question,
+    //      e.g. search for "Order Number".
+    //    - Look for the <input ... name="entry.12345678901234567890" ...> that belongs to that question.
+    //    - Copy the whole "entry.XXXXXXXXXXXXXXXX" string.
+    //    - Repeat for every question above. You need all 7.
+    //
+    // 5. Get the submission URL:
+    //    - Take the live form URL from the address bar (it ends with /viewform).
+    //    - Change the last part from /viewform  →  /formResponse
+    //    - Example result:
+    //      https://docs.google.com/forms/u/0/d/e/1FAIpQLSabc-123xyz_longstring/formResponse
+    //
+    // 6. Update the CONFIG object below (or just paste the whole object you prepared):
+    //    - Put your /formResponse URL into .url
+    //    - Put the 7 entry.XXXX values into the matching keys under .fields
+    //      (Important: use the key name "itemDescription" for the item column, not "item".
+    //       The code auto-detects if you still have placeholder values and will skip the submit.)
+    //
+    // 7. Form permissions (important!):
+    //    - Click the gear/settings icon in the form editor.
+    //    - Under "General" or "Presentation", make sure:
+    //        • "Require sign-in to respond" is UNCHECKED (must allow anonymous submissions from the website).
+    //        • "Limit to 1 response per person" is OFF.
+    //    - Save.
+    //
+    // 8. Test it:
+    //    - Update the values below in this file.
+    //    - Open the site on http://localhost (use Live Server or npx http-server – not by double-clicking the file).
+    //    - Add items to basket → Order Now → fill name + email → Confirm and Order.
+    //    - Wait 5–10 seconds, then open your linked Google Sheet.
+    //    - You should see one new row for every item that was in the order.
+    //    - Check the browser Console (F12) for lines starting with [GoogleForm].
+    //
+    // TROUBLESHOOTING:
+    // - No rows appear? Most common causes:
+    //     - Wrong entry. IDs (they are long and easy to mix up).
+    //     - Still have "Require sign-in" turned on in the form.
+    //     - Using the /viewform URL instead of /formResponse.
+    //     - Opening the site via file:// instead of http://localhost.
+    // - Rows appear but columns are empty or in wrong order → entry IDs are swapped.
+    // - You can always submit a manual test response from the form itself to verify the Sheet connection.
+    //
+    // The existing EmailJS confirmation email continues to work exactly as before (with the TSV block).
+    // This sheet logging is an extra background step for admin convenience.
+    //
+    // If in the future you want a single POST per order, more columns, or server-side logic,
+    // we can replace this with a small Google Apps Script "web app" (still free, still no server you maintain).
+    const GOOGLE_FORM_CONFIG = {
+      url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd4IEam-7nmo3qGVYF4gIYoI4AznTHXNvdFHNA2dYNsV2Yjjw/formResponse",
+  
+      fields: {
+        orderNumber: "entry.526740651",
+        orderDate: "entry.1665123378",
+        customerName: "entry.21550512",
+        customerEmail: "entry.611146520",
+        itemDescription: "entry.808447695",
+        quantity: "entry.169120404",
+        lineTotal: "entry.1991159562"
+      }
     };
 
     function initEmailJS() {
@@ -693,6 +811,76 @@
                     'Automatic email sending failed. Please note your order number.';
         alert(msg);
         return false;
+      }
+    }
+
+    // Log the completed order to the Google Form (which feeds the admin Sheet).
+    // Called once per order; we create one row per line item so the sheet is easy to work with.
+    // Uses the classic "POST to Google Form response endpoint" technique (works from static GitHub Pages).
+    async function logOrderToGoogleForm(order) {
+      const cfg = GOOGLE_FORM_CONFIG;
+      const isConfigured = cfg && cfg.url && cfg.fields &&
+                           !cfg.url.includes('XXXXXXXXXXXXXXXX') &&
+                           !Object.values(cfg.fields).some(v => v.includes('0000000000000000000') || v === 'entry.0000000000000000000' || v.startsWith('entry.0000'));
+
+      const dateStr = new Date(order.date).toISOString().slice(0, 10); // YYYY-MM-DD for easy sorting
+
+      // Always print what we would send (very helpful while setting up the entry IDs)
+      console.log('[GoogleForm] Order data that will be sent to the Google Sheet (one row per line item):');
+      order.items.forEach((line, idx) => {
+        const prod = getProduct(line.productId);
+        if (!prod) return;
+        const colorEn = prod.colors.find(c => c.id === line.colorId)?.name.en || line.colorId;
+        const itemDesc = `${prod.name.en} - ${colorEn} - ${line.size}`;
+        const lineTotal = line.unitPrice * line.qty;
+        console.log(`  [${idx + 1}]`, {
+          orderNumber: order.id,
+          orderDate: dateStr,
+          customerName: order.name || '',
+          customerEmail: order.email,
+          itemDescription: itemDesc,
+          quantity: line.qty,
+          lineTotal: lineTotal
+        });
+      });
+
+      if (!isConfigured) {
+        console.log('[GoogleForm] (Not yet configured – see the big comment above GOOGLE_FORM_CONFIG for setup steps. The data above is what will be submitted once you fill in the real URL + entry IDs.)');
+        return;
+      }
+
+      console.log('[GoogleForm] Submitting to Google Form / Sheet now...');
+
+      for (const line of order.items) {
+        const prod = getProduct(line.productId);
+        if (!prod) continue;
+
+        const colorEn = prod.colors.find(c => c.id === line.colorId)?.name.en || line.colorId;
+        const itemDesc = `${prod.name.en} - ${colorEn} - ${line.size}`;
+        const lineTotal = line.unitPrice * line.qty;
+
+        const fd = new FormData();
+        fd.append(cfg.fields.orderNumber,   order.id);
+        fd.append(cfg.fields.orderDate,     dateStr);
+        fd.append(cfg.fields.customerName,  order.name || '');
+        fd.append(cfg.fields.customerEmail, order.email);
+        fd.append(cfg.fields.itemDescription, itemDesc);
+        fd.append(cfg.fields.quantity,      String(line.qty));
+        fd.append(cfg.fields.lineTotal,     String(lineTotal));
+
+        try {
+          // no-cors is required for client-side Google Form submissions from most browsers.
+          // The request is still sent (fire-and-forget); we just can't read the response.
+          await fetch(cfg.url, {
+            method: 'POST',
+            body: fd,
+            mode: 'no-cors'
+          });
+          console.log('[GoogleForm]   → row logged for', itemDesc);
+        } catch (err) {
+          // Network error or similar – log but do not disturb the customer.
+          console.warn('[GoogleForm]   Submit error for line (submission may still have succeeded):', err);
+        }
       }
     }
 
@@ -832,6 +1020,56 @@
           { id: 'lightgrey', name: { en: 'Light Grey', de: 'Hellgrau', ko: '라이트 그레이' } }
         ],
         sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
+      },
+      {
+        id: 'jacket',
+        image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%231e3a8a%22/%3E%3Ctext x=%2250%25%22 y=%2240%25%22 fill=%22%23bae6fd%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPLACEHOLDER%3C/text%3E%3Ctext x=%2250%25%22 y=%2255%25%22 fill=%22white%22 font-size=%2220%22 text-anchor=%22middle%22 dy=%22.3em%22 font-weight=%22bold%22%3ESchool Jacket%3C/text%3E%3C/svg%3E',
+        price: 80000,
+        name: { en: 'School Jacket', de: 'Schuljacke', ko: '스쿨 재킷' },
+        desc: {
+          en: 'Placeholder • Windbreaker style • Logo on front left chest • Same sizes as the hoodie',
+          de: 'Platzhalter • Windbreaker-Stil • Logo vorne links auf der Brust • Gleiche Größen wie der Hoodie',
+          ko: '플레이스홀더 • 윈드브레이커 스타일 • 가슴 왼쪽 앞 로고 • 후드티와 동일한 사이즈'
+        },
+        colors: [
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
+          { id: 'lightgrey', name: { en: 'Light Grey', de: 'Hellgrau', ko: '라이트 그레이' } }
+        ],
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
+      },
+      {
+        id: 'mug',
+        image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%236b7280%22/%3E%3Ctext x=%2250%25%22 y=%2240%25%22 fill=%22%23e5e7eb%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPLACEHOLDER%3C/text%3E%3Ctext x=%2250%25%22 y=%2255%25%22 fill=%22white%22 font-size=%2220%22 text-anchor=%22middle%22 dy=%22.3em%22 font-weight=%22bold%22%3EMug Cup%3C/text%3E%3C/svg%3E',
+        price: 10000,
+        name: { en: 'Mug Cup', de: 'Tasse', ko: '머그컵' },
+        desc: {
+          en: 'Placeholder • Ceramic mug • School logo • 350ml',
+          de: 'Platzhalter • Keramiktasse • Schul-Logo • 350ml',
+          ko: '플레이스홀더 • 세라믹 머그컵 • 학교 로고 • 350ml'
+        },
+        colors: [
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
+          { id: 'navy', name: { en: 'Navy', de: 'Navy', ko: '네이비' } },
+          { id: 'red', name: { en: 'Red', de: 'Rot', ko: '레드' } }
+        ],
+        sizes: ['One Size']
+      },
+      {
+        id: 'mascot',
+        image: 'mascot.jpg',
+        price: 15000,
+        name: { en: 'School Mascot', de: 'Schulmaskottchen', ko: '학교 마스코트' },
+        desc: {
+          en: 'Coming Soon • Plush toy mascot • Collectible school item',
+          de: 'Demnächst • Plüschmaskottchen • Sammlerstück der Schule',
+          ko: '출시 예정 • 플러시 마스코트 인형 • 학교 기념품'
+        },
+        colors: [
+          { id: 'standard', name: { en: 'Standard', de: 'Standard', ko: '표준' } }
+        ],
+        sizes: ['One Size']
       }
     ]
 
@@ -1009,7 +1247,7 @@
               <div class="flex justify-between gap-x-2">
                 <div>
                   <div class="font-semibold leading-tight">${prod.name[currentLang] || prod.name.en}</div>
-                  <div class="text-xs text-slate-500 mt-0.5">${colorName} • ${item.size}</div>
+                  <div class="text-xs text-slate-500 mt-0.5">${prod.colors.length > 1 ? colorName + ' • ' : ''}${item.size}</div>
                 </div>
                 <div class="text-right text-sm font-semibold tabular-nums whitespace-nowrap">${formatPrice(lineTotal)}</div>
               </div>
@@ -1094,6 +1332,7 @@
             </div>
 
             <div class="mt-4 grid grid-cols-1 gap-y-3 text-sm flex-1">
+              ${product.colors.length > 1 ? `
               <!-- Color -->
               <div>
                 <label class="block text-xs font-medium text-slate-500 mb-1">${t('color')}</label>
@@ -1101,6 +1340,7 @@
                   ${colorOptions}
                 </select>
               </div>
+              ` : ''}
 
               <!-- Size + Qty row -->
               <div class="grid grid-cols-5 gap-2 items-end">
@@ -1162,7 +1402,7 @@
       cart.forEach(item => {
         const prod = getProduct(item.productId)
         const colorName = getColorName(prod, item.colorId)
-        const line = `${prod.name[currentLang] || prod.name.en} • ${colorName} • ${item.size} × ${item.qty}`
+        const line = `${prod.name[currentLang] || prod.name.en}${prod.colors.length > 1 ? ' • ' + colorName : ''} • ${item.size} × ${item.qty}`
         itemsHtml += `<div class="flex justify-between py-1 text-sm border-b border-slate-100 last:border-0">
           <div class="text-slate-600">${line}</div>
           <div class="font-medium tabular-nums">${formatPrice(item.unitPrice * item.qty)}</div>
@@ -1184,8 +1424,15 @@
             </div>
             <div class="mt-3 pt-3 border-t border-slate-200 text-emerald-700 text-xs font-medium flex items-center gap-x-1.5">
               <i class="fa-solid fa-handshake"></i>
-              <span>${t('collectionNote')}</span>
+              <span>${t('collectionNoteDetailed')}</span>
             </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-1.5">${t('nameLabel')}</label>
+            <input id="customer-name" type="text" required
+                   class="w-full px-4 py-3 border border-slate-300 focus:border-blue-600 rounded-2xl text-sm"
+                   placeholder="${t('namePlaceholder')}" value="">
           </div>
 
           <div class="mb-4">
@@ -1210,10 +1457,10 @@
       modal.classList.remove('hidden')
       modal.classList.add('flex')
 
-      // Focus email
+      // Focus name first (new field), then email is next naturally
       setTimeout(() => {
-        const emailInput = document.getElementById('customer-email')
-        if (emailInput) emailInput.focus()
+        const nameInput = document.getElementById('customer-name')
+        if (nameInput) nameInput.focus()
       }, 80)
     }
 
@@ -1227,8 +1474,16 @@
     }
 
     function confirmOrder() {
+      const nameInput = document.getElementById('customer-name')
       const emailInput = document.getElementById('customer-email')
-      if (!emailInput) return
+      if (!nameInput || !emailInput) return
+
+      const customerName = nameInput.value.trim()
+      if (!customerName) {
+        alert(currentLang === 'ko' ? '이름을 입력하세요.' : currentLang === 'de' ? 'Bitte geben Sie Ihren Namen ein.' : 'Please enter your name.')
+        nameInput.focus()
+        return
+      }
 
       const email = emailInput.value.trim()
       if (!email || !email.includes('@')) {
@@ -1243,6 +1498,7 @@
       // Build order data
       const orderData = {
         id: orderId,
+        name: customerName,
         email: email,
         items: cart.map(i => ({...i})),
         total: total,
@@ -1255,6 +1511,7 @@
 
       const baseParams = {
         order_id: orderId,
+        customer_name: customerName,
         customer_email: email,
         order_details: emailBody,
         total_price: formatPrice(total),
@@ -1263,6 +1520,10 @@
 
       // Save order to local history (optional)
       saveOrderToHistory(orderData)
+
+      // Log every line item to the Google Form → Sheet (for school admin overview).
+      // This is fire-and-forget; it does not block the thank-you screen or the email.
+      logOrderToGoogleForm(orderData)
 
       // Clear the cart early
       cart = []
@@ -1287,7 +1548,7 @@
       const headerLine = 'Item\tColor\tSize\tQty\tLine Total'
       const prodLines = order.items.map(item => {
         const prod = getProduct(item.productId)
-        const cname = getColorName(prod, item.colorId)
+        const cname = prod.colors.length > 1 ? getColorName(prod, item.colorId) : ''
         const lineTotal = item.unitPrice * item.qty
         return `${prod.name[order.lang] || prod.name.en}\t${cname}\t${item.size}\t${item.qty}\t${formatPrice(lineTotal)}`
       }).join('\n')
@@ -1304,7 +1565,7 @@
 
 hiermit bestelle ich die unten aufgeführten Artikel der DSSI Schulkleidung 2026.
 
-BESTELLNUMMER: ${order.id}
+${order.name ? 'Name: ' + order.name + '\nE-Mail: ' + order.email + '\n\n' : 'E-Mail: ' + order.email + '\n\n'}BESTELLNUMMER: ${order.id}
 DATUM: ${new Date(order.date).toLocaleDateString('de-DE')}
 
 ${itemsHeader}
@@ -1312,7 +1573,7 @@ ${prodLines}
 
 GESAMTBETRAG: ${formatPrice(order.total)}
 
-ÜBERGABE / SAMMLUNG: ${t('collectionNote')}
+ÜBERGABE / SAMMLUNG: ${t('collectionNoteDetailed')}
 
 ZAHLUNGSANWEISUNG:
 Bitte überweisen Sie den Gesamtbetrag innerhalb von 7 Tagen auf folgendes Konto:
@@ -1326,14 +1587,14 @@ Verwendungszweck / Reference: ${payRef}
 Vielen Dank für die Bearbeitung.
 
 Mit freundlichen Grüßen
-${order.email}
+${order.name ? order.name + '\n' : ''}${order.email}
 `
       } else if (order.lang === 'ko') {
         body = `안녕하세요,
 
 2026 DSSI 학교 의류를 다음과 같이 주문합니다.
 
-주문번호: ${order.id}
+${order.name ? '이름: ' + order.name + '\n이메일: ' + order.email + '\n\n' : '이메일: ' + order.email + '\n\n'}주문번호: ${order.id}
 주문일: ${new Date(order.date).toLocaleDateString('ko-KR')}
 
 ${itemsHeader}
@@ -1341,7 +1602,7 @@ ${prodLines}
 
 총 금액: ${formatPrice(order.total)}
 
-전달 / 수령 안내: ${t('collectionNote')}
+전달 / 수령 안내: ${t('collectionNoteDetailed')}
 
 결제 안내:
 7일 이내에 아래 계좌로 총액을 입금해 주세요.
@@ -1354,14 +1615,14 @@ ${t('holder')}
 
 감사합니다.
 
-${order.email}
+${order.name ? order.name + '\n' : ''}${order.email}
 `
       } else {
         body = `Dear DSSI team,
 
 I would like to order the following school clothing items for 2026.
 
-ORDER NUMBER: ${order.id}
+${order.name ? 'Name: ' + order.name + '\nEmail: ' + order.email + '\n\n' : 'Email: ' + order.email + '\n\n'}ORDER NUMBER: ${order.id}
 DATE: ${new Date(order.date).toLocaleDateString('en-GB')}
 
 ${itemsHeader}
@@ -1369,7 +1630,7 @@ ${prodLines}
 
 TOTAL AMOUNT: ${formatPrice(order.total)}
 
-ITEM COLLECTION: ${t('collectionNote')}
+ITEM COLLECTION: ${t('collectionNoteDetailed')}
 
 PAYMENT INSTRUCTIONS:
 Please transfer the total amount to the account below within 7 days:
@@ -1383,7 +1644,7 @@ Payment reference: ${payRef}
 Thank you.
 
 Best regards,
-${order.email}
+${order.name ? order.name + '\n' : ''}${order.email}
 `
       }
 
@@ -1408,6 +1669,11 @@ ${order.email}
             #${order.id}
           </div>
 
+          <div class="mb-4 text-sm text-slate-600">
+            ${order.name ? '<div class="font-medium text-slate-700">' + order.name + '</div>' : ''}
+            <div>${order.email}</div>
+          </div>
+
           <div class="text-left bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-5">
             <div class="uppercase text-xs font-semibold tracking-wider text-emerald-700 mb-2">${t('paymentTitle')}</div>
             <div class="text-sm leading-relaxed">
@@ -1419,7 +1685,7 @@ ${order.email}
             </div>
             <div class="mt-3 pt-3 border-t text-emerald-700 text-xs font-medium flex items-center gap-x-1.5">
               <i class="fa-solid fa-handshake"></i>
-              <span>${t('collectionNote')}</span>
+              <span>${t('collectionNoteDetailed')}</span>
             </div>
           </div>
 
@@ -1528,7 +1794,7 @@ ${order.email}
                 </div>
               </div>
               <div class="mt-1 text-xs text-slate-600 truncate">${shortItems}</div>
-              <div class="mt-1 text-[10px] text-slate-400">${o.email}</div>
+              <div class="mt-1 text-[10px] text-slate-400">${o.name ? o.name + ' · ' : ''}${o.email}</div>
             </div>
           `
         })

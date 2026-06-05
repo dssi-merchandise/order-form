@@ -13,7 +13,7 @@ Simple, self-contained multilingual ordering website (English / German / Korean)
   - Persisted in browser localStorage (survives refresh).
 - **Checkout flow**:
   1. Click "Order Now" in the basket.
-  2. Review the summary (includes unique purchase number e.g. `D2602ABCDE` (max 10 chars for bank ref) and collection info) + enter your email address.
+  2. Review the summary (includes unique purchase number e.g. `D2602ABCDE` (max 10 chars for bank ref) and collection info) + enter your name and email address.
   3. Click **"Confirm and Order"** → an automatic confirmation email (with full order + payment instructions) is sent to your address **and** to vs.vorsitz@dsseoul.org. No manual sending required.
 - **Email handling** (uses EmailJS for automatic sending - see Technical notes):
   - On "Confirm and Order", one identical email (full confirmation with tabular ITEMS for easy Excel copy-paste) is sent to the customer; school office (vs.vorsitz@dsseoul.org) receives it via BCC.
@@ -33,24 +33,27 @@ Simple, self-contained multilingual ordering website (English / German / Korean)
 4. For each item choose **color**, **size**, **quantity** → "Add to basket".
 5. Open the basket (shopping bag icon top right).
 6. Review / adjust quantities → "Order Now".
-7. Enter your email → "Confirm and Order".
-8. The system automatically sends one identical email (full confirmation with tabular ITEMS for easy Excel copy) to your email; vs.vorsitz@dsseoul.org receives it via BCC.
+7. Enter your name and email → "Confirm and Order".
+8. The system automatically sends one identical email (full confirmation with tabular ITEMS for easy Excel copy, including the name you entered) to your email; vs.vorsitz@dsseoul.org receives it via BCC.
 9. On the thank-you screen you will see the order number, payment details, and the ITEMS table. The school will contact you after payment.
 
 Automatic emails are sent via the configured EmailJS integration (see Technical notes). If the keys are invalid or removed, it falls back to console simulation.
 
 ## For the school / administrators
 - On "Confirm and Order", one identical email (full confirmation with tabular ITEMS table for easy copy-paste to Excel) is sent to the customer; vs.vorsitz@dsseoul.org receives it via BCC.
+- At the same moment, every line item is automatically appended to a Google Sheet (via a linked Google Form). You get a live tabular list with: Order Number, Order Date, Customer Name, Customer Email, Item (incl. color + size), Quantity, and Line Total (qty × price). Perfect for managing what needs to be produced/collected.
 - The unique order number (max. 10 characters, e.g. D2602ABCDE) appears in the email body as "ORDER NUMBER" / "BESTELLNUMMER" / "주문번호" and as the payment Reference (suitable for bank transfers).
 - The thank-you screen (and email) includes the full payment instructions + dummy Korean bank account + the ITEMS table.
 - You can keep the folder on a shared drive or publish it on the school website.
 - To change prices, items, colors, sizes or bank details: edit `index.html` (clearly commented sections near the top of the `<script>`).
 - **Important**: EmailJS is already configured with the school's keys. If you change the service/template later, update the keys in index.html. Ensure vs.vorsitz@dsseoul.org can receive emails from the configured service.
+- **Google Sheet logging**: See the large comment block directly above `GOOGLE_FORM_CONFIG` in `index.html` for the exact setup steps (create form → link sheet → find entry IDs → paste into the config). The sheet is the easiest way for admin staff to get a clear overview without manual copying.
 
 ## Files in this folder
 - `index.html` — the complete single-file application (open this)
-- `tshirt.jpg`, `poloshirt.jpg`, `hoodie.jpg` — representative product photos (generated to match the PDF items)
+- `tshirt.jpg`, `poloshirt.jpg`, `hoodie.jpg`, `mascot.jpg` — product photos (mascot is a suspenseful Grok Imagine placeholder)
 - `README.md` — this file
+- School Jacket and Mug Cup use embedded SVG placeholders; School Mascot uses a generated suspenseful placeholder image `mascot.jpg` created with Grok Imagine (update the `image` value in the `products` array in index.html when you have real photos). The mascot has no color variants (color selector is hidden).
 
 The original `DSSI Shirts 2026.pdf` is included in this folder for reference (size charts etc.).
 
@@ -59,6 +62,7 @@ The original `DSSI Shirts 2026.pdf` is included in this folder for reference (si
 - Works in any modern browser (Chrome, Edge, Firefox, Safari).
 - Cart + language preference saved locally.
 - **Automatic emails**: Configured with EmailJS. Emails are sent automatically to the customer + vs.vorsitz@dsseoul.org on "Confirm and Order". See the large comment block directly above `EMAILJS_CONFIG` in `index.html` for the full recommended template + detailed troubleshooting for the "One or more dynamic variables are corrupted" error. IMPORTANT: You must serve the page over http://localhost (not by double-clicking index.html). See the same comment block for easy Windows options (Live Server in VS Code is the simplest).
+- **Automatic Google Sheet logging**: On every confirmed order the site also posts the line items (order # + date + name + email + item + qty + line total) to a Google Form that feeds a Google Sheet. This is the recommended way for admin staff to get a clean tabular overview. Full setup instructions are in the big comment above `GOOGLE_FORM_CONFIG` inside `index.html`. No extra services or cost.
 - The thank-you screen no longer requires the user to manually open their email client.
 
 ## Dummy bank account (replace for real use)
@@ -82,12 +86,13 @@ This is the absolute easiest way with zero setup.
 
 1. **Prepare a clean deploy folder** (strongly recommended):
    - Create a new folder on your computer, e.g. `dssi-order-form-live`
-   - Copy **only** these 5 files into it:
+   - Copy **only** these 6 files into it:
      - `index.html`
      - `DSSI logo.jpg`
      - `tshirt.jpg`
      - `poloshirt.jpg`
      - `hoodie.jpg`
+     - `mascot.jpg`
 
 2. Go to this page in your browser:  
    **https://app.netlify.com/drop**
