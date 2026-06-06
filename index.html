@@ -991,7 +991,12 @@
           { id: 'burgundy', name: { en: 'Burgundy', de: 'Weinrot', ko: '버건디' } },
           { id: 'darkblue', name: { en: 'Dark Blue', de: 'Dunkelblau', ko: '다크블루' } }
         ],
-        sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+        sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        noteShort: {
+          en: "Order now and receive it in time before Oktoberfest!",
+          de: "Jetzt bestellen und rechtzeitig vor dem Oktoberfest erhalten!",
+          ko: "지금 주문하고 옥토버페스트 전에 제때 받아보세요!"
+        }
       },
       {
         id: 'polo',
@@ -1008,7 +1013,12 @@
           { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
           { id: 'navy', name: { en: 'Navy', de: 'Navy', ko: '네이비' } }
         ],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        noteShort: {
+          en: "Order now and receive it in time before Oktoberfest!",
+          de: "Jetzt bestellen und rechtzeitig vor dem Oktoberfest erhalten!",
+          ko: "지금 주문하고 옥토버페스트 전에 제때 받아보세요!"
+        }
       },
       {
         id: 'hoodie',
@@ -1025,7 +1035,12 @@
           { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
           { id: 'lightgrey', name: { en: 'Light Grey', de: 'Hellgrau', ko: '라이트 그레이' } }
         ],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+        noteShort: {
+          en: "Order now and receive it in time before Oktoberfest!",
+          de: "Jetzt bestellen und rechtzeitig vor dem Oktoberfest erhalten!",
+          ko: "지금 주문하고 옥토버페스트 전에 제때 받아보세요!"
+        }
       },
       {
         id: 'jacket',
@@ -1042,7 +1057,12 @@
           { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
           { id: 'lightgrey', name: { en: 'Light Grey', de: 'Hellgrau', ko: '라이트 그레이' } }
         ],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL']
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+        noteShort: {
+          en: "Order now and receive it in time before Summer Festival!",
+          de: "Jetzt bestellen und rechtzeitig vor dem Sommerfest erhalten!",
+          ko: "지금 주문하고 여름 축제 전에 제때 받아보세요!"
+        }
       },
       {
         id: 'mug',
@@ -1060,7 +1080,12 @@
           { id: 'navy', name: { en: 'Navy', de: 'Navy', ko: '네이비' } },
           { id: 'red', name: { en: 'Red', de: 'Rot', ko: '레드' } }
         ],
-        sizes: ['One Size']
+        sizes: ['One Size'],
+        noteShort: {
+          en: "Ready for order, in stock",
+          de: "Bestellbereit, auf Lager",
+          ko: "주문 가능, 재고 있음"
+        }
       },
       {
         id: 'mascot',
@@ -1075,7 +1100,12 @@
         colors: [
           { id: 'standard', name: { en: 'Standard', de: 'Standard', ko: '표준' } }
         ],
-        sizes: ['One Size']
+        sizes: ['One Size'],
+        noteShort: {
+          en: "Order now and receive it at or after our Summer Festival!",
+          de: "Jetzt bestellen und bei oder nach unserem Sommerfest erhalten!",
+          ko: "지금 주문하고 여름 축제 때 또는 그 후에 받아보세요!"
+        }
       }
     ]
 
@@ -1333,7 +1363,7 @@
               <p class="text-xs text-slate-500 mt-0.5 leading-snug">${product.desc[currentLang] || product.desc.en}</p>
               <div class="mt-1.5 text-[10px] text-emerald-700 font-medium flex items-center gap-x-1">
                 <i class="fa-solid fa-handshake text-xs"></i>
-                <span>${t('collectionNoteShort')}</span>
+                <span>${product.noteShort ? (product.noteShort[currentLang] || product.noteShort.en) : t('collectionNoteShort')}</span>
               </div>
             </div>
 
