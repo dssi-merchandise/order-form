@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Cache busting for GitHub Pages / static hosting -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Order Form | DSSI School Support Shop</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -91,7 +95,7 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo + Title -->
         <div class="flex items-center gap-x-3">
-          <img src="DSSI logo.jpg" alt="DSSI Logo" class="h-9 w-auto max-h-10 object-contain">
+          <img id="dssi-logo" src="DSSI logo.jpg" alt="DSSI Logo" class="h-9 w-auto max-h-10 object-contain">
           <div>
             <div class="font-semibold text-xl tracking-tight text-slate-900">DSSI</div>
             <div class="text-[10px] text-slate-500 -mt-1 font-medium tracking-[0.5px]">School Support Shop</div>
@@ -397,6 +401,22 @@
   </footer>
 
   <script>
+    // ==================== CACHE BUSTING ====================
+    // Bump this version string (e.g. to today's date) whenever you push a new version
+    // via GitHub. GitHub Pages + browsers cache static assets quite aggressively.
+    // Changing ASSET_VERSION forces fresh downloads of logo + all product images.
+    // For the index.html itself, tell users to press Ctrl+Shift+R (hard refresh) once
+    // after a deploy — this is the most reliable cross-browser way.
+    const ASSET_VERSION = '20250606';   // YYYYMMDD — bump on every significant deploy
+
+    // Set versioned logo src for cache busting (must happen after DOM is ready for this element)
+    function setVersionedAssets() {
+      const logo = document.getElementById('dssi-logo');
+      if (logo) {
+        logo.src = `DSSI logo.jpg?v=${ASSET_VERSION}`;
+      }
+    }
+
     // Tailwind script
     function initTailwind() {
       document.documentElement.style.setProperty('--accent', '#1e40af');
@@ -1277,7 +1297,7 @@
         html += `
           <div class="cart-item flex gap-3 bg-white border border-slate-200 rounded-2xl p-3">
             <div class="w-16 h-16 rounded-xl overflow-hidden border border-slate-200 flex-shrink-0 bg-slate-100">
-              <img src="${prod.image}" class="w-full h-full object-cover" alt="${prod.name.en}">
+              <img src="${prod.image}?v=${ASSET_VERSION}" class="w-full h-full object-cover" alt="${prod.name.en}">
             </div>
             <div class="flex-1 min-w-0">
               <div class="flex justify-between gap-x-2">
@@ -1351,7 +1371,7 @@
 
         card.innerHTML = `
           <div class="aspect-square bg-slate-100 relative">
-            <img src="${product.image}" class="w-full h-full object-cover" alt="${product.name.en}">
+            <img src="${product.image}?v=${ASSET_VERSION}" class="w-full h-full object-cover" alt="${product.name.en}">
             <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2.5 py-0.5 rounded-full text-xs font-semibold shadow text-emerald-700 border border-white">
               ${formatPrice(product.price)}
             </div>
@@ -1896,6 +1916,7 @@ ${order.name ? order.name + '\n' : ''}${order.email}
     }
 
     function init() {
+      setVersionedAssets()   // cache-bust local images
       initTailwind()
       loadCart()
 
