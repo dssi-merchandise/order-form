@@ -178,7 +178,7 @@
       <div class="flex items-start gap-x-3">
         <i class="fa-solid fa-info-circle text-blue-600 mt-0.5"></i>
         <div>
-          <p id="shop-intro" class="mb-2 text-sm text-slate-700 leading-relaxed">Our support shop serves the community of Deutsche Schule Seoul International (DSSI). Every purchase directly helps our school and benefits our students. All proceeds are 100% reinvested into school operations.</p>
+          <p id="shop-intro" class="mb-2 text-sm text-slate-700 leading-relaxed">Our Order Portal serves the community of Deutsche Schule Seoul International (DSSI). Every purchase directly helps our school and benefits our students. All proceeds are 100% reinvested into school operations.</p>
           <span id="info-text">Orders are processed after payment confirmation. You will receive payment instructions by email.</span>
           <span class="block text-emerald-700 text-xs mt-1 font-medium" id="collection-note"></span>
         </div>
@@ -430,7 +430,7 @@
         productsHeading: "Available Items",
         pricesNote: "All prices in KRW",
         inStock: "Ready for ordering",
-        shopIntro: "Our support shop serves the community of Deutsche Schule Seoul International (DSSI). Every purchase directly helps our school and benefits our students. All proceeds are 100% reinvested into school operations.",
+        shopIntro: "Our Order Portal serves the community of Deutsche Schule Seoul International (DSSI). Every purchase directly helps our school and benefits our students. All proceeds are 100% reinvested into school operations.",
         sizeGuide: "Size guide",
         infoText: "Orders are processed after payment confirmation. You will receive payment instructions by email.",
         basket: "Basket",
@@ -485,7 +485,7 @@
         productsHeading: "Verfügbare Artikel",
         pricesNote: "Alle Preise in KRW",
         inStock: "Bestellbereit",
-        shopIntro: "Unser Support-Shop dient der Gemeinschaft der Deutschen Schule Seoul International (DSSI). Jeder Kauf hilft direkt unserer Schule und kommt unseren Schülern zugute. Alle Erlöse werden zu 100% in den Schulbetrieb reinvestiert.",
+        shopIntro: "Unser Order Portal dient der Gemeinschaft der Deutschen Schule Seoul International (DSSI). Jeder Kauf hilft direkt unserer Schule und kommt unseren Schülern zugute. Alle Erlöse werden zu 100% in den Schulbetrieb reinvestiert.",
         sizeGuide: "Größenübersicht",
         infoText: "Bestellungen werden nach Zahlungseingang bearbeitet. Sie erhalten die Zahlungsanweisungen per E-Mail.",
         basket: "Warenkorb",
@@ -540,7 +540,7 @@
         productsHeading: "주문 가능 품목",
         pricesNote: "모든 가격은 KRW입니다",
         inStock: "주문 가능",
-        shopIntro: "우리의 지원 상점은 Deutsche Schule Seoul International (DSSI) 커뮤니티를 위해 운영됩니다. 모든 구매는 학교를 직접 돕고 학생들에게 혜택을 줍니다. 모든 수익은 100% 학교 운영에 재투자됩니다.",
+        shopIntro: "우리의 Order Portal은 Deutsche Schule Seoul International (DSSI) 커뮤니티를 위해 운영됩니다. 모든 구매는 학교를 직접 돕고 학생들에게 혜택을 줍니다. 모든 수익은 100% 학교 운영에 재투자됩니다.",
         sizeGuide: "사이즈 가이드",
         infoText: "결제 확인 후 주문이 처리됩니다. 결제 안내가 이메일로 발송됩니다.",
         basket: "장바구니",
@@ -1095,10 +1095,13 @@
           ko: '플레이스홀더 • 세라믹 머그컵 • 학교 로고 • 350ml'
         },
         colors: [
+          { id: 'white-blue-inside', name: { en: 'White (blue inside)', de: 'Weiß (blau innen)', ko: '화이트 (블루 내부)' } },
+          { id: 'white-red-inside', name: { en: 'White (red inside)', de: 'Weiß (rot innen)', ko: '화이트 (레드 내부)' } },
+          { id: 'white-yellow-inside', name: { en: 'White (yellow inside)', de: 'Weiß (gelb innen)', ko: '화이트 (옐로우 내부)' } },
           { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
-          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
-          { id: 'navy', name: { en: 'Navy', de: 'Navy', ko: '네이비' } },
-          { id: 'red', name: { en: 'Red', de: 'Rot', ko: '레드' } }
+          { id: 'black-pink-inside', name: { en: 'Black (pink inside)', de: 'Schwarz (rosa innen)', ko: '블랙 (핑크 내부)' } },
+          { id: 'black-blue-inside', name: { en: 'Black (blue inside)', de: 'Schwarz (blau innen)', ko: '블랙 (블루 내부)' } },
+          { id: 'black-red-inside', name: { en: 'Black (red inside)', de: 'Schwarz (rot innen)', ko: '블랙 (레드 내부)' } }
         ],
         sizes: ['One Size'],
         noteShort: {
@@ -1125,6 +1128,92 @@
           en: "Order now and receive it at or after our Summer Festival!",
           de: "Jetzt bestellen und bei oder nach unserem Sommerfest erhalten!",
           ko: "지금 주문하고 여름 축제 때 또는 그 후에 받아보세요!"
+        }
+      },
+      {
+        id: 'thermobecher',
+        image: 'thermobecher.jpg',
+        price: 15000,
+        name: { en: 'Thermobecher', de: 'Thermobecher', ko: '보온컵' },
+        desc: {
+          en: 'Placeholder • Thermal cup • Keeps drinks warm or cold • School logo',
+          de: 'Platzhalter • Thermobecher • Hält Getränke warm oder kalt • Schul-Logo',
+          ko: '플레이스홀더 • 보온컵 • 음료를 따뜻하거나 차갑게 유지 • 학교 로고'
+        },
+        colors: [
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } }
+        ],
+        sizes: ['One Size'],
+        noteShort: {
+          en: "Ready for order, in stock",
+          de: "Bestellbereit, auf Lager",
+          ko: "주문 가능, 재고 있음"
+        }
+      },
+      {
+        id: 'trinkflasche',
+        image: 'trinkflasche.jpg',
+        price: 5000,
+        name: { en: 'Drinking Bottle', de: 'Trinkflasche', ko: '트링크플라슈' },
+        desc: {
+          en: 'Placeholder • Drinking bottle • Reusable • School logo',
+          de: 'Platzhalter • Trinkflasche • Wiederverwendbar • Schul-Logo',
+          ko: '플레이스홀더 • 트링크플라슈 • 재사용 가능 • 학교 로고'
+        },
+        colors: [
+          { id: 'pink', name: { en: 'Pink', de: 'Pink', ko: '핑크' } },
+          { id: 'green', name: { en: 'Green', de: 'Grün', ko: '그린' } },
+          { id: 'blue', name: { en: 'Blue', de: 'Blau', ko: '블루' } },
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'yellow', name: { en: 'Yellow', de: 'Gelb', ko: '옐로우' } }
+        ],
+        sizes: ['One Size'],
+        noteShort: {
+          en: "Ready for order, in stock",
+          de: "Bestellbereit, auf Lager",
+          ko: "주문 가능, 재고 있음"
+        }
+      },
+      {
+        id: 'eco-tasche',
+        image: 'eco-tasche.jpg',
+        price: 5000,
+        name: { en: 'Eco Bag', de: 'Eco-Tasche', ko: '에코 토트' },
+        desc: {
+          en: 'Placeholder • Eco bag • Reusable item bag • School logo',
+          de: 'Platzhalter • Eco-Tasche • Wiederverwendbare Item-Tasche • Schul-Logo',
+          ko: '플레이스홀더 • 에코 토트 • 재사용 아이템 가방 • 학교 로고'
+        },
+        colors: [
+          { id: 'standard', name: { en: 'Standard', de: 'Standard', ko: '표준' } }
+        ],
+        sizes: ['One Size'],
+        noteShort: {
+          en: "Ready for order, in stock",
+          de: "Bestellbereit, auf Lager",
+          ko: "주문 가능, 재고 있음"
+        }
+      },
+      {
+        id: 'umbrella',
+        image: 'umbrella.jpg',
+        price: 12000,
+        name: { en: 'Umbrella', de: 'Regenschirm', ko: '우산' },
+        desc: {
+          en: 'Placeholder • Umbrella • Windproof • School logo',
+          de: 'Platzhalter • Regenschirm • Winddicht • Schul-Logo',
+          ko: '플레이스홀더 • 우산 • 방풍 • 학교 로고'
+        },
+        colors: [
+          { id: 'grey', name: { en: 'Grey', de: 'Grau', ko: '그레이' } },
+          { id: 'darkgrey', name: { en: 'Dark Grey', de: 'Dunkelgrau', ko: '다크 그레이' } }
+        ],
+        sizes: ['One Size'],
+        noteShort: {
+          en: "Ready for order, in stock",
+          de: "Bestellbereit, auf Lager",
+          ko: "주문 가능, 재고 있음"
         }
       }
     ]
