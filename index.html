@@ -440,6 +440,7 @@
         clearBasket: "Clear basket",
         addToBasket: "Add to basket",
         color: "Color",
+        year: "Year",
         size: "Size",
         quantity: "Qty",
         checkoutTitle: "Complete Your Order",
@@ -480,7 +481,7 @@
         impressumNote: "This ordering form is operated by the school. All orders are subject to the school's terms."
       },
       de: {
-        pageTitle: "Bestellformular",
+        pageTitle: "Bestellportal",
         pageSubtitle: "Tragen und nutzen Sie stolz unsere Schulartikel. Wählen Sie Farbe, Größe und Menge.",
         productsHeading: "Verfügbare Artikel",
         pricesNote: "Alle Preise in KRW",
@@ -495,6 +496,7 @@
         clearBasket: "Warenkorb leeren",
         addToBasket: "In den Warenkorb",
         color: "Farbe",
+        year: "Jahr",
         size: "Größe",
         quantity: "Menge",
         checkoutTitle: "Bestellung abschließen",
@@ -550,6 +552,7 @@
         clearBasket: "장바구니 비우기",
         addToBasket: "장바구니에 담기",
         color: "색상",
+        year: "연도",
         size: "사이즈",
         quantity: "수량",
         checkoutTitle: "주문 완료하기",
@@ -994,6 +997,27 @@
 
     // ==================== PRODUCTS DATA ====================
     const products = [
+      {
+        id: 'jahrbuch',
+        image: 'Jahrbuch-25-26.jpg',
+        price: 15000,
+        name: { en: 'Jahrbuch', de: 'Jahrbuch', ko: '연감' },
+        desc: {
+          en: 'School yearbook • Official DSSI publication',
+          de: 'Schuljahrbuch • Offizielle DSSI Veröffentlichung',
+          ko: '학교 연감 • 공식 DSSI 출판물'
+        },
+        colors: [
+          { id: '2025-2026', name: { en: '2025/2026', de: '2025/2026', ko: '2025/2026' } },
+          { id: '2024-2025', name: { en: '2024/2025', de: '2024/2025', ko: '2024/2025' } }
+        ],
+        sizes: ['One Size'],
+        noteShort: {
+          en: "Ready for order, in stock",
+          de: "Bestellbereit, auf Lager",
+          ko: "주문 가능, 재고 있음"
+        }
+      },
       {
         id: 'tshirt',
         image: 'tshirt.jpg',
@@ -1458,6 +1482,8 @@
           `<option value="${s}">${s}</option>`
         ).join('')
 
+        const hasMultipleSizes = product.sizes && product.sizes.length > 1;
+
         card.innerHTML = `
           <div class="aspect-square bg-slate-100 relative">
             <img src="${product.image}?v=${ASSET_VERSION}" class="w-full h-full object-cover" alt="${product.name.en}">
@@ -1480,13 +1506,14 @@
               ${product.colors.length > 1 ? `
               <!-- Color -->
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">${t('color')}</label>
+                <label class="block text-xs font-medium text-slate-500 mb-1">${product.id === 'jahrbuch' ? t('year') : t('color')}</label>
                 <select class="color-select w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 bg-white">
                   ${colorOptions}
                 </select>
               </div>
               ` : ''}
 
+              ${hasMultipleSizes ? `
               <!-- Size + Qty row -->
               <div class="grid grid-cols-5 gap-2 items-end">
                 <div class="col-span-3">
@@ -1500,6 +1527,15 @@
                   <input type="number" value="1" min="1" max="20" class="qty-input w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
                 </div>
               </div>
+              ` : `
+              <!-- Qty only (no size selector) -->
+              <div class="grid grid-cols-5 gap-2 items-end">
+                <div class="col-span-5">
+                  <label class="block text-xs font-medium text-slate-500 mb-1">${t('quantity')}</label>
+                  <input type="number" value="1" min="1" max="20" class="qty-input w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+              </div>
+              `}
             </div>
 
             <button onclick="addToCart('${product.id}')" 

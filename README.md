@@ -51,9 +51,9 @@ Automatic emails are sent via the configured EmailJS integration (see Technical 
 
 ## Files in this folder
 - `index.html` — the complete single-file application (open this)
-- `tshirt.jpg`, `poloshirt.jpg`, `hoodie.jpg`, `jacket.jpg`, `mug.jpg`, `thermobecher.jpg`, `trinkflasche.jpg`, `eco-tasche.jpg`, `umbrella.jpg`, `mascot.jpg` — product photos (jacket, mug, thermobecher, trinkflasche, eco-tasche, umbrella and mascot are Grok Imagine placeholders)
+- `tshirt.jpg`, `poloshirt.jpg`, `hoodie.jpg`, `jacket.jpg`, `mug.jpg`, `thermobecher.jpg`, `trinkflasche.jpg`, `eco-tasche.jpg`, `umbrella.jpg`, `Jahrbuch-25-26.jpg`, `mascot.jpg` — product photos (most new items and mascot are Grok Imagine placeholders; Jahrbuch photo provided)
 - `README.md` — this file
-- School Jacket, Mug Cup, Thermobecher, Trinkflasche, Eco-Tasche, Umbrella and School Mascot use generated placeholder images (`jacket.jpg`, `mug.jpg`, `thermobecher.jpg`, `trinkflasche.jpg`, `eco-tasche.jpg`, `umbrella.jpg`, `mascot.jpg`) created with Grok Imagine. Update the `image` value in the `products` array in index.html when you have real photos. The mascot and eco-tasche have no color variants (color selector is hidden or shows standard).
+- School Jacket, Mug Cup, Thermobecher, Trinkflasche, Eco-Tasche, Umbrella, Jahrbuch and School Mascot use images (Jahrbuch photo provided; others are Grok Imagine placeholders or real). Update the `image` value in the `products` array in index.html when you have real photos. Jahrbuch, mascot and eco-tasche have limited or no color variants.
 
 The original `DSSI Shirts 2026.pdf` is included in this folder for reference (size charts etc.).
 
@@ -86,7 +86,7 @@ This is the absolute easiest way with zero setup.
 
 1. **Prepare a clean deploy folder** (strongly recommended):
    - Create a new folder on your computer, e.g. `dssi-order-form-live`
-   - Copy **only** these 12 files into it:
+   - Copy **only** these 13 files into it:
      - `index.html`
      - `DSSI logo.jpg`
      - `tshirt.jpg`
@@ -98,6 +98,7 @@ This is the absolute easiest way with zero setup.
      - `trinkflasche.jpg`
      - `eco-tasche.jpg`
      - `umbrella.jpg`
+     - `Jahrbuch-25-26.jpg`
      - `mascot.jpg`
 
 2. Go to this page in your browser:  
