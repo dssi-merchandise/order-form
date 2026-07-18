@@ -492,6 +492,7 @@
         contactGeneral: "Questions? Contact the school office",
         impressumNote: "This ordering form is operated by the school. All orders are subject to the school's terms.",
         stockLeft: "in stock",
+        stockLow: "Low inventory: {n}",
         stockOut: "Out of stock",
         stockInsufficient: "Not enough stock for this item. Available: {n}",
         inventoryBusy: "Inventory is busy. Please try again in a moment.",
@@ -557,6 +558,7 @@
         contactGeneral: "Fragen? Kontaktieren Sie das Schulbüro",
         impressumNote: "Dieses Bestellformular wird von der Schule betrieben. Alle Bestellungen unterliegen den Bedingungen der Schule.",
         stockLeft: "auf Lager",
+        stockLow: "Geringer Bestand: {n}",
         stockOut: "Nicht auf Lager",
         stockInsufficient: "Nicht genügend Bestand für diesen Artikel. Verfügbar: {n}",
         inventoryBusy: "Inventar ist gerade belegt. Bitte gleich noch einmal versuchen.",
@@ -621,7 +623,8 @@
         collectionNoteShort: "리셉션에서 수령",
         contactGeneral: "문의 사항이 있으신가요? 학교 사무실에 연락하세요",
         impressumNote: "이 주문 양식은 학교에서 운영합니다. 모든 주문은 학교 약관의 적용을 받습니다.",
-        stockLeft: "재고",
+        stockLeft: "재고 있음",
+        stockLow: "재고 부족: {n}",
         stockOut: "품절",
         stockInsufficient: "재고가 부족합니다. 가능 수량: {n}",
         inventoryBusy: "재고 처리 중입니다. 잠시 후 다시 시도해 주세요.",
@@ -1792,6 +1795,7 @@
         const defaultColorId = product.colors[0].id
         const defaultAvailable = getAvailableStock(product.id, defaultColorId)
 
+        const LOW_STOCK_THRESHOLD = 5
         const colorOptions = product.colors.map(c => {
           const listed = getListedStock(product.id, c.id)
           const avail = getAvailableStock(product.id, c.id)
@@ -1802,7 +1806,11 @@
           if (avail <= 0) {
             return `<option value="${c.id}" disabled>${name} — ${t('stockOut')}</option>`
           }
-          return `<option value="${c.id}">${name} (${avail} ${t('stockLeft')})</option>`
+          // Hide exact counts when plentiful; only show number at low stock (≤5)
+          const stockLabel = avail <= LOW_STOCK_THRESHOLD
+            ? t('stockLow').replace('{n}', String(avail))
+            : t('stockLeft')
+          return `<option value="${c.id}">${name} (${stockLabel})</option>`
         }).join('')
 
         // Prefer first in-stock color when default is sold out
