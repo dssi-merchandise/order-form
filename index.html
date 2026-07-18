@@ -321,20 +321,30 @@
             </table>
           </div>
 
+          <!-- School Jacket -->
+          <div>
+            <div class="font-semibold mb-1 text-blue-800">Schuljacke / School Jacket</div>
+            <table class="w-full text-[10px] border border-slate-200">
+              <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Body (cm)</th></tr></thead>
+              <tbody class="font-mono">
+                <tr class="border-t"><td class="p-1">S</td><td class="p-1">163</td></tr>
+                <tr class="border-t"><td class="p-1">M</td><td class="p-1">170</td></tr>
+                <tr class="border-t"><td class="p-1">L</td><td class="p-1">179</td></tr>
+                <tr class="border-t"><td class="p-1">XL</td><td class="p-1">181</td></tr>
+                <tr class="border-t"><td class="p-1">2XL</td><td class="p-1">183</td></tr>
+              </tbody>
+            </table>
+            <div class="mt-2 text-[10px] text-slate-500">Nur Farbe Schwarz • Sonderanfertigung</div>
+          </div>
+
           <!-- Mug Cup -->
           <div>
             <div class="font-semibold mb-1 text-blue-800">Mug Cup</div>
             <div class="text-[10px] text-slate-500">One Size • 350ml</div>
           </div>
-
-          <!-- School Mascot -->
-          <div>
-            <div class="font-semibold mb-1 text-blue-800">School Mascot</div>
-            <div class="text-[10px] text-slate-500">One Size • Coming Soon</div>
-          </div>
         </div>
         <div class="mt-4 text-xs text-slate-500 px-1">
-          Measurements are approximate body height / upper body length for clothing items. Mug and mascot are One Size. Please refer to the original PDF for full chest, shoulder and sleeve measurements.
+          Measurements are approximate body height / upper body length for clothing items. Mug Cup is One Size. Please refer to the original PDF for full chest, shoulder and sleeve measurements.
         </div>
       </div>
       <div class="px-5 py-3 bg-slate-50 border-t text-right">
@@ -445,11 +455,13 @@
         quantity: "Qty",
         checkoutTitle: "Complete Your Order",
         checkoutSubtitle: "Payment instructions will be emailed to you",
-        nameLabel: "Your Name",
-        namePlaceholder: "Your full name",
+        firstNameLabel: "Your First Name",
+        firstNamePlaceholder: "First name",
+        lastNameLabel: "Your Last Name",
+        lastNamePlaceholder: "Last name",
         emailLabel: "Your Email Address",
         emailPlaceholder: "you@example.com",
-        emailHelp: "We will send the order confirmation and payment details to this address. A copy goes to vs.vorsitz@dsseoul.org.",
+        emailHelp: "We will send the order confirmation and payment details to this address.",
         placeOrderBtn: "Confirm and Order",
         orderSummary: "Order Summary",
         items: "Items",
@@ -474,11 +486,18 @@
         orderOn: "Ordered on",
         impressum: "Impressum",
         impressumTitle: "Impressum / Legal Notice",
-        collectionNote: "Items will be handed over to students at school or can be collected at the reception.",
-        collectionNoteDetailed: "Items will be handed over to students at school or can be collected at the reception. Clothes are order-made and collectively handed to students four times a year - prior to Oktoberfest, Christmas Market, Spring Festival and Summer Festival.",
-        collectionNoteShort: "Handed to students or collect at reception",
+        collectionNote: "Goods will be handed over at the reception.",
+        collectionNoteDetailed: "Goods will be handed over at the reception. At handover, items are checked for completeness and perfect condition. Returns of items are excluded.",
+        collectionNoteShort: "Handed over at reception",
         contactGeneral: "Questions? Contact the school office",
-        impressumNote: "This ordering form is operated by the school. All orders are subject to the school's terms."
+        impressumNote: "This ordering form is operated by the school. All orders are subject to the school's terms.",
+        stockLeft: "in stock",
+        stockOut: "Out of stock",
+        stockInsufficient: "Not enough stock for this item. Available: {n}",
+        inventoryBusy: "Inventory is busy. Please try again in a moment.",
+        inventoryError: "Could not reserve stock. Please try again.",
+        inventorySyncing: "Loading stock…",
+        placingOrder: "Placing order…"
       },
       de: {
         pageTitle: "Bestellportal",
@@ -501,11 +520,13 @@
         quantity: "Menge",
         checkoutTitle: "Bestellung abschließen",
         checkoutSubtitle: "Zahlungsanweisungen werden Ihnen per E-Mail zugesandt",
-        nameLabel: "Ihr Name",
-        namePlaceholder: "Ihr voller Name",
+        firstNameLabel: "Ihr Vorname",
+        firstNamePlaceholder: "Vorname",
+        lastNameLabel: "Ihr Nachname",
+        lastNamePlaceholder: "Nachname",
         emailLabel: "Ihre E-Mail-Adresse",
         emailPlaceholder: "max@beispiel.de",
-        emailHelp: "Wir senden Bestellbestätigung und Zahlungsinformationen an diese Adresse. Eine Kopie geht an vs.vorsitz@dsseoul.org.",
+        emailHelp: "Wir senden Bestellbestätigung und Zahlungsinformationen an diese Adresse.",
         placeOrderBtn: "Bestätigen und Bestellen",
         orderSummary: "Bestellübersicht",
         items: "Artikel",
@@ -530,11 +551,18 @@
         orderOn: "Bestellt am",
         impressum: "Impressum",
         impressumTitle: "Impressum / Rechtliche Hinweise",
-        collectionNote: "Die Ware wird direkt an die Schüler in der Schule übergeben oder kann an der Rezeption abgeholt werden.",
-        collectionNoteDetailed: "Die Artikel werden an die Schüler in der Schule übergeben oder können an der Rezeption abgeholt werden. Die Kleidungsstücke werden auf Bestellung gefertigt und viermal im Jahr gesammelt an die Schüler ausgegeben – vor dem Oktoberfest, Weihnachtsmarkt, Frühlingsfest und Sommerfest.",
-        collectionNoteShort: "Wird an Schüler übergeben oder an Rezeption abholbar",
+        collectionNote: "Die Ware wird an der Rezeption ausgehändigt.",
+        collectionNoteDetailed: "Die Ware wird an der Rezeption ausgehändigt. Bei der Übergabe wird auf Vollständigkeit und einwandfreien Zustand geprüft. Die Rückgabe von Artikeln ist ausgeschlossen.",
+        collectionNoteShort: "Aushändigung an der Rezeption",
         contactGeneral: "Fragen? Kontaktieren Sie das Schulbüro",
-        impressumNote: "Dieses Bestellformular wird von der Schule betrieben. Alle Bestellungen unterliegen den Bedingungen der Schule."
+        impressumNote: "Dieses Bestellformular wird von der Schule betrieben. Alle Bestellungen unterliegen den Bedingungen der Schule.",
+        stockLeft: "auf Lager",
+        stockOut: "Nicht auf Lager",
+        stockInsufficient: "Nicht genügend Bestand für diesen Artikel. Verfügbar: {n}",
+        inventoryBusy: "Inventar ist gerade belegt. Bitte gleich noch einmal versuchen.",
+        inventoryError: "Bestand konnte nicht reserviert werden. Bitte erneut versuchen.",
+        inventorySyncing: "Bestand wird geladen…",
+        placingOrder: "Bestellung wird übermittelt…"
       },
       ko: {
         pageTitle: "주문 양식",
@@ -557,11 +585,13 @@
         quantity: "수량",
         checkoutTitle: "주문 완료하기",
         checkoutSubtitle: "결제 안내가 이메일로 전송됩니다",
-        nameLabel: "이름",
-        namePlaceholder: "이름을 입력하세요",
+        firstNameLabel: "이름",
+        firstNamePlaceholder: "이름",
+        lastNameLabel: "성",
+        lastNamePlaceholder: "성",
         emailLabel: "이메일 주소",
         emailPlaceholder: "you@example.com",
-        emailHelp: "주문 확인서와 결제 안내를 이 주소로 보냅니다. 사본은 vs.vorsitz@dsseoul.org로 전송됩니다.",
+        emailHelp: "주문 확인서와 결제 안내를 이 주소로 보냅니다.",
         placeOrderBtn: "확인 및 주문",
         orderSummary: "주문 요약",
         items: "품목",
@@ -586,11 +616,18 @@
         orderOn: "주문일",
         impressum: "Impressum",
         impressumTitle: "Impressum / 법적 고지",
-        collectionNote: "물품은 학교에서 학생에게 직접 전달되거나 리셉션에서 수령할 수 있습니다.",
-        collectionNoteDetailed: "물품은 학교에서 학생에게 직접 전달되거나 리셉션에서 수령할 수 있습니다. 의류는 주문 제작되며 연 4회(옥토버페스트, 크리스마스 마켓, 봄 축제, 여름 축제 이전) 학생들에게 일괄 전달됩니다.",
-        collectionNoteShort: "학생에게 전달 또는 리셉션 수령 가능",
+        collectionNote: "물품은 리셉션에서 수령합니다.",
+        collectionNoteDetailed: "물품은 리셉션에서 수령합니다. 수령 시 수량과 이상 유무를 확인합니다. 상품 반품은 불가합니다.",
+        collectionNoteShort: "리셉션에서 수령",
         contactGeneral: "문의 사항이 있으신가요? 학교 사무실에 연락하세요",
-        impressumNote: "이 주문 양식은 학교에서 운영합니다. 모든 주문은 학교 약관의 적용을 받습니다."
+        impressumNote: "이 주문 양식은 학교에서 운영합니다. 모든 주문은 학교 약관의 적용을 받습니다.",
+        stockLeft: "재고",
+        stockOut: "품절",
+        stockInsufficient: "재고가 부족합니다. 가능 수량: {n}",
+        inventoryBusy: "재고 처리 중입니다. 잠시 후 다시 시도해 주세요.",
+        inventoryError: "재고를 확보할 수 없습니다. 다시 시도해 주세요.",
+        inventorySyncing: "재고 불러오는 중…",
+        placingOrder: "주문 처리 중…"
       }
     }
 
@@ -996,6 +1033,220 @@
     }
 
     // ==================== PRODUCTS DATA ====================
+    // Temporarily hidden (no inventory). Clear this array [] to show them again.
+    const OUT_OF_STOCK_IDS = ['trinkflasche', 'thermobecher', 'umbrella', 'eco-tasche', 'mascot']
+
+    // ==================== INVENTORY (Google Sheet via Apps Script) ====================
+    // Live source: "Inventar Merchandise"
+    //   https://docs.google.com/spreadsheets/d/1D1X_h5hNpQBW1kNMvhcnQGU0qMZ-rDqF5ETf1ueMkDU/
+    // Columns: Artikel | Eigenschaft | Anfangsbestand | Bestellungen | Verfügbares Inventar
+    // On order: checks Verfügbares Inventar, then Bestellungen += qty (Apps Script).
+    // Order detail log still uses Google Form → separate orders sheet (GOOGLE_FORM_CONFIG).
+    //
+    // SETUP: open that Sheet → Extensions → Apps Script → paste InventarWebApp.gs
+    //        → optional installVerfuegbarFormulas() → Deploy Web app → set URL + secret here.
+    // Leave webAppUrl empty to use FALLBACK_INVENTORY only (no live multi-user updates).
+    const INVENTORY_API = {
+      webAppUrl: 'https://script.google.com/macros/s/AKfycbwD4nkEBpP5Kvln63iQ3hzziO5ntXJHgCkdrGR6wSJfP3iYjtcXAzF2mCaxltEV6zU/exec',
+      // Must match SECRET in InventarWebApp.gs (if still CHANGE_ME_... both sides, auth is open)
+      secret: 'CHANGE_ME_TO_A_LONG_RANDOM_STRING'
+    }
+
+    // Offline / bootstrap values (Tasse). Overwritten when the Sheet responds.
+    // Source mapping:
+    //   weiß → white (118) | weiß blau → white-blue-inside (26)
+    //   weiß pink → white-pink-inside (30) | weiß grün → white-green-inside (19)
+    //   weiß gelb → white-yellow-inside (17) | schwarz rot → black-red-inside (6)
+    //   schwarz pink → black-pink-inside (17) | schwarz blau → black-blue-inside (5)
+    const FALLBACK_INVENTORY = {
+      'mug::white': 118,
+      'mug::white-blue-inside': 26,
+      'mug::white-pink-inside': 30,
+      'mug::white-green-inside': 19,
+      'mug::white-yellow-inside': 17,
+      'mug::black-red-inside': 6,
+      'mug::black-pink-inside': 17,
+      'mug::black-blue-inside': 5
+    }
+
+    // Live map: key "productId::colorId" → remaining Inventar units
+    let INVENTORY = Object.assign({}, FALLBACK_INVENTORY)
+    let inventoryLive = false
+    let inventoryFetchPromise = null
+
+    function inventoryKey(productId, colorId) {
+      return productId + '::' + colorId
+    }
+
+    function isInventoryApiConfigured() {
+      const url = (INVENTORY_API.webAppUrl || '').trim()
+      return url.length > 10 && !url.includes('AKfycbXXXX') && url.includes('script.google.com')
+    }
+
+    function applyStockMap(stockMap) {
+      if (!stockMap || typeof stockMap !== 'object') return
+      // Replace only keys returned by the sheet so unknown products stay unlimited
+      // unless the sheet listed them. Start from empty then assign sheet values for tracked items.
+      const next = {}
+      Object.keys(stockMap).forEach(k => {
+        next[k] = Math.max(0, Math.floor(Number(stockMap[k]) || 0))
+      })
+      // Keep fallback keys only if sheet did not return anything usable
+      if (Object.keys(next).length === 0) {
+        INVENTORY = Object.assign({}, FALLBACK_INVENTORY)
+        inventoryLive = false
+        return
+      }
+      INVENTORY = next
+      inventoryLive = true
+    }
+
+    async function fetchInventoryFromSheet() {
+      if (!isInventoryApiConfigured()) {
+        console.log('[Inventory] Web App URL not set — using local FALLBACK_INVENTORY.')
+        inventoryLive = false
+        return false
+      }
+      if (inventoryFetchPromise) return inventoryFetchPromise
+
+      inventoryFetchPromise = (async () => {
+        try {
+          const u = new URL(INVENTORY_API.webAppUrl)
+          u.searchParams.set('action', 'stock')
+          u.searchParams.set('secret', INVENTORY_API.secret || '')
+          // cache-bust
+          u.searchParams.set('_', String(Date.now()))
+
+          const res = await fetch(u.toString(), { method: 'GET', redirect: 'follow' })
+          const data = await res.json()
+          if (!data || !data.ok) {
+            console.warn('[Inventory] Stock fetch failed:', data)
+            return false
+          }
+          applyStockMap(data.stock)
+          console.log('[Inventory] Live stock loaded from Google Sheet:', INVENTORY)
+          return true
+        } catch (err) {
+          console.warn('[Inventory] Stock fetch error (using fallback):', err)
+          inventoryLive = false
+          return false
+        } finally {
+          inventoryFetchPromise = null
+        }
+      })()
+
+      return inventoryFetchPromise
+    }
+
+    /**
+     * Reserve stock on the Sheet: Inventar -= qty, Bestellungen += qty.
+     * Returns { ok: true, stock } or { ok: false, error, shortfalls?, message? }
+     */
+    async function placeOrderOnSheet(order) {
+      if (!isInventoryApiConfigured()) {
+        // Local-only mode: decrement FALLBACK map so this browser session stays consistent
+        const shortfalls = []
+        const needed = {}
+        order.items.forEach(line => {
+          const key = inventoryKey(line.productId, line.colorId)
+          if (!Object.prototype.hasOwnProperty.call(INVENTORY, key)) return
+          needed[key] = (needed[key] || 0) + line.qty
+        })
+        Object.keys(needed).forEach(key => {
+          const have = INVENTORY[key] | 0
+          if (have < needed[key]) {
+            shortfalls.push({ key, available: have, requested: needed[key] })
+          }
+        })
+        if (shortfalls.length) {
+          return { ok: false, error: 'insufficient_stock', shortfalls, stock: Object.assign({}, INVENTORY) }
+        }
+        Object.keys(needed).forEach(key => {
+          INVENTORY[key] = Math.max(0, (INVENTORY[key] | 0) - needed[key])
+        })
+        console.log('[Inventory] Local-only reserve (no Web App URL). Updated INVENTORY:', INVENTORY)
+        return { ok: true, stock: Object.assign({}, INVENTORY), localOnly: true }
+      }
+
+      const payload = {
+        action: 'placeOrder',
+        secret: INVENTORY_API.secret || '',
+        orderId: order.id,
+        customerName: order.name || '',
+        customerEmail: order.email || '',
+        items: order.items.map(line => ({
+          productId: line.productId,
+          colorId: line.colorId,
+          qty: line.qty,
+          size: line.size,
+          unitPrice: line.unitPrice
+        }))
+      }
+
+      try {
+        // text/plain avoids CORS preflight; Apps Script parses JSON from postData.contents
+        const res = await fetch(INVENTORY_API.webAppUrl, {
+          method: 'POST',
+          redirect: 'follow',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        })
+        const data = await res.json()
+        if (data && data.stock) applyStockMap(data.stock)
+        console.log('[Inventory] placeOrder response:', data)
+        return data
+      } catch (err) {
+        console.error('[Inventory] placeOrder network error:', err)
+        return { ok: false, error: 'network', message: String(err) }
+      }
+    }
+
+    function hasInventoryLimit(productId, colorId) {
+      return Object.prototype.hasOwnProperty.call(INVENTORY, inventoryKey(productId, colorId))
+    }
+
+    function getListedStock(productId, colorId) {
+      const key = inventoryKey(productId, colorId)
+      if (!Object.prototype.hasOwnProperty.call(INVENTORY, key)) return null
+      return Math.max(0, INVENTORY[key] | 0)
+    }
+
+    // Qty already in cart for this product+color (all sizes share the same stock bucket).
+    function getCartQtyForVariant(productId, colorId, excludeIndex) {
+      return cart.reduce((sum, item, idx) => {
+        if (excludeIndex !== undefined && idx === excludeIndex) return sum
+        if (item.productId === productId && item.colorId === colorId) return sum + item.qty
+        return sum
+      }, 0)
+    }
+
+    // Available for a variant: listed stock minus already in cart.
+    // Returns null when no limit applies.
+    function getAvailableStock(productId, colorId, excludeIndex) {
+      const listed = getListedStock(productId, colorId)
+      if (listed === null) return null
+      const inCart = getCartQtyForVariant(productId, colorId, excludeIndex)
+      return Math.max(0, listed - inCart)
+    }
+
+    function stockMessage(available) {
+      return t('stockInsufficient').replace('{n}', String(available))
+    }
+
+    function formatShortfallAlert(result) {
+      if (!result || !result.shortfalls || !result.shortfalls.length) {
+        return result && result.message ? result.message : t('inventoryError')
+      }
+      return result.shortfalls.map(s => {
+        const [pid, cid] = (s.key || '').split('::')
+        const prod = getProduct(pid)
+        const label = prod
+          ? (prod.name[currentLang] || prod.name.en) + ' • ' + getColorName(prod, cid)
+          : s.key
+        return label + '\n' + stockMessage(s.available)
+      }).join('\n\n')
+    }
+
     const products = [
       {
         id: 'jahrbuch',
@@ -1008,8 +1259,7 @@
           ko: '학교 연감 • 공식 DSSI 출판물'
         },
         colors: [
-          { id: '2025-2026', name: { en: '2025/2026', de: '2025/2026', ko: '2025/2026' } },
-          { id: '2024-2025', name: { en: '2024/2025', de: '2024/2025', ko: '2024/2025' } }
+          { id: '2025-2026', name: { en: '2025/2026', de: '2025/2026', ko: '2025/2026' } }
         ],
         sizes: ['One Size'],
         noteShort: {
@@ -1037,9 +1287,9 @@
         ],
         sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "Order now and receive it in time before Oktoberfest!",
-          de: "Jetzt bestellen und rechtzeitig vor dem Oktoberfest erhalten!",
-          ko: "지금 주문하고 옥토버페스트 전에 제때 받아보세요!"
+          en: "If ordered by 4 September, handover by Oktoberfest on 19 September.",
+          de: "Bei Bestellung bis zum 4.9. erfolgt die Übergabe bis zum Oktoberfest am 19.9.",
+          ko: "9월 4일까지 주문 시 9월 19일 옥토버페스트까지 인도됩니다."
         }
       },
       {
@@ -1059,9 +1309,9 @@
         ],
         sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "Order now and receive it in time before Oktoberfest!",
-          de: "Jetzt bestellen und rechtzeitig vor dem Oktoberfest erhalten!",
-          ko: "지금 주문하고 옥토버페스트 전에 제때 받아보세요!"
+          en: "If ordered by 4 September, handover by Oktoberfest on 19 September.",
+          de: "Bei Bestellung bis zum 4.9. erfolgt die Übergabe bis zum Oktoberfest am 19.9.",
+          ko: "9월 4일까지 주문 시 9월 19일 옥토버페스트까지 인도됩니다."
         }
       },
       {
@@ -1081,31 +1331,29 @@
         ],
         sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
         noteShort: {
-          en: "Order now and receive it in time before Oktoberfest!",
-          de: "Jetzt bestellen und rechtzeitig vor dem Oktoberfest erhalten!",
-          ko: "지금 주문하고 옥토버페스트 전에 제때 받아보세요!"
+          en: "If ordered by 4 September, handover by Oktoberfest on 19 September.",
+          de: "Bei Bestellung bis zum 4.9. erfolgt die Übergabe bis zum Oktoberfest am 19.9.",
+          ko: "9월 4일까지 주문 시 9월 19일 옥토버페스트까지 인도됩니다."
         }
       },
       {
         id: 'jacket',
         image: 'jacket.jpg',
-        price: 80000,
+        price: 65000,
         name: { en: 'School Jacket', de: 'Schuljacke', ko: '스쿨 재킷' },
         desc: {
-          en: 'Placeholder • Windbreaker style • Logo on front left chest • Same sizes as the hoodie',
-          de: 'Platzhalter • Windbreaker-Stil • Logo vorne links auf der Brust • Gleiche Größen wie der Hoodie',
-          ko: '플레이스홀더 • 윈드브레이커 스타일 • 가슴 왼쪽 앞 로고 • 후드티와 동일한 사이즈'
+          en: 'Windbreaker style • Logo on front left chest • Sizes S–2XL',
+          de: 'Windbreaker-Stil • Logo vorne links auf der Brust • Größen S–2XL',
+          ko: '윈드브레이커 스타일 • 가슴 왼쪽 앞 로고 • 사이즈 S–2XL'
         },
         colors: [
-          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
-          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
-          { id: 'lightgrey', name: { en: 'Light Grey', de: 'Hellgrau', ko: '라이트 그레이' } }
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } }
         ],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+        sizes: ['S', 'M', 'L', 'XL', '2XL'],
         noteShort: {
-          en: "Order now and receive it in time before Summer Festival!",
-          de: "Jetzt bestellen und rechtzeitig vor dem Sommerfest erhalten!",
-          ko: "지금 주문하고 여름 축제 전에 제때 받아보세요!"
+          en: "Made to order, delivery approx. 2 months",
+          de: "Sonderanfertigung, Lieferzeit ca. 2 Monate",
+          ko: "특별 제작, 배송 약 2개월"
         }
       },
       {
@@ -1119,13 +1367,14 @@
           ko: '플레이스홀더 • 세라믹 머그컵 • 학교 로고 • 350ml'
         },
         colors: [
-          { id: 'white-blue-inside', name: { en: 'White (blue inside)', de: 'Weiß (blau innen)', ko: '화이트 (블루 내부)' } },
-          { id: 'white-red-inside', name: { en: 'White (red inside)', de: 'Weiß (rot innen)', ko: '화이트 (레드 내부)' } },
-          { id: 'white-yellow-inside', name: { en: 'White (yellow inside)', de: 'Weiß (gelb innen)', ko: '화이트 (옐로우 내부)' } },
           { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'white-blue-inside', name: { en: 'White (blue inside)', de: 'Weiß (blau innen)', ko: '화이트 (블루 내부)' } },
+          { id: 'white-pink-inside', name: { en: 'White (pink inside)', de: 'Weiß (pink innen)', ko: '화이트 (핑크 내부)' } },
+          { id: 'white-green-inside', name: { en: 'White (green inside)', de: 'Weiß (grün innen)', ko: '화이트 (그린 내부)' } },
+          { id: 'white-yellow-inside', name: { en: 'White (yellow inside)', de: 'Weiß (gelb innen)', ko: '화이트 (옐로우 내부)' } },
+          { id: 'black-red-inside', name: { en: 'Black (red inside)', de: 'Schwarz (rot innen)', ko: '블랙 (레드 내부)' } },
           { id: 'black-pink-inside', name: { en: 'Black (pink inside)', de: 'Schwarz (rosa innen)', ko: '블랙 (핑크 내부)' } },
-          { id: 'black-blue-inside', name: { en: 'Black (blue inside)', de: 'Schwarz (blau innen)', ko: '블랙 (블루 내부)' } },
-          { id: 'black-red-inside', name: { en: 'Black (red inside)', de: 'Schwarz (rot innen)', ko: '블랙 (레드 내부)' } }
+          { id: 'black-blue-inside', name: { en: 'Black (blue inside)', de: 'Schwarz (blau innen)', ko: '블랙 (블루 내부)' } }
         ],
         sizes: ['One Size'],
         noteShort: {
@@ -1250,6 +1499,28 @@
       if (saved) {
         try { cart = JSON.parse(saved) } catch (e) { cart = [] }
       }
+      // Drop items that are temporarily out of stock
+      let changed = false
+      const before = cart.length
+      cart = cart.filter(item => !OUT_OF_STOCK_IDS.includes(item.productId))
+      if (cart.length !== before) changed = true
+
+      // Cap quantities to listed inventory (e.g. after admin reduced stock)
+      const remainingByKey = {}
+      cart.forEach(item => {
+        const listed = getListedStock(item.productId, item.colorId)
+        if (listed === null) return
+        const key = inventoryKey(item.productId, item.colorId)
+        if (remainingByKey[key] === undefined) remainingByKey[key] = listed
+        const allowed = remainingByKey[key]
+        if (item.qty > allowed) {
+          item.qty = Math.max(0, allowed)
+          changed = true
+        }
+        remainingByKey[key] = Math.max(0, remainingByKey[key] - item.qty)
+      })
+      cart = cart.filter(item => item.qty > 0)
+      if (changed) saveCart()
     }
 
     function saveCart() {
@@ -1279,6 +1550,7 @@
     }
 
     function addToCart(productId) {
+      if (OUT_OF_STOCK_IDS.includes(productId)) return
       const product = getProduct(productId)
       if (!product) return
 
@@ -1292,7 +1564,20 @@
 
       const colorId = colorSel ? colorSel.value : product.colors[0].id
       const size = sizeSel ? sizeSel.value : product.sizes[0]
-      const qty = qtyInput ? Math.max(1, parseInt(qtyInput.value) || 1) : 1
+      let qty = qtyInput ? Math.max(1, parseInt(qtyInput.value) || 1) : 1
+
+      const available = getAvailableStock(productId, colorId)
+      if (available !== null) {
+        if (available <= 0) {
+          alert(t('stockOut'))
+          return
+        }
+        if (qty > available) {
+          alert(stockMessage(available))
+          qty = available
+          if (qtyInput) qtyInput.value = String(available)
+        }
+      }
 
       // Check if same variant already in cart
       const existing = cart.findIndex(item => 
@@ -1316,6 +1601,7 @@
 
       saveCart()
       renderCart()
+      renderProducts()
 
       // Nice feedback
       const origText = colorSel ? '' : ''
@@ -1340,22 +1626,50 @@
     }
 
     function changeCartQty(index, delta) {
-      cart[index].qty = Math.max(1, Math.min(99, cart[index].qty + delta))
+      const item = cart[index]
+      if (!item) return
+      let next = Math.max(1, Math.min(99, item.qty + delta))
+      const available = getAvailableStock(item.productId, item.colorId, index)
+      if (available !== null && delta > 0) {
+        const maxAllowed = item.qty + available
+        if (next > maxAllowed) {
+          if (maxAllowed <= item.qty) {
+            alert(t('stockOut'))
+            return
+          }
+          alert(stockMessage(maxAllowed))
+          next = maxAllowed
+        }
+      }
+      item.qty = next
       saveCart()
       renderCart()
+      renderProducts()
     }
 
     function setCartQty(index, newQty) {
-      const q = Math.max(1, Math.min(99, parseInt(newQty) || 1))
-      cart[index].qty = q
+      const item = cart[index]
+      if (!item) return
+      let q = Math.max(1, Math.min(99, parseInt(newQty) || 1))
+      const available = getAvailableStock(item.productId, item.colorId, index)
+      if (available !== null) {
+        const maxAllowed = item.qty + available
+        if (q > maxAllowed) {
+          alert(stockMessage(maxAllowed))
+          q = Math.max(1, maxAllowed)
+        }
+      }
+      item.qty = q
       saveCart()
       renderCart()
+      renderProducts()
     }
 
     function removeFromCart(index) {
       cart.splice(index, 1)
       saveCart()
       renderCart()
+      renderProducts()
     }
 
     function clearCart() {
@@ -1364,6 +1678,7 @@
       cart = []
       saveCart()
       renderCart()
+      renderProducts()
     }
 
     function calculateTotal() {
@@ -1416,7 +1731,7 @@
               <div class="flex justify-between gap-x-2">
                 <div>
                   <div class="font-semibold leading-tight">${prod.name[currentLang] || prod.name.en}</div>
-                  <div class="text-xs text-slate-500 mt-0.5">${prod.colors.length > 1 ? colorName + ' • ' : ''}${item.size}</div>
+                  <div class="text-xs text-slate-500 mt-0.5">${(prod.colors.length > 1 || prod.id === 'jahrbuch') ? colorName + ' • ' : ''}${item.size}</div>
                 </div>
                 <div class="text-right text-sm font-semibold tabular-nums whitespace-nowrap">${formatPrice(lineTotal)}</div>
               </div>
@@ -1469,20 +1784,49 @@
       if (!grid) return
       grid.innerHTML = ''
 
-      products.forEach(product => {
+    products.filter(product => !OUT_OF_STOCK_IDS.includes(product.id)).forEach(product => {
         const card = document.createElement('div')
         card.className = `product-card bg-white border border-slate-200 rounded-3xl overflow-hidden flex flex-col shadow-sm`
         card.setAttribute('data-product-id', product.id)
 
-        const colorOptions = product.colors.map(c => 
-          `<option value="${c.id}">${c.name[currentLang] || c.name.en}</option>`
-        ).join('')
+        const defaultColorId = product.colors[0].id
+        const defaultAvailable = getAvailableStock(product.id, defaultColorId)
+
+        const colorOptions = product.colors.map(c => {
+          const listed = getListedStock(product.id, c.id)
+          const avail = getAvailableStock(product.id, c.id)
+          const name = c.name[currentLang] || c.name.en
+          if (listed === null) {
+            return `<option value="${c.id}">${name}</option>`
+          }
+          if (avail <= 0) {
+            return `<option value="${c.id}" disabled>${name} — ${t('stockOut')}</option>`
+          }
+          return `<option value="${c.id}">${name} (${avail} ${t('stockLeft')})</option>`
+        }).join('')
+
+        // Prefer first in-stock color when default is sold out
+        let selectedColorId = defaultColorId
+        if (defaultAvailable !== null && defaultAvailable <= 0) {
+          const firstOk = product.colors.find(c => {
+            const a = getAvailableStock(product.id, c.id)
+            return a === null || a > 0
+          })
+          if (firstOk) selectedColorId = firstOk.id
+        }
 
         const sizeOptions = product.sizes.map(s => 
           `<option value="${s}">${s}</option>`
         ).join('')
 
         const hasMultipleSizes = product.sizes && product.sizes.length > 1;
+        const allColorsOut = product.colors.every(c => {
+          const a = getAvailableStock(product.id, c.id)
+          return a !== null && a <= 0
+        })
+        const selectedAvail = getAvailableStock(product.id, selectedColorId)
+        const qtyMax = selectedAvail !== null ? Math.max(0, Math.min(20, selectedAvail)) : 20
+        const qtyVal = qtyMax > 0 ? 1 : 0
 
         card.innerHTML = `
           <div class="aspect-square bg-slate-100 relative">
@@ -1503,8 +1847,8 @@
             </div>
 
             <div class="mt-4 grid grid-cols-1 gap-y-3 text-sm flex-1">
-              ${product.colors.length > 1 ? `
-              <!-- Color -->
+              ${(product.colors.length > 1 || product.id === 'jahrbuch') ? `
+              <!-- Color / Year -->
               <div>
                 <label class="block text-xs font-medium text-slate-500 mb-1">${product.id === 'jahrbuch' ? t('year') : t('color')}</label>
                 <select class="color-select w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 bg-white">
@@ -1524,7 +1868,7 @@
                 </div>
                 <div class="col-span-2">
                   <label class="block text-xs font-medium text-slate-500 mb-1">${t('quantity')}</label>
-                  <input type="number" value="1" min="1" max="20" class="qty-input w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                  <input type="number" value="${qtyVal}" min="1" max="${Math.max(1, qtyMax)}" class="qty-input w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500" ${allColorsOut ? 'disabled' : ''}>
                 </div>
               </div>
               ` : `
@@ -1532,21 +1876,49 @@
               <div class="grid grid-cols-5 gap-2 items-end">
                 <div class="col-span-5">
                   <label class="block text-xs font-medium text-slate-500 mb-1">${t('quantity')}</label>
-                  <input type="number" value="1" min="1" max="20" class="qty-input w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                  <input type="number" value="${qtyVal}" min="1" max="${Math.max(1, qtyMax)}" class="qty-input w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500" ${allColorsOut ? 'disabled' : ''}>
                 </div>
               </div>
               `}
             </div>
 
             <button onclick="addToCart('${product.id}')" 
-                    class="add-btn mt-4 w-full py-2.5 bg-blue-800 hover:bg-blue-900 active:bg-blue-950 text-white text-sm font-semibold rounded-2xl flex items-center justify-center gap-x-2 transition-colors">
+                    class="add-btn mt-4 w-full py-2.5 ${allColorsOut ? 'bg-slate-400 cursor-not-allowed' : 'bg-blue-800 hover:bg-blue-900 active:bg-blue-950'} text-white text-sm font-semibold rounded-2xl flex items-center justify-center gap-x-2 transition-colors"
+                    ${allColorsOut ? 'disabled' : ''}>
               <i class="fa-solid fa-plus"></i>
-              <span>${t('addToBasket')}</span>
+              <span>${allColorsOut ? t('stockOut') : t('addToBasket')}</span>
             </button>
           </div>
         `
 
         grid.appendChild(card)
+
+        const colorSel = card.querySelector('.color-select')
+        const qtyInput = card.querySelector('.qty-input')
+        if (colorSel && selectedColorId) {
+          colorSel.value = selectedColorId
+        }
+        const updateQtyMax = () => {
+          if (!qtyInput) return
+          const cid = colorSel ? colorSel.value : product.colors[0].id
+          const avail = getAvailableStock(product.id, cid)
+          if (avail === null) {
+            qtyInput.max = 20
+            qtyInput.disabled = false
+            return
+          }
+          qtyInput.max = Math.max(1, Math.min(20, avail || 1))
+          if (avail <= 0) {
+            qtyInput.value = 0
+            qtyInput.disabled = true
+          } else {
+            qtyInput.disabled = false
+            if (parseInt(qtyInput.value, 10) > avail) qtyInput.value = String(avail)
+            if (parseInt(qtyInput.value, 10) < 1) qtyInput.value = '1'
+          }
+        }
+        if (colorSel) colorSel.addEventListener('change', updateQtyMax)
+        updateQtyMax()
       })
     }
 
@@ -1583,7 +1955,7 @@
       cart.forEach(item => {
         const prod = getProduct(item.productId)
         const colorName = getColorName(prod, item.colorId)
-        const line = `${prod.name[currentLang] || prod.name.en}${prod.colors.length > 1 ? ' • ' + colorName : ''} • ${item.size} × ${item.qty}`
+        const line = `${prod.name[currentLang] || prod.name.en}${(prod.colors.length > 1 || prod.id === 'jahrbuch') ? ' • ' + colorName : ''} • ${item.size} × ${item.qty}`
         itemsHtml += `<div class="flex justify-between py-1 text-sm border-b border-slate-100 last:border-0">
           <div class="text-slate-600">${line}</div>
           <div class="font-medium tabular-nums">${formatPrice(item.unitPrice * item.qty)}</div>
@@ -1610,10 +1982,17 @@
           </div>
 
           <div class="mb-4">
-            <label class="block text-sm font-semibold mb-1.5">${t('nameLabel')}</label>
-            <input id="customer-name" type="text" required
+            <label class="block text-sm font-semibold mb-1.5">${t('lastNameLabel')}</label>
+            <input id="customer-last-name" type="text" required
                    class="w-full px-4 py-3 border border-slate-300 focus:border-blue-600 rounded-2xl text-sm"
-                   placeholder="${t('namePlaceholder')}" value="">
+                   placeholder="${t('lastNamePlaceholder')}" value="">
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-semibold mb-1.5">${t('firstNameLabel')}</label>
+            <input id="customer-first-name" type="text" required
+                   class="w-full px-4 py-3 border border-slate-300 focus:border-blue-600 rounded-2xl text-sm"
+                   placeholder="${t('firstNamePlaceholder')}" value="">
           </div>
 
           <div class="mb-4">
@@ -1624,10 +2003,10 @@
             <p class="mt-1.5 text-xs text-slate-500">${t('emailHelp')}</p>
           </div>
 
-          <button onclick="confirmOrder()" 
+          <button id="confirm-order-btn" onclick="confirmOrder()" 
                   class="mt-2 w-full py-3.5 rounded-2xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 transition text-white font-semibold flex items-center justify-center gap-2">
             <i class="fa-solid fa-check"></i>
-            <span>${t('placeOrderBtn')}</span>
+            <span id="confirm-order-btn-text">${t('placeOrderBtn')}</span>
           </button>
           <div class="text-center mt-3">
             <button onclick="closeCheckoutModal()" class="text-xs text-slate-500 hover:text-slate-700">${currentLang === 'ko' ? '취소' : currentLang === 'de' ? 'Abbrechen' : 'Cancel'}</button>
@@ -1638,10 +2017,9 @@
       modal.classList.remove('hidden')
       modal.classList.add('flex')
 
-      // Focus name first (new field), then email is next naturally
       setTimeout(() => {
-        const nameInput = document.getElementById('customer-name')
-        if (nameInput) nameInput.focus()
+        const lastNameInput = document.getElementById('customer-last-name')
+        if (lastNameInput) lastNameInput.focus()
       }, 80)
     }
 
@@ -1654,17 +2032,27 @@
       // Do not clear currentOrderId here in case of success state reuse
     }
 
-    function confirmOrder() {
-      const nameInput = document.getElementById('customer-name')
+    async function confirmOrder() {
+      const lastNameInput = document.getElementById('customer-last-name')
+      const firstNameInput = document.getElementById('customer-first-name')
       const emailInput = document.getElementById('customer-email')
-      if (!nameInput || !emailInput) return
+      if (!firstNameInput || !lastNameInput || !emailInput) return
 
-      const customerName = nameInput.value.trim()
-      if (!customerName) {
-        alert(currentLang === 'ko' ? '이름을 입력하세요.' : currentLang === 'de' ? 'Bitte geben Sie Ihren Namen ein.' : 'Please enter your name.')
-        nameInput.focus()
+      const lastName = lastNameInput.value.trim()
+      if (!lastName) {
+        alert(currentLang === 'ko' ? '성을 입력하세요.' : currentLang === 'de' ? 'Bitte geben Sie Ihren Nachnamen ein.' : 'Please enter your last name.')
+        lastNameInput.focus()
         return
       }
+
+      const firstName = firstNameInput.value.trim()
+      if (!firstName) {
+        alert(currentLang === 'ko' ? '이름을 입력하세요.' : currentLang === 'de' ? 'Bitte geben Sie Ihren Vornamen ein.' : 'Please enter your first name.')
+        firstNameInput.focus()
+        return
+      }
+
+      const customerName = lastName + ' ' + firstName
 
       const email = emailInput.value.trim()
       if (!email || !email.includes('@')) {
@@ -1673,12 +2061,29 @@
         return
       }
 
+      // Final client-side inventory check before confirming
+      for (let i = 0; i < cart.length; i++) {
+        const item = cart[i]
+        const listed = getListedStock(item.productId, item.colorId)
+        if (listed === null) continue
+        const otherQty = getCartQtyForVariant(item.productId, item.colorId, i)
+        const maxForThisLine = Math.max(0, listed - otherQty)
+        if (item.qty > maxForThisLine) {
+          const prod = getProduct(item.productId)
+          const label = (prod ? (prod.name[currentLang] || prod.name.en) : item.productId) + ' • ' + getColorName(prod, item.colorId)
+          alert(label + '\n' + stockMessage(maxForThisLine))
+          return
+        }
+      }
+
       const total = calculateTotal()
       const orderId = currentOrderId || generateOrderId()
 
       // Build order data
       const orderData = {
         id: orderId,
+        firstName: firstName,
+        lastName: lastName,
         name: customerName,
         email: email,
         items: cart.map(i => ({...i})),
@@ -1687,12 +2092,49 @@
         lang: currentLang
       }
 
+      const confirmBtn = document.getElementById('confirm-order-btn')
+      const confirmBtnText = document.getElementById('confirm-order-btn-text')
+      const originalBtnHtml = confirmBtn ? confirmBtn.innerHTML : ''
+      if (confirmBtn) {
+        confirmBtn.disabled = true
+        confirmBtn.classList.add('opacity-70', 'cursor-wait')
+        if (confirmBtnText) confirmBtnText.textContent = t('placingOrder')
+      }
+
+      // 1) Reserve stock in Google Sheet (Inventar ↓, Bestellungen ↑). Blocks checkout on failure.
+      const reserve = await placeOrderOnSheet(orderData)
+      if (!reserve || !reserve.ok) {
+        if (reserve && reserve.stock) applyStockMap(reserve.stock)
+        else await fetchInventoryFromSheet()
+        // Cap cart to new stock
+        loadCart()
+        renderCart()
+        renderProducts()
+
+        if (reserve && reserve.error === 'busy') {
+          alert(t('inventoryBusy'))
+        } else if (reserve && reserve.error === 'insufficient_stock') {
+          alert(formatShortfallAlert(reserve))
+        } else {
+          alert(t('inventoryError') + (reserve && reserve.message ? '\n' + reserve.message : ''))
+        }
+
+        if (confirmBtn) {
+          confirmBtn.disabled = false
+          confirmBtn.classList.remove('opacity-70', 'cursor-wait')
+          confirmBtn.innerHTML = originalBtnHtml
+        }
+        return
+      }
+
       // Build the email body (in selected language) for the customer
       const emailBody = buildEmailBody(orderData)
 
       const baseParams = {
         order_id: orderId,
         customer_name: customerName,
+        customer_first_name: firstName,
+        customer_last_name: lastName,
         customer_email: email,
         order_details: emailBody,
         total_price: formatPrice(total),
@@ -1702,14 +2144,14 @@
       // Save order to local history (optional)
       saveOrderToHistory(orderData)
 
-      // Log every line item to the Google Form → Sheet (for school admin overview).
-      // This is fire-and-forget; it does not block the thank-you screen or the email.
+      // Log every line item to the Google Form → Sheet (admin overview). Keep in parallel with Inventar.
       logOrderToGoogleForm(orderData)
 
       // Clear the cart early
       cart = []
       saveCart()
       renderCart()
+      renderProducts()
 
       const sendParams = {
         ...baseParams,
@@ -1729,7 +2171,7 @@
       const headerLine = 'Item\tColor\tSize\tQty\tLine Total'
       const prodLines = order.items.map(item => {
         const prod = getProduct(item.productId)
-        const cname = prod.colors.length > 1 ? getColorName(prod, item.colorId) : ''
+        const cname = (prod.colors.length > 1 || prod.id === 'jahrbuch') ? getColorName(prod, item.colorId) : ''
         const lineTotal = item.unitPrice * item.qty
         return `${prod.name[order.lang] || prod.name.en}\t${cname}\t${item.size}\t${item.qty}\t${formatPrice(lineTotal)}`
       }).join('\n')
@@ -1746,7 +2188,7 @@
 
 hiermit bestelle ich die unten aufgeführten Artikel der DSSI Schulkleidung 2026.
 
-${order.name ? 'Name: ' + order.name + '\nE-Mail: ' + order.email + '\n\n' : 'E-Mail: ' + order.email + '\n\n'}BESTELLNUMMER: ${order.id}
+${order.firstName || order.lastName ? 'Nachname: ' + (order.lastName || '') + '\nVorname: ' + (order.firstName || '') + '\nE-Mail: ' + order.email + '\n\n' : (order.name ? 'Name: ' + order.name + '\n' : '') + 'E-Mail: ' + order.email + '\n\n'}BESTELLNUMMER: ${order.id}
 DATUM: ${new Date(order.date).toLocaleDateString('de-DE')}
 
 ${itemsHeader}
@@ -1775,7 +2217,7 @@ ${order.name ? order.name + '\n' : ''}${order.email}
 
 2026 DSSI 학교 의류를 다음과 같이 주문합니다.
 
-${order.name ? '이름: ' + order.name + '\n이메일: ' + order.email + '\n\n' : '이메일: ' + order.email + '\n\n'}주문번호: ${order.id}
+${order.firstName || order.lastName ? '성: ' + (order.lastName || '') + '\n이름: ' + (order.firstName || '') + '\n이메일: ' + order.email + '\n\n' : (order.name ? '이름: ' + order.name + '\n' : '') + '이메일: ' + order.email + '\n\n'}주문번호: ${order.id}
 주문일: ${new Date(order.date).toLocaleDateString('ko-KR')}
 
 ${itemsHeader}
@@ -1803,7 +2245,7 @@ ${order.name ? order.name + '\n' : ''}${order.email}
 
 I would like to order the following school clothing items for 2026.
 
-${order.name ? 'Name: ' + order.name + '\nEmail: ' + order.email + '\n\n' : 'Email: ' + order.email + '\n\n'}ORDER NUMBER: ${order.id}
+${order.firstName || order.lastName ? 'Last name: ' + (order.lastName || '') + '\nFirst name: ' + (order.firstName || '') + '\nEmail: ' + order.email + '\n\n' : (order.name ? 'Name: ' + order.name + '\n' : '') + 'Email: ' + order.email + '\n\n'}ORDER NUMBER: ${order.id}
 DATE: ${new Date(order.date).toLocaleDateString('en-GB')}
 
 ${itemsHeader}
@@ -2040,7 +2482,7 @@ ${order.name ? order.name + '\n' : ''}${order.email}
       updateStaticTexts()
     }
 
-    function init() {
+    async function init() {
       setVersionedAssets()   // cache-bust local images
       initTailwind()
       loadCart()
@@ -2050,6 +2492,19 @@ ${order.name ? order.name + '\n' : ''}${order.email}
       renderProducts()
       renderCart()
       updateCartBadge()
+
+      // Live stock from Google Sheet (Inventar tab). Falls back to local numbers if offline.
+      try {
+        const ok = await fetchInventoryFromSheet()
+        if (ok) {
+          loadCart() // re-cap quantities against live stock
+          renderProducts()
+          renderCart()
+          updateCartBadge()
+        }
+      } catch (e) {
+        console.warn('[Inventory] init fetch skipped:', e)
+      }
 
       // Keyboard support: ESC closes drawers/modals
       document.addEventListener('keydown', function(e) {

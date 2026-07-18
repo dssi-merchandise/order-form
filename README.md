@@ -48,9 +48,44 @@ Automatic emails are sent via the configured EmailJS integration (see Technical 
 - To change prices, items, colors, sizes or bank details: edit `index.html` (clearly commented sections near the top of the `<script>`).
 - **Important**: EmailJS is already configured with the school's keys. If you change the service/template later, update the keys in index.html. Ensure vs.vorsitz@dsseoul.org can receive emails from the configured service.
 - **Google Sheet logging**: See the large comment block directly above `GOOGLE_FORM_CONFIG` in `index.html` for the exact setup steps (create form → link sheet → find entry IDs → paste into the config). The sheet is the easiest way for admin staff to get a clear overview without manual copying.
+- **Live inventory (Google Sheet)**: Tab **Inventar** is the source of truth. On each confirmed order the web app decreases **Inventar** and increases **Bestellungen** for every tracked variant (currently mugs). See setup below.
+
+## Live inventory setup (Google Apps Script)
+
+Uses the dedicated inventory spreadsheet **Inventar Merchandise**:
+
+[Inventar Merchandise](https://docs.google.com/spreadsheets/d/1D1X_h5hNpQBW1kNMvhcnQGU0qMZ-rDqF5ETf1ueMkDU/edit)
+
+| Artikel | Eigenschaft | Anfangsbestand 18.7. | Bestellungen | Verfügbares Inventar |
+|---------|-------------|----------------------|--------------|----------------------|
+| Tasse | weiß | 118 | 0 | 118 |
+| … | … | … | … | … |
+
+**On each confirmed order:** script checks **Verfügbares Inventar** (Anfangsbestand − Bestellungen), then adds the ordered qty to **Bestellungen**. Column **Anfangsbestand** stays fixed (physical count baseline).
+
+1. Open the sheet → **Extensions → Apps Script** → paste `google-apps-script/InventarWebApp.gs` → **Save**.  
+   (`SPREADSHEET_ID` is already set to this file.)
+2. Set `SECRET` in the script (same value later in `index.html`).
+3. Optional but recommended: run **`installVerfuegbarFormulas`** once so column E is `=MAX(0,C-D)`.
+4. **Deploy → New deployment → Web app**  
+   - Execute as: **Me**  
+   - Who has access: **Anyone**  
+   Copy the Web App URL.
+5. In `index.html` → `INVENTORY_API`:
+   ```js
+   webAppUrl: 'https://script.google.com/macros/s/XXXX/exec',
+   secret: 'same-secret-as-in-the-script'
+   ```
+6. Deploy the shop. Console: `[Inventory] Live stock loaded from Google Sheet: …`
+7. Test-order a mug colour → **Bestellungen** increases, **Verfügbares Inventar** decreases.
+
+- Shop maps e.g. `mug` + `white` ↔ Tasse / weiß (see `VARIANT_MAP` in the `.gs` file).
+- Order detail rows still go to your Google Form / orders sheet (`GOOGLE_FORM_CONFIG`).
+- After script changes: **Deploy → Manage deployments → Edit → New version**.
 
 ## Files in this folder
 - `index.html` — the complete single-file application (open this)
+- `google-apps-script/InventarWebApp.gs` — paste into Apps Script for live Inventar / Bestellungen
 - `tshirt.jpg`, `poloshirt.jpg`, `hoodie.jpg`, `jacket.jpg`, `mug.jpg`, `thermobecher.jpg`, `trinkflasche.jpg`, `eco-tasche.jpg`, `umbrella.jpg`, `Jahrbuch-25-26.jpg`, `mascot.jpg` — product photos (most new items and mascot are Grok Imagine placeholders; Jahrbuch photo provided)
 - `README.md` — this file
 - School Jacket, Mug Cup, Thermobecher, Trinkflasche, Eco-Tasche, Umbrella, Jahrbuch and School Mascot use images (Jahrbuch photo provided; others are Grok Imagine placeholders or real). Update the `image` value in the `products` array in index.html when you have real photos. Jahrbuch, mascot and eco-tasche have limited or no color variants.
@@ -63,6 +98,7 @@ The original `DSSI Shirts 2026.pdf` is included in this folder for reference (si
 - Cart + language preference saved locally.
 - **Automatic emails**: Configured with EmailJS. Emails are sent automatically to the customer + vs.vorsitz@dsseoul.org on "Confirm and Order". See the large comment block directly above `EMAILJS_CONFIG` in `index.html` for the full recommended template + detailed troubleshooting for the "One or more dynamic variables are corrupted" error. IMPORTANT: You must serve the page over http://localhost (not by double-clicking index.html). See the same comment block for easy Windows options (Live Server in VS Code is the simplest).
 - **Automatic Google Sheet logging**: On every confirmed order the site also posts the line items (order # + date + name + email + item + qty + line total) to a Google Form that feeds a Google Sheet. This is the recommended way for admin staff to get a clean tabular overview. Full setup instructions are in the big comment above `GOOGLE_FORM_CONFIG` inside `index.html`. No extra services or cost.
+- **Live inventory API**: Optional Google Apps Script web app (`InventarWebApp.gs`). On load the shop GETs stock; on “Confirm and Order” it POSTs the cart so the server atomically decreases **Inventar** and increases **Bestellungen**. Without `INVENTORY_API.webAppUrl`, a local fallback map is used (no multi-user sync).
 - The thank-you screen no longer requires the user to manually open their email client.
 
 ## Dummy bank account (replace for real use)
