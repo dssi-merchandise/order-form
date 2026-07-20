@@ -309,7 +309,6 @@
             <table class="w-full text-[10px] border border-slate-200">
               <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Body (cm)</th></tr></thead>
               <tbody class="font-mono">
-                <tr class="border-t"><td class="p-1">XS</td><td class="p-1">~160</td></tr>
                 <tr class="border-t"><td class="p-1">S</td><td class="p-1">163</td></tr>
                 <tr class="border-t"><td class="p-1">M</td><td class="p-1">170</td></tr>
                 <tr class="border-t"><td class="p-1">L</td><td class="p-1">179</td></tr>
@@ -417,7 +416,7 @@
     // Changing ASSET_VERSION forces fresh downloads of logo + all product images.
     // For the index.html itself, tell users to press Ctrl+Shift+R (hard refresh) once
     // after a deploy — this is the most reliable cross-browser way.
-    const ASSET_VERSION = '20250606';   // YYYYMMDD — bump on every significant deploy
+    const ASSET_VERSION = '20260720b';   // YYYYMMDD — bump on every significant deploy
 
     // Set versioned logo src for cache busting (must happen after DOM is ready for this element)
     function setVersionedAssets() {
@@ -1332,7 +1331,7 @@
           { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
           { id: 'lightgrey', name: { en: 'Light Grey', de: 'Hellgrau', ko: '라이트 그레이' } }
         ],
-        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+        sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
         noteShort: {
           en: "If ordered by 4 September, handover by Oktoberfest on 19 September.",
           de: "Bei Bestellung bis zum 4.9. erfolgt die Übergabe bis zum Oktoberfest am 19.9.",
