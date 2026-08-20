@@ -264,7 +264,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-5 text-xs">
           <!-- T-Shirt sizes -->
           <div>
-            <div class="font-semibold mb-1 text-blue-800">T-Shirt</div>
+            <div class="font-semibold mb-1 text-blue-800">T-Shirt / T-Shirt 50th Anniversary</div>
             <table class="w-full text-[10px] border border-slate-200">
               <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Body (cm)</th></tr></thead>
               <tbody class="font-mono">
@@ -428,7 +428,7 @@
     // Changing ASSET_VERSION forces fresh downloads of logo + all product images.
     // For the index.html itself, tell users to press Ctrl+Shift+R (hard refresh) once
     // after a deploy — this is the most reliable cross-browser way.
-    const ASSET_VERSION = '20260720b';   // YYYYMMDD — bump on every significant deploy
+    const ASSET_VERSION = '20260820i';   // YYYYMMDD — bump on every significant deploy
 
     // Set versioned logo src for cache busting (must happen after DOM is ready for this element)
     function setVersionedAssets() {
@@ -1286,9 +1286,9 @@
         ],
         sizes: ['One Size'],
         noteShort: {
-          en: "Ready for order, in stock",
-          de: "Bestellbereit, auf Lager",
-          ko: "주문 가능, 재고 있음"
+          en: "In stock, ready for collection at the secretariat",
+          de: "Auf Lager, abholbereit im Sekretariat",
+          ko: "재고 있음, 사무국에서 수령 가능"
         }
       },
       {
@@ -1310,9 +1310,37 @@
         ],
         sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 4 September, handover by Oktoberfest on 19 September.",
-          de: "Bei Bestellung bis zum 4.9. erfolgt die Übergabe bis zum Oktoberfest am 19.9.",
-          ko: "9월 4일까지 주문 시 9월 19일 옥토버페스트까지 인도됩니다."
+          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
+          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
+          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
+        }
+      },
+      {
+        id: 'tshirt-50th',
+        image: 'tshirt-50th.jpg',
+        price: 25000,
+        name: {
+          en: 'T-Shirt 50th Anniversary',
+          de: 'T-Shirt 50th Anniversary',
+          ko: 'T-Shirt 50th Anniversary'
+        },
+        desc: {
+          en: 'With our school mascot, designed by our children for the 50th anniversary celebration',
+          de: 'Mit unserem Schulmaskottchen, welches für die 50-Jahr Feier von unseren Kindern gestaltet wurde',
+          ko: '아이들이 50주년 기념을 위해 디자인한 학교 마스코트'
+        },
+        colors: [
+          { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } },
+          { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
+          { id: 'lightblue', name: { en: 'Light blue', de: 'Hellblau', ko: '라이트 블루' } },
+          { id: 'pink', name: { en: 'Pink', de: 'Rosa', ko: '핑크' } },
+          { id: 'grey', name: { en: 'Grey', de: 'Grau', ko: '그레이' } }
+        ],
+        sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        noteShort: {
+          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
+          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
+          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1332,9 +1360,9 @@
         ],
         sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 4 September, handover by Oktoberfest on 19 September.",
-          de: "Bei Bestellung bis zum 4.9. erfolgt die Übergabe bis zum Oktoberfest am 19.9.",
-          ko: "9월 4일까지 주문 시 9월 19일 옥토버페스트까지 인도됩니다."
+          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
+          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
+          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1354,9 +1382,9 @@
         ],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
         noteShort: {
-          en: "If ordered by 4 September, handover by Oktoberfest on 19 September.",
-          de: "Bei Bestellung bis zum 4.9. erfolgt die Übergabe bis zum Oktoberfest am 19.9.",
-          ko: "9월 4일까지 주문 시 9월 19일 옥토버페스트까지 인도됩니다."
+          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
+          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
+          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1382,9 +1410,9 @@
           'Male 2XL'
         ],
         noteShort: {
-          en: "Made to order. If ordered by 13 September, handover by class trip week.",
-          de: "Sonderanfertigung. Bei Bestellung bis zum 13.9. erfolgt die Übergabe bis zur Klassenfahrtswoche",
-          ko: "특별 제작. 9월 13일까지 주문 시 수학여행 주간까지 인도됩니다."
+          en: "Made to order. If ordered by 6 September, handover by class trip week.",
+          de: "Sonderanfertigung. Bei Bestellung bis zum 6.9. erfolgt die Übergabe bis zur Klassenfahrtswoche",
+          ko: "특별 제작. 9월 6일까지 주문 시 수학여행 주간까지 인도됩니다."
         }
       },
       {
@@ -1409,9 +1437,9 @@
         ],
         sizes: ['One Size'],
         noteShort: {
-          en: "Ready for order, in stock",
-          de: "Bestellbereit, auf Lager",
-          ko: "주문 가능, 재고 있음"
+          en: "In stock, ready for collection at the secretariat",
+          de: "Auf Lager, abholbereit im Sekretariat",
+          ko: "재고 있음, 사무국에서 수령 가능"
         }
       },
       {
@@ -2274,6 +2302,8 @@ ${t('holder')}
 
 Verwendungszweck / Reference: ${payRef}
 
+Bei Fragen wenden Sie sich bitte an: bdv@dsseoul.org
+
 Vielen Dank für die Bearbeitung.
 
 Mit freundlichen Grüßen
@@ -2303,6 +2333,8 @@ ${t('holder')}
 
 참고번호 (Reference): ${payRef}
 
+문의: bdv@dsseoul.org
+
 감사합니다.
 
 ${order.name ? order.name + '\n' : ''}${order.email}
@@ -2330,6 +2362,8 @@ ${t('account')}
 ${t('holder')}
 
 Payment reference: ${payRef}
+
+For questions, please contact: bdv@dsseoul.org
 
 Thank you.
 

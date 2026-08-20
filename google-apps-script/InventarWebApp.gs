@@ -51,6 +51,8 @@ var COL = {
  * Extend this when you add more products to the sheet.
  */
 var VARIANT_MAP = {
+  'jahrbuch::2025-2026': { artikel: 'Jahrbuch', eigenschaft: '2025/2026' },
+  'jahrbuch::2024-2025': { artikel: 'Jahrbuch', eigenschaft: '2024/2025' },
   'mug::white': { artikel: 'Tasse', eigenschaft: 'weiß' },
   'mug::white-blue-inside': { artikel: 'Tasse', eigenschaft: 'weiß blau' },
   'mug::white-pink-inside': { artikel: 'Tasse', eigenschaft: 'weiß pink' },
