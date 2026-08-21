@@ -47,6 +47,24 @@
       letter-spacing: -0.025em;
     }
 
+    /* Checkout modal: on mobile fill the screen so the header + X are never clipped */
+    #checkout-modal.is-open {
+      display: flex;
+    }
+    #checkout-modal .checkout-sheet {
+      max-height: 100%;
+      max-height: 100dvh;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    @media (min-width: 640px) {
+      #checkout-modal .checkout-sheet {
+        max-height: min(90vh, 90dvh);
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+
     .price-tag {
       font-feature-settings: "tnum";
     }
@@ -229,25 +247,25 @@
     </div>
   </div>
 
-  <!-- Checkout / Order Modal (scrollable on mobile; header stays visible to close) -->
+  <!-- Checkout / Order Modal: full-screen on mobile so header + X stay reachable -->
   <div id="checkout-modal" onclick="if (event.target.id === 'checkout-modal') closeCheckoutModal()" 
-       class="hidden fixed inset-0 bg-black/50 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto">
+       class="hidden fixed inset-0 bg-black/50 z-[70] items-stretch sm:items-center justify-center sm:p-4">
     <div onclick="event.stopImmediatePropagation()" 
-         class="modal bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-xl overflow-hidden flex flex-col max-h-[92dvh] max-h-[92vh] my-0 sm:my-auto">
+         class="checkout-sheet modal bg-white w-full sm:max-w-lg h-full sm:h-auto rounded-none sm:rounded-3xl shadow-xl overflow-hidden flex flex-col">
       
-      <!-- Modal Header (always visible) -->
-      <div class="px-6 py-4 bg-slate-900 text-white flex items-center flex-shrink-0">
+      <!-- Modal Header — pinned at top of sheet (never scrolls away) -->
+      <div class="px-5 sm:px-6 py-3 sm:py-4 bg-slate-900 text-white flex items-center gap-3 flex-shrink-0 sticky top-0 z-10">
         <div class="flex-1 min-w-0">
-          <div class="font-semibold text-lg" id="checkout-title">Complete Your Order</div>
-          <div class="text-blue-300 text-xs" id="checkout-subtitle">Payment instructions will be sent by email</div>
+          <div class="font-semibold text-base sm:text-lg" id="checkout-title">Complete Your Order</div>
+          <div class="text-blue-300 text-xs truncate" id="checkout-subtitle">Payment instructions will be sent by email</div>
         </div>
-        <button type="button" onclick="closeCheckoutModal()" aria-label="Close"
-                class="text-white/70 hover:text-white p-2 -mr-1 flex-shrink-0">
-          <i class="fa-solid fa-times text-2xl"></i>
+        <button type="button" id="checkout-close-btn" onclick="closeCheckoutModal()" aria-label="Close"
+                class="text-white bg-white/15 hover:bg-white/25 active:bg-white/30 rounded-full w-11 h-11 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-times text-xl"></i>
         </button>
       </div>
 
-      <div class="p-6 overflow-y-auto overscroll-contain flex-1 min-h-0" id="checkout-body"
+      <div class="px-5 sm:px-6 pt-4 pb-6 overflow-y-auto overscroll-contain flex-1 min-h-0" id="checkout-body"
            style="-webkit-overflow-scrolling: touch;">
         <!-- Dynamic content: summary + form OR success state -->
       </div>
@@ -2090,13 +2108,13 @@
             <p class="mt-1.5 text-xs text-slate-500">${t('emailHelp')}</p>
           </div>
 
-          <div class="sticky bottom-0 -mx-6 px-6 pt-3 pb-1 bg-white border-t border-slate-100 mt-2">
+          <div class="sticky bottom-0 -mx-5 sm:-mx-6 px-5 sm:px-6 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] bg-white/95 backdrop-blur border-t border-slate-100 mt-2">
             <button type="button" id="confirm-order-btn" onclick="confirmOrder()" 
                     class="w-full py-3.5 rounded-2xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 transition text-white font-semibold flex items-center justify-center gap-2">
               <i class="fa-solid fa-check"></i>
               <span id="confirm-order-btn-text">${t('placeOrderBtn')}</span>
             </button>
-            <div class="text-center mt-3 pb-2">
+            <div class="text-center mt-2 pb-1">
               <button type="button" onclick="closeCheckoutModal()" class="text-sm text-slate-500 hover:text-slate-700 py-2 px-4">${currentLang === 'ko' ? '취소' : currentLang === 'de' ? 'Abbrechen' : 'Cancel'}</button>
             </div>
           </div>
@@ -2104,27 +2122,30 @@
       `
 
       modal.classList.remove('hidden')
-      modal.classList.add('flex')
+      modal.classList.add('flex', 'is-open')
       document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
 
-      // Scroll form to top; avoid autofocus on small screens (keyboard covers the button)
+      // Scroll form to top; avoid autofocus on small screens (keyboard covers controls)
       setTimeout(() => {
         body.scrollTop = 0
+        modal.scrollTop = 0
         const isNarrow = window.matchMedia('(max-width: 640px)').matches
         if (!isNarrow) {
           const lastNameInput = document.getElementById('customer-last-name')
           if (lastNameInput) lastNameInput.focus()
         }
-      }, 80)
+      }, 50)
     }
 
     function closeCheckoutModal() {
       const modal = document.getElementById('checkout-modal')
       if (modal) {
         modal.classList.add('hidden')
-        modal.classList.remove('flex')
+        modal.classList.remove('flex', 'is-open')
       }
       document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
       // Do not clear currentOrderId here in case of success state reuse
     }
 
@@ -2459,12 +2480,7 @@ ${order.name ? order.name + '\n' : ''}${order.email}
     }
 
     function closeCheckoutAndReset() {
-      const modal = document.getElementById('checkout-modal')
-      if (modal) {
-        modal.classList.add('hidden')
-        modal.classList.remove('flex')
-      }
-      document.body.style.overflow = ''
+      closeCheckoutModal()
       currentOrderId = null
       // cart already cleared in confirm
     }
@@ -2626,7 +2642,7 @@ ${order.name ? order.name + '\n' : ''}${order.email}
           const sizeM = document.getElementById('size-modal')
           const checkM = document.getElementById('checkout-modal')
           if (!checkM.classList.contains('hidden')) {
-            checkM.classList.add('hidden'); checkM.classList.remove('flex')
+            closeCheckoutModal()
           } else if (!sizeM.classList.contains('hidden')) {
             sizeM.classList.add('hidden'); sizeM.classList.remove('flex')
           } else if (!cartD.classList.contains('hidden')) {
