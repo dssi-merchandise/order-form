@@ -1077,7 +1077,7 @@
 
     // ==================== PRODUCTS DATA ====================
     // Temporarily hidden (no inventory). Clear this array [] to show them again.
-    const OUT_OF_STOCK_IDS = ['trinkflasche', 'thermobecher', 'umbrella', 'eco-tasche', 'mascot']
+    const OUT_OF_STOCK_IDS = ['thermobecher', 'umbrella', 'eco-tasche', 'mascot']
 
     // ==================== INVENTORY (Google Sheet via Apps Script) ====================
     // Live source: "Inventar Merchandise"
@@ -1108,7 +1108,12 @@
       'mug::white-yellow-inside': 17,
       'mug::black-red-inside': 6,
       'mug::black-pink-inside': 17,
-      'mug::black-blue-inside': 5
+      'mug::black-blue-inside': 5,
+      'trinkflasche::pink': 50,
+      'trinkflasche::white': 50,
+      'trinkflasche::blue': 50,
+      'trinkflasche::yellow': 50,
+      'trinkflasche::green': 50
     }
 
     // Live map: key "productId::colorId" → remaining Inventar units
@@ -1507,24 +1512,24 @@
         id: 'trinkflasche',
         image: 'trinkflasche.jpg',
         price: 5000,
-        name: { en: 'Drinking Bottle', de: 'Trinkflasche', ko: '트링크플라슈' },
+        name: { en: 'Drinking Bottle', de: 'Trinkflasche', ko: '물병' },
         desc: {
-          en: 'Placeholder • Drinking bottle • Reusable • School logo',
-          de: 'Platzhalter • Trinkflasche • Wiederverwendbar • Schul-Logo',
-          ko: '플레이스홀더 • 트링크플라슈 • 재사용 가능 • 학교 로고'
+          en: 'Reusable drinking bottle • School logo',
+          de: 'Wiederverwendbare Trinkflasche • Schul-Logo',
+          ko: '재사용 가능한 물병 • 학교 로고'
         },
         colors: [
           { id: 'pink', name: { en: 'Pink', de: 'Pink', ko: '핑크' } },
-          { id: 'green', name: { en: 'Green', de: 'Grün', ko: '그린' } },
-          { id: 'blue', name: { en: 'Blue', de: 'Blau', ko: '블루' } },
           { id: 'white', name: { en: 'White', de: 'Weiß', ko: '화이트' } },
-          { id: 'yellow', name: { en: 'Yellow', de: 'Gelb', ko: '옐로우' } }
+          { id: 'blue', name: { en: 'Blue', de: 'Blau', ko: '블루' } },
+          { id: 'yellow', name: { en: 'Yellow', de: 'Gelb', ko: '옐로우' } },
+          { id: 'green', name: { en: 'Green', de: 'Grün', ko: '그린' } }
         ],
         sizes: ['One Size'],
         noteShort: {
-          en: "Ready for order, in stock",
-          de: "Bestellbereit, auf Lager",
-          ko: "주문 가능, 재고 있음"
+          en: "In stock, ready for collection at the secretariat",
+          de: "Auf Lager, abholbereit im Sekretariat",
+          ko: "재고 있음, 사무국에서 수령 가능"
         }
       },
       {
