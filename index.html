@@ -338,34 +338,18 @@
           </div>
 
           <!-- School Jacket -->
-          <div class="sm:col-span-2 md:col-span-2">
+          <div>
             <div class="font-semibold mb-1 text-blue-800">Schuljacke 50th Anniversary</div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <div class="text-[10px] font-semibold text-slate-600 mb-1">Female cut (body height cm)</div>
-                <table class="w-full text-[10px] border border-slate-200">
-                  <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Height (cm)</th></tr></thead>
-                  <tbody class="font-mono">
-                    <tr class="border-t"><td class="p-1">Female S</td><td class="p-1">150–160</td></tr>
-                    <tr class="border-t"><td class="p-1">Female M</td><td class="p-1">155–170</td></tr>
-                    <tr class="border-t"><td class="p-1">Female L</td><td class="p-1">160–175</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div>
-                <div class="text-[10px] font-semibold text-slate-600 mb-1">Male cut (body height cm)</div>
-                <table class="w-full text-[10px] border border-slate-200">
-                  <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Height (cm)</th></tr></thead>
-                  <tbody class="font-mono">
-                    <tr class="border-t"><td class="p-1">Male M</td><td class="p-1">165–175</td></tr>
-                    <tr class="border-t"><td class="p-1">Male L</td><td class="p-1">170–180</td></tr>
-                    <tr class="border-t"><td class="p-1">Male XL</td><td class="p-1">175–189</td></tr>
-                    <tr class="border-t"><td class="p-1">Male 2XL</td><td class="p-1">175–189</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="mt-2 text-[10px] text-slate-500">Female and Male are different cuts — please choose carefully.</div>
+            <table class="w-full text-[10px] border border-slate-200">
+              <thead class="bg-slate-100"><tr><th class="p-1 text-left">Size</th><th class="p-1">Height (cm)</th></tr></thead>
+              <tbody class="font-mono">
+                <tr class="border-t"><td class="p-1">S</td><td class="p-1">150–160</td></tr>
+                <tr class="border-t"><td class="p-1">M</td><td class="p-1">155–175</td></tr>
+                <tr class="border-t"><td class="p-1">L</td><td class="p-1">170–180</td></tr>
+                <tr class="border-t"><td class="p-1">XL</td><td class="p-1">175–189</td></tr>
+                <tr class="border-t"><td class="p-1">2XL</td><td class="p-1">175–189</td></tr>
+              </tbody>
+            </table>
           </div>
 
           <!-- Mug Cup -->
@@ -375,7 +359,7 @@
           </div>
         </div>
         <div class="mt-4 text-xs text-slate-500 px-1">
-          T-Shirt / Polo / Hoodie: approximate body height. Schuljacke: recommended body height (cm) by gender. Mug Cup is One Size.
+          T-Shirt / Polo / Hoodie: approximate body height. Schuljacke: recommended body height (cm). Mug Cup is One Size.
         </div>
       </div>
       <div class="px-5 py-3 bg-slate-50 border-t text-right">
@@ -448,7 +432,7 @@
     // Changing ASSET_VERSION forces fresh downloads of logo + all product images.
     // For the index.html itself, tell users to press Ctrl+Shift+R (hard refresh) once
     // after a deploy — this is the most reliable cross-browser way.
-    const ASSET_VERSION = '20260820i';   // YYYYMMDD — bump on every significant deploy
+    const ASSET_VERSION = '20261003a';   // YYYYMMDD — bump on every significant deploy
 
     // Set versioned logo src for cache busting (must happen after DOM is ready for this element)
     function setVersionedAssets() {
@@ -484,6 +468,8 @@
         year: "Year",
         size: "Size",
         quantity: "Qty",
+        prevPhoto: "Previous photo",
+        nextPhoto: "Next photo",
         checkoutTitle: "Complete Your Order",
         checkoutSubtitle: "Payment instructions will be emailed to you",
         firstNameLabel: "Your First Name",
@@ -553,6 +539,8 @@
         year: "Jahr",
         size: "Größe",
         quantity: "Menge",
+        prevPhoto: "Vorheriges Foto",
+        nextPhoto: "Nächstes Foto",
         checkoutTitle: "Bestellung abschließen",
         checkoutSubtitle: "Zahlungsanweisungen werden Ihnen per E-Mail zugesandt",
         firstNameLabel: "Ihr Vorname",
@@ -622,6 +610,8 @@
         year: "연도",
         size: "사이즈",
         quantity: "수량",
+        prevPhoto: "이전 사진",
+        nextPhoto: "다음 사진",
         checkoutTitle: "주문 완료하기",
         checkoutSubtitle: "결제 안내가 이메일로 전송됩니다",
         firstNameLabel: "이름",
@@ -1335,9 +1325,9 @@
         ],
         sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
-          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
-          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1363,9 +1353,9 @@
         ],
         sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
-          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
-          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1385,9 +1375,9 @@
         ],
         sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
-          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
-          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1407,9 +1397,9 @@
         ],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
         noteShort: {
-          en: "If ordered by 6 September, handover at the secretariat before Oktoberfest on 19 September.",
-          de: "Bei Bestellungen bis zum 6.9. erfolgt die Übergabe beim Sekretariat vor dem Oktoberfest am 19.9.",
-          ko: "9월 6일까지 주문 시 9월 19일 옥토버페스트 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1418,26 +1408,19 @@
         price: 65000,
         name: { en: 'Schuljacke 50th Anniversary', de: 'Schuljacke 50th Anniversary', ko: 'Schuljacke 50th Anniversary' },
         desc: {
-          en: 'Windbreaker style • Mock-up, final design may vary slightly • Female & Male cuts',
-          de: 'Windbreaker-Stil • Mock-Up, finales Design kann leicht abweichen • Schnitte Female & Male',
-          ko: '윈드브레이커 스타일 • Mock-Up, 최종 디자인은 약간 다를 수 있음 • Female & Male 핏'
+          en: 'Windbreaker style • Front and back view',
+          de: 'Windbreaker-Stil • Vorder- und Rückansicht',
+          ko: '윈드브레이커 스타일 • 앞면과 뒷면'
         },
         colors: [
           { id: 'black', name: { en: 'Black', de: 'Schwarz', ko: '블랙' } }
         ],
-        sizes: [
-          'Female S',
-          'Female M',
-          'Female L',
-          'Male M',
-          'Male L',
-          'Male XL',
-          'Male 2XL'
-        ],
+        images: ['jacket.jpg', 'jacket-back.jpg'],
+        sizes: ['S', 'M', 'L', 'XL', '2XL'],
         noteShort: {
-          en: "Made to order. If ordered by 6 September, handover by class trip week.",
-          de: "Sonderanfertigung. Bei Bestellung bis zum 6.9. erfolgt die Übergabe bis zur Klassenfahrtswoche",
-          ko: "특별 제작. 9월 6일까지 주문 시 수학여행 주간까지 인도됩니다."
+          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
         }
       },
       {
@@ -1588,6 +1571,14 @@
       const before = cart.length
       cart = cart.filter(item => !OUT_OF_STOCK_IDS.includes(item.productId))
       if (cart.length !== before) changed = true
+
+      // Drop lines whose size is no longer offered (e.g. old Female/Male jacket sizes)
+      cart = cart.filter(item => {
+        const prod = getProduct(item.productId)
+        if (!prod || !prod.sizes || prod.sizes.includes(item.size)) return true
+        changed = true
+        return false
+      })
 
       // Cap quantities to listed inventory (e.g. after admin reduced stock)
       const remainingByKey = {}
@@ -1862,6 +1853,31 @@
       }
     }
 
+    function productImageList(product) {
+      return (product.images && product.images.length) ? product.images : [product.image]
+    }
+
+    function stepProductGallery(btn, delta) {
+      const gallery = btn.closest('.product-gallery')
+      if (!gallery) return
+      const images = (gallery.dataset.images || '').split('|').filter(Boolean)
+      if (images.length < 2) return
+      let i
+      if (btn.dataset.dot !== undefined) {
+        i = parseInt(btn.dataset.dot, 10) || 0
+      } else {
+        i = (parseInt(gallery.dataset.index || '0', 10) + delta + images.length) % images.length
+      }
+      gallery.dataset.index = String(i)
+      const img = gallery.querySelector('.product-photo')
+      if (img) img.src = `${images[i]}?v=${ASSET_VERSION}`
+      gallery.querySelectorAll('[data-dot]').forEach(dot => {
+        const on = parseInt(dot.dataset.dot, 10) === i
+        dot.classList.toggle('bg-white', on)
+        dot.classList.toggle('bg-white/50', !on)
+      })
+    }
+
     // ==================== PRODUCT CARDS ====================
     function renderProducts() {
       const grid = document.getElementById('products-grid')
@@ -1916,11 +1932,26 @@
         const selectedAvail = getAvailableStock(product.id, selectedColorId)
         const qtyMax = selectedAvail !== null ? Math.max(0, Math.min(20, selectedAvail)) : 20
         const qtyVal = qtyMax > 0 ? 1 : 0
+        const photos = productImageList(product)
+        const galleryNav = photos.length > 1 ? `
+            <button type="button" onclick="stepProductGallery(this, -1)" aria-label="${t('prevPhoto')}"
+                    class="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 text-slate-700 shadow border border-white flex items-center justify-center hover:bg-white">
+              <i class="fa-solid fa-chevron-left text-sm"></i>
+            </button>
+            <button type="button" onclick="stepProductGallery(this, 1)" aria-label="${t('nextPhoto')}"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 text-slate-700 shadow border border-white flex items-center justify-center hover:bg-white">
+              <i class="fa-solid fa-chevron-right text-sm"></i>
+            </button>
+            <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+              ${photos.map((_, idx) => `<button type="button" data-dot="${idx}" onclick="stepProductGallery(this, 0)" aria-label="${idx + 1}" class="w-2 h-2 rounded-full ${idx === 0 ? 'bg-white' : 'bg-white/50'} shadow"></button>`).join('')}
+            </div>
+        ` : ''
 
         card.innerHTML = `
-          <div class="aspect-square bg-slate-100 relative">
-            <img src="${product.image}?v=${ASSET_VERSION}" class="w-full h-full object-cover" alt="${product.name.en}">
-            <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2.5 py-0.5 rounded-full text-xs font-semibold shadow text-emerald-700 border border-white">
+          <div class="aspect-square bg-slate-100 relative product-gallery" data-index="0" data-images="${photos.join('|')}">
+            <img src="${photos[0]}?v=${ASSET_VERSION}" class="product-photo w-full h-full object-cover" alt="${product.name.en}">
+            ${galleryNav}
+            <div class="absolute top-3 right-3 z-20 bg-white/90 backdrop-blur px-2.5 py-0.5 rounded-full text-xs font-semibold shadow text-emerald-700 border border-white">
               ${formatPrice(product.price)}
             </div>
           </div>

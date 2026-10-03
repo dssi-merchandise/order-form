@@ -60,7 +60,12 @@ var VARIANT_MAP = {
   'mug::white-yellow-inside': { artikel: 'Tasse', eigenschaft: 'weiß gelb' },
   'mug::black-red-inside': { artikel: 'Tasse', eigenschaft: 'schwarz rot' },
   'mug::black-pink-inside': { artikel: 'Tasse', eigenschaft: 'schwarz pink' },
-  'mug::black-blue-inside': { artikel: 'Tasse', eigenschaft: 'schwarz blau' }
+  'mug::black-blue-inside': { artikel: 'Tasse', eigenschaft: 'schwarz blau' },
+  'trinkflasche::pink': { artikel: 'Trinkflasche', eigenschaft: 'pink' },
+  'trinkflasche::white': { artikel: 'Trinkflasche', eigenschaft: 'weiß' },
+  'trinkflasche::blue': { artikel: 'Trinkflasche', eigenschaft: 'blau' },
+  'trinkflasche::yellow': { artikel: 'Trinkflasche', eigenschaft: 'gelb' },
+  'trinkflasche::green': { artikel: 'Trinkflasche', eigenschaft: 'grün' }
 };
 
 // Reverse lookup: normalized "tasse|weiß blau" → "mug::white-blue-inside"
