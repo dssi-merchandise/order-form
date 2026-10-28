@@ -12,9 +12,8 @@ Self-contained multilingual shop (English / German / Korean) for DSSI school mer
   2. Summary + **Last name**, **First name**, **Schulklasse** (Kindergarten … Grade 12), **Email**  
   3. Confirm → stock reservation (Google Sheet) → confirmation email + Google Form log  
 - **EmailJS**: one confirmation to the customer; **BCC** to:
-  - `vs.vorsitz@dsseoul.org`
   - `sekretariat@dsseoul.org`
-  - `bdv@dsseoul.org`  
+  - `marketing@dsseoul.org`
   Template Bcc field must be `{{bcc}}` (not a hardcoded single address).
 - **Google Form → Sheet**: one row per line item (order #, date, name + Schulklasse, email, item, qty, line total).
 - **Live inventory** (Google Apps Script + Sheet *Inventar Merchandise*): checks available stock, then **Bestellungen** += qty.
@@ -41,7 +40,7 @@ Temporarily hidden products: edit `OUT_OF_STOCK_IDS` in `index.html` (empty arra
 4. Pay using the order number as reference; collect at reception (see on-site notes).
 
 ## For administrators
-- **Emails**: customer + BCC (Vorsitz, Sekretariat, BDV). Ensure EmailJS template **Bcc = `{{bcc}}`**.
+- **Emails**: customer + BCC (Sekretariat, Marketing). Ensure EmailJS template **Bcc = `{{bcc}}`**.
 - **Order log**: Google Form sheet (existing) — customer name is stored as `Name | Schulklasse`.
 - **Inventory sheet**: [Inventar Merchandise](https://docs.google.com/spreadsheets/d/1D1X_h5hNpQBW1kNMvhcnQGU0qMZ-rDqF5ETf1ueMkDU/edit)  
   Columns: Artikel | Eigenschaft | Anfangsbestand | Bestellungen | Verfügbares Inventar  
@@ -98,4 +97,4 @@ Do **not** need on Pages: `google-apps-script/`, `_img_backup_beige/`, PDF refer
 ---
 
 Created for DSSI (Deutsche Schule Seoul International) – 2026 merchandise orders.  
-Footer contact: marketing@dsseoul.org · Order BCC: vs.vorsitz@ / sekretariat@ / bdv@dsseoul.org
+Footer contact: marketing@dsseoul.org · Order BCC: sekretariat@ / marketing@dsseoul.org

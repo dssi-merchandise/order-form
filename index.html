@@ -478,6 +478,7 @@
         lastNamePlaceholder: "Last name",
         childClassLabel: "Schulklasse",
         childClassPlaceholder: "Please select",
+        childClassNotStudent: "Not a student",
         childClassRequired: "Please select a school class.",
         emailLabel: "Your Email Address",
         emailPlaceholder: "you@example.com",
@@ -508,7 +509,7 @@
         impressumTitle: "Impressum / Legal Notice",
         collectionNote: "Goods will be handed over at the reception.",
         collectionNoteDetailed: "Goods will be handed over at the reception. At handover, items are checked for completeness and perfect condition. Returns of items are excluded.",
-        collectionNoteShort: "Handed over at reception",
+        collectionNoteShort: "Handed over at the reception",
         contactGeneral: "Questions? Contact the school office",
         impressumNote: "This ordering form is operated by the school. All orders are subject to the school's terms.",
         stockLeft: "in stock",
@@ -549,6 +550,7 @@
         lastNamePlaceholder: "Nachname",
         childClassLabel: "Schulklasse",
         childClassPlaceholder: "Bitte auswählen",
+        childClassNotStudent: "Kein Schüler / keine Schülerin",
         childClassRequired: "Bitte wählen Sie eine Schulklasse.",
         emailLabel: "Ihre E-Mail-Adresse",
         emailPlaceholder: "max@beispiel.de",
@@ -620,6 +622,7 @@
         lastNamePlaceholder: "성",
         childClassLabel: "Schulklasse",
         childClassPlaceholder: "선택해 주세요",
+        childClassNotStudent: "학생이 아님",
         childClassRequired: "학교 학년/클래스를 선택해 주세요.",
         emailLabel: "이메일 주소",
         emailPlaceholder: "you@example.com",
@@ -669,7 +672,7 @@
     // ==================== EMAILJS CONFIG FOR AUTOMATIC EMAILS ====================
     // Automatic order confirmation emails are sent using EmailJS.
     // - Customer receives full order details + payment instructions.
-    // - Copies are BCC'd to vs.vorsitz@dsseoul.org, sekretariat@dsseoul.org, bdv@dsseoul.org.
+    // - Copies are BCC'd to sekretariat@dsseoul.org, marketing@dsseoul.org.
     // Configured with:
     //   Public Key: Hyd-NRca4cqelM5HB
     //   Service ID: service_w2elslj
@@ -680,7 +683,7 @@
     // CRITICAL: EmailJS Template Setup for template_8ic1dmd (follow exactly)
     //
     // The customer always receives the full order confirmation.
-    // School copies via BCC (vs.vorsitz, sekretariat, bdv) — template BCC field must be {{bcc}}.
+    // School copies via BCC (sekretariat, marketing) — template BCC field must be {{bcc}}.
     //
     // === STEP 1: Edit the template ===
     // 1. Log into https://dashboard.emailjs.com/
@@ -897,7 +900,7 @@
       try {
         console.log('[EmailJS] Sending email (to customer + BCC school) with params:', sendParams);
         await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, sendParams);
-        console.log('[EmailJS] Email sent to', sendParams.to_email, '(BCC to vs.vorsitz@dsseoul.org, sekretariat@dsseoul.org, bdv@dsseoul.org)');
+        console.log('[EmailJS] Email sent to', sendParams.to_email, '(BCC to sekretariat@dsseoul.org, marketing@dsseoul.org)');
 
         return true;
       } catch (error) {
@@ -1301,9 +1304,9 @@
         ],
         sizes: ['One Size'],
         noteShort: {
-          en: "In stock, ready for collection at the secretariat",
-          de: "Auf Lager, abholbereit im Sekretariat",
-          ko: "재고 있음, 사무국에서 수령 가능"
+          en: "In stock, ready for collection at the reception",
+          de: "Auf Lager, abholbereit an der Rezeption",
+          ko: "재고 있음, 리셉션에서 수령 가능"
         }
       },
       {
@@ -1325,9 +1328,9 @@
         ],
         sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
-          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
-          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the reception before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe an der Rezeption vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 리셉션에서 인도됩니다."
         }
       },
       {
@@ -1353,9 +1356,9 @@
         ],
         sizes: ['110', '120', '130', '140', '150', '160', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
-          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
-          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the reception before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe an der Rezeption vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 리셉션에서 인도됩니다."
         }
       },
       {
@@ -1375,9 +1378,9 @@
         ],
         sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
         noteShort: {
-          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
-          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
-          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the reception before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe an der Rezeption vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 리셉션에서 인도됩니다."
         }
       },
       {
@@ -1397,9 +1400,9 @@
         ],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
         noteShort: {
-          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
-          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
-          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the reception before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe an der Rezeption vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 리셉션에서 인도됩니다."
         }
       },
       {
@@ -1418,9 +1421,9 @@
         images: ['jacket.jpg', 'jacket-back.jpg'],
         sizes: ['S', 'M', 'L', 'XL', '2XL'],
         noteShort: {
-          en: "If ordered by 15 November, handover at the secretariat before the Christmas holidays.",
-          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe beim Sekretariat vor den Weihnachtsferien.",
-          ko: "11월 15일까지 주문 시 크리스마스 방학 전 사무국에서 인도됩니다."
+          en: "If ordered by 15 November, handover at the reception before the Christmas holidays.",
+          de: "Bei Bestellungen bis zum 15.11. erfolgt die Übergabe an der Rezeption vor den Weihnachtsferien.",
+          ko: "11월 15일까지 주문 시 크리스마스 방학 전 리셉션에서 인도됩니다."
         }
       },
       {
@@ -1445,9 +1448,9 @@
         ],
         sizes: ['One Size'],
         noteShort: {
-          en: "In stock, ready for collection at the secretariat",
-          de: "Auf Lager, abholbereit im Sekretariat",
-          ko: "재고 있음, 사무국에서 수령 가능"
+          en: "In stock, ready for collection at the reception",
+          de: "Auf Lager, abholbereit an der Rezeption",
+          ko: "재고 있음, 리셉션에서 수령 가능"
         }
       },
       {
@@ -1510,9 +1513,9 @@
         ],
         sizes: ['One Size'],
         noteShort: {
-          en: "In stock, ready for collection at the secretariat",
-          de: "Auf Lager, abholbereit im Sekretariat",
-          ko: "재고 있음, 사무국에서 수령 가능"
+          en: "In stock, ready for collection at the reception",
+          de: "Auf Lager, abholbereit an der Rezeption",
+          ko: "재고 있음, 리셉션에서 수령 가능"
         }
       },
       {
@@ -2120,6 +2123,7 @@
             <select id="customer-child-class" required
                     class="w-full px-4 py-3 border border-slate-300 focus:border-blue-600 rounded-2xl text-sm bg-white">
               <option value="">${t('childClassPlaceholder')}</option>
+              <option value="Not a student">${t('childClassNotStudent')}</option>
               <option value="Kindergarten">Kindergarten</option>
               <option value="Grade 1">Grade 1</option>
               <option value="Grade 2">Grade 2</option>
@@ -2320,10 +2324,10 @@
         ...baseParams,
         to_email: email,
         email_subject: `DSSI Order #${orderId} - Confirmation & Payment Instructions`,
-        bcc: 'vs.vorsitz@dsseoul.org, sekretariat@dsseoul.org, bdv@dsseoul.org'
+        bcc: 'sekretariat@dsseoul.org, marketing@dsseoul.org'
       };
 
-      // Send ONE identical email to the customer; BCC to vs.vorsitz, sekretariat, bdv.
+      // Send ONE identical email to the customer; BCC to sekretariat, marketing.
       // Always show the thank you screen.
       sendOrderEmails(orderData, emailBody, sendParams).finally(() => {
         showOrderSuccess(orderData, emailBody, sendParams)
